@@ -271,7 +271,7 @@ def evaluate_jobs_batch(jobs_batch, profiles, api_key):
         return [{"temp_id": str(i), "best_match_candidate": "Greg", "compatibility_score": 85, "reasoning": "No API Key"} for i in range(len(jobs_batch))]
         
     print(f"[Gemini API] Evaluating batch of {len(jobs_batch)} jobs...")
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
     
     # Construct clean structured candidates summary
     candidates_summary = ""
