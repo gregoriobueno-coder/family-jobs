@@ -213,11 +213,16 @@ def scrape_playwright_fallback(company_url, keywords):
             
             # Extract potential job links containing keywords
             links = page.locator("a").all()
+            print(f"[Scraper] Found {len(links)} total 'a' elements on page.")
             found_urls = set()
+            sample_count = 0
             for link in links:
                 href = link.get_attribute("href")
                 text = link.inner_text()
                 if href and href.startswith("http") and href not in found_urls:
+                    if sample_count < 10:
+                        print(f"  [DEBUG LINK] Text: '{text.strip().replace(chr(10), ' ')[:60]}', Href: '{href[:80]}'")
+                        sample_count += 1
                     # Heuristic keyword match on anchor text
                     if any(k.lower() in text.lower() for k in keywords):
                         found_urls.add(href)
