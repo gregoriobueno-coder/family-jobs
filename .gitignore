@@ -13,3 +13,7 @@ node_modules/
 npm_cache/
 package.json
 package-lock.json
+
+# Local Environment Variables
+.env
+.env.*

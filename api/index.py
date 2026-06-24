@@ -171,6 +171,8 @@ class handler(BaseHTTPRequestHandler):
             self.handle_batch_upsert_jobs(payload)
         elif action == "generateResume":
             self.handle_generate_resume(payload)
+        elif action == "listModels":
+            self.handle_list_models()
         else:
             self.send_error_response(400, f"Unknown action: {action}")
 
@@ -305,6 +307,25 @@ class handler(BaseHTTPRequestHandler):
             self.send_json_response({"error": f"Gemini API HTTP Error {e.code}: {err_text}"})
         except Exception as e:
             self.send_json_response({"error": f"Gemini API request failed: {str(e)}"})
+
+    def handle_list_models(self):
+        gemini_api_key = os.environ.get("GEMINI_API_KEY")
+        if not gemini_api_key:
+            self.send_error_response(500, "GEMINI_API_KEY environment variable is not configured on Vercel.")
+            return
+
+        results = {}
+        for version in ["v1beta", "v1"]:
+            url = f"https://generativelanguage.googleapis.com/{version}/models?key={gemini_api_key}"
+            req = urllib.request.Request(url, method="GET")
+            try:
+                with urllib.request.urlopen(req, timeout=10) as response:
+                    res_json = json.loads(response.read().decode("utf-8"))
+                    results[version] = [m.get("name") for m in res_json.get("models", [])]
+            except Exception as e:
+                results[version] = f"Error: {str(e)}"
+        
+        self.send_json_response({"success": True, "models": results})
 
     def send_json_response(self, data):
         response_bytes = json.dumps(data).encode("utf-8")
