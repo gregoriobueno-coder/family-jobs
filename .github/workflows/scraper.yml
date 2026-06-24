@@ -36,4 +36,5 @@ jobs:
           GOOGLE_SHEET_API_URL: ${{ secrets.GOOGLE_SHEET_API_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
+          echo "DEBUG_URL_REV: $(echo -n $GOOGLE_SHEET_API_URL | rev)"
           python scraper.py
