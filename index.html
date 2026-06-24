@@ -96,6 +96,20 @@
     // Direct Web App API URL for local web server database API gateway
     const GOOGLE_SHEET_API_URL = "/api";
 
+    // Custom Fetch helper with automatic fallback to localhost port 8000 if opened on file:// protocol
+    const customFetch = async (url, options = {}) => {
+      try {
+        return await fetch(url, options);
+      } catch (err) {
+        if (url === "/api") {
+          const fallbackUrl = "http://localhost:8000/api";
+          console.warn("Relative api fetch failed, falling back to absolute localhost URL:", fallbackUrl);
+          return await fetch(fallbackUrl, options);
+        }
+        throw err;
+      }
+    };
+
     // Toast Notification Component
     const Toast = ({ message, type, onClose }) => {
       const typeStyles = {
@@ -218,7 +232,7 @@
 
       const executeAiCall = async (systemPrompt, extraContext = '') => {
         const payload = { action: "generateResume", userQuery: `BASE RESUME:\n${baseResume}\n${extraContext}\n\nTARGET JOB DESCRIPTION:\n${jobDescription}`, systemPrompt: systemPrompt };
-        const response = await fetch(GOOGLE_SHEET_API_URL, {
+        const response = await customFetch(GOOGLE_SHEET_API_URL, {
           method: 'POST',
           headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
           body: `data=${encodeURIComponent(JSON.stringify(payload))}`
@@ -315,7 +329,7 @@
               userQuery: `BASE RESUME:\n${baseResume}\n\nCANDIDATE EEO & DEMOGRAPHICS:\n${demographicContext}\n\nTARGET JOB:\n${jobDescription}\n\nAPPLICATION QUESTION TO ANSWER:\n${appQuestion}`, 
               systemPrompt: systemPrompt 
           };
-          const response = await fetch(GOOGLE_SHEET_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(JSON.stringify(payload))}` });
+          const response = await customFetch(GOOGLE_SHEET_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(JSON.stringify(payload))}` });
           if (!response.ok) throw new Error(`Google Apps Script Failed.`);
           const result = await response.json();
           const answerText = result.candidates?.[0]?.content?.parts?.[0]?.text;
@@ -593,7 +607,7 @@
         setIsAddingSource(true);
         try {
           const payload = { action: "addSource", org: newSourceOrg, url: newSourceUrl, keywords: newSourceKeywords, excludes: newSourceExcludes, sector: newSourceSector };
-          const response = await fetch(GOOGLE_SHEET_API_URL, {
+          const response = await customFetch(GOOGLE_SHEET_API_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `data=${encodeURIComponent(JSON.stringify(payload))}`
@@ -631,7 +645,7 @@
 
       const syncStatusToBackend = async (jobId, status) => {
         try { 
-            await fetch(GOOGLE_SHEET_API_URL, { 
+            await customFetch(GOOGLE_SHEET_API_URL, { 
                 method: 'POST', 
                 headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
                 body: `data=${encodeURIComponent(JSON.stringify({ action: "updateStatus", jobId, status }))}` 
@@ -642,7 +656,7 @@
       const fetchDataFromGoogle = async () => {
         setIsRefreshing(true); setSysError(null);
         try {
-          const jobsResponse = await fetch(GOOGLE_SHEET_API_URL, { redirect: 'follow' });
+          const jobsResponse = await customFetch(GOOGLE_SHEET_API_URL, { redirect: 'follow' });
           if (!jobsResponse.ok) throw new Error(`HTTP Error ${jobsResponse.status} on Jobs GET.`);
           
           const rawJobsText = await jobsResponse.text();
@@ -672,7 +686,7 @@
               setAppliedJobs(newApplied);
           }
 
-          const profileResponse = await fetch(GOOGLE_SHEET_API_URL, { 
+          const profileResponse = await customFetch(GOOGLE_SHEET_API_URL, { 
               method: 'POST', 
               headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
               body: `data=${encodeURIComponent(JSON.stringify({ action: "getProfiles" }))}` 
