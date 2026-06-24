@@ -269,7 +269,7 @@ class handler(BaseHTTPRequestHandler):
             self.send_error_response(500, "GEMINI_API_KEY environment variable is not configured on Vercel.")
             return
 
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={gemini_api_key}"
+        url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent?key={gemini_api_key}"
         
         gemini_payload = {
             "contents": [
