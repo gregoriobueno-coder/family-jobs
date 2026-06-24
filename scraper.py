@@ -37,6 +37,14 @@ def generate_job_id(title, company):
     raw_str = f"{title.strip().lower()}|{company.strip().lower()}"
     return hashlib.md5(raw_str.encode("utf-8")).hexdigest()
 
+def clean_url(url):
+    """Sanitize and extract raw URLs from markdown link patterns [text](url)."""
+    url = url.strip()
+    match = re.match(r"^\[.*\]\((https?://[^\s)]+)\)$", url)
+    if match:
+        return match.group(1)
+    return url
+
 def fetch_sources_from_db():
     """Download the list of target companies and configurations from Google Sheets."""
     print("[DB] Fetching scraper sources...")
@@ -357,6 +365,7 @@ def main():
     # 2. Phase 0: Sourcing
     for src in sources:
         url = src.get("url") or src.get("URL") or ""
+        url = clean_url(url)
         org = src.get("org") or src.get("Organization") or src.get("organization") or "Unknown"
         keywords_str = src.get("keywords") or src.get("Target Keywords") or src.get("keywords") or ""
         excludes_str = src.get("excludes") or src.get("Exclude Keywords") or src.get("excludes") or ""
