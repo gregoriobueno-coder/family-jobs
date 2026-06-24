@@ -356,10 +356,10 @@ def main():
     
     # 2. Phase 0: Sourcing
     for src in sources:
-        url = src.get("url", "")
-        org = src.get("org", "Unknown")
-        keywords_str = src.get("keywords", "")
-        excludes_str = src.get("excludes", "")
+        url = src.get("url") or src.get("URL") or ""
+        org = src.get("org") or src.get("Organization") or src.get("organization") or "Unknown"
+        keywords_str = src.get("keywords") or src.get("Target Keywords") or src.get("keywords") or ""
+        excludes_str = src.get("excludes") or src.get("Exclude Keywords") or src.get("excludes") or ""
         
         keywords = [k.strip() for k in keywords_str.split(",") if k.strip()]
         excludes = [ex.strip() for ex in excludes_str.split(",") if ex.strip()]
