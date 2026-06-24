@@ -954,7 +954,12 @@
                             </span>
                           </div>
 
-                          <h3 className="text-lg font-black text-white leading-snug group-hover:text-fuchsia-300 transition-colors">{job.title}</h3>
+                          <h3 className="text-lg font-black text-white leading-snug group-hover:text-fuchsia-300 transition-colors">
+                            <a href={job.url} target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-2">
+                              {job.title}
+                              <i className="fa-solid fa-arrow-up-right-from-square text-xs text-purple-400 group-hover:text-fuchsia-300 transition-colors"></i>
+                            </a>
+                          </h3>
                           <p className="text-emerald-400 font-bold text-sm mt-1">{job.organization}</p>
                           <p className="text-xs text-purple-300/60 mt-2 flex items-center gap-1"><i className="fa-solid fa-location-dot"></i> {job.location || 'Remote/US'}</p>
                         </div>
