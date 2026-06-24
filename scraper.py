@@ -43,7 +43,7 @@ def fetch_sources_from_db():
     try:
         response = requests.post(
             GOOGLE_SHEET_API_URL,
-            data={"data": json.dumps({"action": "getSources"})},
+            json={"action": "getSources"},
             timeout=20
         )
         if response.status_code == 200:
@@ -63,7 +63,7 @@ def fetch_profiles_from_db():
     try:
         response = requests.post(
             GOOGLE_SHEET_API_URL,
-            data={"data": json.dumps({"action": "getProfiles"})},
+            json={"action": "getProfiles"},
             timeout=20
         )
         if response.status_code == 200:
@@ -441,7 +441,7 @@ def main():
             }
             res = requests.post(
                 GOOGLE_SHEET_API_URL,
-                data={"data": json.dumps(payload)},
+                json=payload,
                 timeout=25
             )
             if res.status_code == 200:
