@@ -1,0 +1,212 @@
+[
+  {
+    "Organization": "NASA (Port Canaveral)",
+    "URL": "https://www.usajobs.gov/Search/Results?l=Cape%20Canaveral%2C%20Florida&k=NASA",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Walt Disney World (Orlando)",
+    "URL": "https://jobs.disneycareers.com/search-jobs?k=&l=Orlando%2C+FL",
+    "Target Keywords": "project manager, creative project manager, technical project manager, producer, project coordinator, technical trainer, operational trainer, training specialist, agile, jira",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Universal Studios (Orlando)",
+    "URL": "https://jobs.universalparks.com/universal-orlando-resort/search-jobs/?location=Orlando",
+    "Target Keywords": "project manager, creative project manager, technical project manager, producer, project coordinator, technical trainer, operational trainer, training specialist, agile, jira",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "SeaWorld Orlando",
+    "URL": "https://careers.seaworldparks.com/search/?location=Orlando",
+    "Target Keywords": "project manager, creative project manager, technical project manager, producer, project coordinator, technical trainer, operational trainer, training specialist, agile, jira",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Marriott (Central FL)",
+    "URL": "https://jobs.marriott.com/marriott/jobs?page=1&location=Orlando",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Hilton (Central FL)",
+    "URL": "https://jobs.hilton.com/us/en/search-results?location=Orlando",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Hyatt (Central FL)",
+    "URL": "https://careers.hyatt.com/en-US/careers/search?location=Orlando",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Hard Rock Seminole",
+    "URL": "https://gotoworkhappy.com/seminole-hard-rock-tampa/",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Orange County (FL)",
+    "URL": "https://www.governmentjobs.com/careers/orangecountyfl",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "City of Orlando",
+    "URL": "https://www.governmentjobs.com/careers/orlando",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "SpaceX (Space Coast)",
+    "URL": "https://boards.greenhouse.io/spacex",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "L3Harris (Space Coast)",
+    "URL": "https://careers.l3harris.com/search-jobs",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Publix Corporate (Lakeland)",
+    "URL": "https://jobs.publix.com/search-jobs",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "CSX Logistics (Jacksonville)",
+    "URL": "https://careers.csx.com/",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "BayCare Health (Tampa)",
+    "URL": "https://baycare.org/careers/search-jobs",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Florida Blue (Statewide)",
+    "URL": "https://careers.floridablue.com/",
+    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
+    "Sector Tag": "Rachel"
+  },
+  {
+    "Organization": "Walt Disney World (Data/Tech)",
+    "URL": "https://jobs.disneycareers.com/search-jobs?k=&l=Orlando%2C+FL",
+    "Target Keywords": "data analyst, business intelligence, bi analyst, integration analyst, management analyst, business systems analyst, sdet, qa engineer, test automation, qa automation, rpa developer, revenue management, operations analyst, python, sql, power bi, r, swift, ios, oracle, teradata, postgresql, selenium",
+    "Exclude Keywords": "cpa, accountant, bookkeeper, attorney, legal counsel, paralegal, nurse, clinical, police, fire, retail, cashier, food, culinary, medical, mechanic, call center, customer service rep",
+    "Sector Tag": "Greg"
+  },
+  {
+    "Organization": "Universal Parks (Data/Tech)",
+    "URL": "https://jobs.universalparks.com/universal-orlando-resort/search-jobs/?location=Orlando",
+    "Target Keywords": "data analyst, business intelligence, bi analyst, integration analyst, management analyst, business systems analyst, sdet, qa engineer, test automation, qa automation, rpa developer, revenue management, operations analyst, python, sql, power bi, r, swift, ios, oracle, teradata, postgresql, selenium",
+    "Exclude Keywords": "cpa, accountant, bookkeeper, attorney, legal counsel, paralegal, nurse, clinical, police, fire, retail, cashier, food, culinary, medical, mechanic, call center, customer service rep",
+    "Sector Tag": "Greg"
+  },
+  {
+    "Organization": "AdventHealth (Orlando)",
+    "URL": "https://careers.adventhealth.com/us/en/search-results?location=Orlando",
+    "Target Keywords": "data analyst, business intelligence, bi analyst, integration analyst, management analyst, business systems analyst, sdet, qa engineer, test automation, qa automation, rpa developer, revenue management, operations analyst, python, sql, power bi, r, swift, ios, oracle, teradata, postgresql, selenium",
+    "Exclude Keywords": "cpa, accountant, bookkeeper, attorney, legal counsel, paralegal, nurse, clinical, police, fire, retail, cashier, food, culinary, medical, mechanic, call center, customer service rep",
+    "Sector Tag": "Greg"
+  },
+  {
+    "Organization": "Raymond James (FL)",
+    "URL": "https://www.raymondjames.com/about/careers",
+    "Target Keywords": "data analyst, business intelligence, bi analyst, integration analyst, management analyst, business systems analyst, sdet, qa engineer, test automation, qa automation, rpa developer, revenue management, operations analyst, python, sql, power bi, r, swift, ios, oracle, teradata, postgresql, selenium",
+    "Exclude Keywords": "cpa, accountant, bookkeeper, attorney, legal counsel, paralegal, nurse, clinical, police, fire, retail, cashier, food, culinary, medical, mechanic, call center, customer service rep",
+    "Sector Tag": "Greg"
+  },
+  {
+    "Organization": "USAA (Tampa)",
+    "URL": "https://www.usaajobs.com/search-jobs/Tampa",
+    "Target Keywords": "data analyst, business intelligence, bi analyst, integration analyst, management analyst, business systems analyst, sdet, qa engineer, test automation, qa automation, rpa developer, revenue management, operations analyst, python, sql, power bi, r, swift, ios, oracle, teradata, postgresql, selenium",
+    "Exclude Keywords": "cpa, accountant, bookkeeper, attorney, legal counsel, paralegal, nurse, clinical, police, fire, retail, cashier, food, culinary, medical, mechanic, call center, customer service rep",
+    "Sector Tag": "Greg"
+  },
+  {
+    "Organization": "Jabil (St. Pete)",
+    "URL": "https://careers.jabil.com/en/search-jobs",
+    "Target Keywords": "data analyst, business intelligence, bi analyst, integration analyst, management analyst, business systems analyst, sdet, qa engineer, test automation, qa automation, rpa developer, revenue management, operations analyst, python, sql, power bi, r, swift, ios, oracle, teradata, postgresql, selenium",
+    "Exclude Keywords": "cpa, accountant, bookkeeper, attorney, legal counsel, paralegal, nurse, clinical, police, fire, retail, cashier, food, culinary, medical, mechanic, call center, customer service rep",
+    "Sector Tag": "Greg"
+  },
+  {
+    "Organization": "Walt Disney World (Management)",
+    "URL": "https://jobs.disneycareers.com/search-jobs?k=&l=Orlando%2C+FL",
+    "Target Keywords": "visual merchandising, showroom, property manager, retail manager, sales manager, interior design, bilingual, b2b sales, account executive, operations manager, store manager",
+    "Exclude Keywords": "engineer, software, developer, nurse, clinical, mechanic, warehouse worker, food service, cashier, entry level",
+    "Sector Tag": "Lorena"
+  },
+  {
+    "Organization": "Universal Parks (Management)",
+    "URL": "https://jobs.universalparks.com/universal-orlando-resort/search-jobs/?location=Orlando",
+    "Target Keywords": "visual merchandising, showroom, property manager, retail manager, sales manager, interior design, bilingual, b2b sales, account executive, operations manager, store manager",
+    "Exclude Keywords": "engineer, software, developer, nurse, clinical, mechanic, warehouse worker, food service, cashier, entry level",
+    "Sector Tag": "Lorena"
+  },
+  {
+    "Organization": "Marriott (Property/Design)",
+    "URL": "https://jobs.marriott.com/marriott/jobs?page=1&location=Orlando",
+    "Target Keywords": "visual merchandising, showroom, property manager, retail manager, sales manager, interior design, bilingual, b2b sales, account executive, operations manager, store manager",
+    "Exclude Keywords": "engineer, software, developer, nurse, clinical, mechanic, warehouse worker, food service, cashier, entry level",
+    "Sector Tag": "Lorena"
+  },
+  {
+    "Organization": "Hilton (Operations/Design)",
+    "URL": "https://jobs.hilton.com/us/en/search-results?location=Orlando",
+    "Target Keywords": "visual merchandising, showroom, property manager, retail manager, sales manager, interior design, bilingual, b2b sales, account executive, operations manager, store manager",
+    "Exclude Keywords": "engineer, software, developer, nurse, clinical, mechanic, warehouse worker, food service, cashier, entry level",
+    "Sector Tag": "Lorena"
+  },
+  {
+    "Organization": "Simon Property Group",
+    "URL": "[https://careers.simon.com/search-jobs?location=Orlando](https://careers.simon.com/search-jobs?location=Orlando)",
+    "Target Keywords": "property manager, operations manager, retail manager, visual",
+    "Exclude Keywords": "security, maintenance, janitorial",
+    "Sector Tag": "Lorena"
+  },
+  {
+    "Organization": "Tapestry Collection",
+    "URL": "[https://jobs.hilton.com/us/en/search-results?location=Orlando](https://jobs.hilton.com/us/en/search-results?location=Orlando)",
+    "Target Keywords": "operations manager, guest relations, showroom, visual",
+    "Exclude Keywords": "housekeeper, cook, bartender",
+    "Sector Tag": "Lorena"
+  },
+  {
+    "Organization": "LVMH (Luxury Retail)",
+    "URL": "[https://www.lvmh.com/talents/our-offers?location=Orlando](https://www.lvmh.com/talents/our-offers?location=Orlando)",
+    "Target Keywords": "retail manager, visual merchandiser, operations",
+    "Exclude Keywords": "entry level, cashier, seasonal",
+    "Sector Tag": "Lorena"
+  },
+  {
+    "Organization": "Wyndham Destinations",
+    "URL": "[https://careers.wyndhamdestinations.com/search/?location=Orlando](https://careers.wyndhamdestinations.com/search/?location=Orlando)",
+    "Target Keywords": "property manager, sales manager, B2B, operations",
+    "Exclude Keywords": "housekeeper, maintenance, driver",
+    "Sector Tag": "Lorena"
+  }
+]

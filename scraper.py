@@ -15,8 +15,11 @@ import hashlib
 import requests
 from urllib.parse import urlparse
 
+# Local Database Paths
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE_DIR = os.path.join(BASE_DIR, "database")
+
 # Load Environment Parameters
-GOOGLE_SHEET_API_URL = os.environ.get("GOOGLE_SHEET_API_URL", "https://script.google.com/macros/s/AKfycbwcTzSmXyUqzU7mvEob56-MuO1Ol8r9lfBqjqrRIvlzIhjOz2c3AyDE4gq-ol3OWPTs/exec")
 GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
 
 # Playwright setup verification
@@ -46,43 +49,29 @@ def clean_url(url):
     return url
 
 def fetch_sources_from_db():
-    """Download the list of target companies and configurations from Google Sheets."""
-    print("[DB] Fetching scraper sources...")
+    """Retrieve the list of target companies and configurations from local JSON database."""
+    print("[DB] Fetching local scraper sources...")
+    sources_file = os.path.join(DATABASE_DIR, "sources.json")
     try:
-        response = requests.post(
-            GOOGLE_SHEET_API_URL,
-            json={"action": "getSources"},
-            timeout=20
-        )
-        if response.status_code == 200:
-            result = response.json()
-            if "sources" in result:
-                return result["sources"]
-            print(f"[DB] No sources returned: {result}")
-        else:
-            print(f"[DB] Sources fetch failed. HTTP Code: {response.status_code}")
+        if os.path.exists(sources_file):
+            with open(sources_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        print(f"[DB] sources.json not found at {sources_file}")
     except Exception as e:
-        print(f"[DB] Error fetching sources: {e}")
+        print(f"[DB] Error reading local sources: {e}")
     return []
 
 def fetch_profiles_from_db():
-    """Retrieve demographic and resume profiles from Google Sheets database."""
-    print("[DB] Fetching candidate profiles...")
+    """Retrieve demographic and resume profiles from local JSON database."""
+    print("[DB] Fetching local candidate profiles...")
+    profiles_file = os.path.join(DATABASE_DIR, "profiles.json")
     try:
-        response = requests.post(
-            GOOGLE_SHEET_API_URL,
-            json={"action": "getProfiles"},
-            timeout=20
-        )
-        if response.status_code == 200:
-            result = response.json()
-            if result.get("success") and "profiles" in result:
-                return result["profiles"]
-            print(f"[DB] Profiles query unsuccessful: {result}")
-        else:
-            print(f"[DB] Profiles fetch failed. HTTP Code: {response.status_code}")
+        if os.path.exists(profiles_file):
+            with open(profiles_file, "r", encoding="utf-8") as f:
+                return json.load(f)
+        print(f"[DB] profiles.json not found at {profiles_file}")
     except Exception as e:
-        print(f"[DB] Error fetching profiles: {e}")
+        print(f"[DB] Error reading local profiles: {e}")
     return {}
 
 def scrape_greenhouse(company_url):
@@ -445,28 +434,47 @@ def main():
                 
     print(f"\n[Gatekeeper] Passed compatibility threshold (>=80%): {len(scored_jobs)} jobs.")
     
-    # 4. Batch Upload results to database
+    # 4. Save results to local JSON database
     if scored_jobs:
-        print(f"\n[DB] Committing {len(scored_jobs)} qualified jobs to spreadsheet gateway...")
+        print(f"\n[DB] Committing {len(scored_jobs)} qualified jobs to local database...")
+        jobs_file = os.path.join(DATABASE_DIR, "jobs.json")
         try:
-            payload = {
-                "action": "batchUpsertJobs",
-                "jobs": scored_jobs
-            }
-            res = requests.post(
-                GOOGLE_SHEET_API_URL,
-                json=payload,
-                timeout=25
-            )
-            if res.status_code == 200:
-                upload_res = res.json()
-                print(f"[DB] Bulk upload complete: {upload_res}")
+            if os.path.exists(jobs_file):
+                with open(jobs_file, "r", encoding="utf-8") as f:
+                    jobs_data = json.load(f)
             else:
-                print(f"[DB] Upload failed with HTTP Code: {res.status_code} - {res.text}")
+                jobs_data = []
+
+            jobs_map = {job["id"]: job for job in jobs_data if "id" in job}
+            updated_count = 0
+            appended_count = 0
+
+            for job in scored_jobs:
+                job_id = job.get("id")
+                if not job_id:
+                    continue
+
+                if job_id in jobs_map:
+                    # Update existing job, but preserve userStatus if not explicitly updated
+                    existing_job = jobs_map[job_id]
+                    user_status = job.get("userStatus") or existing_job.get("userStatus") or ""
+                    existing_job.update(job)
+                    existing_job["userStatus"] = user_status
+                    updated_count += 1
+                else:
+                    # Append new job
+                    jobs_data.append(job)
+                    jobs_map[job_id] = job
+                    appended_count += 1
+
+            with open(jobs_file, "w", encoding="utf-8") as f:
+                json.dump(jobs_data, f, indent=2)
+
+            print(f"[DB] Local update complete: {updated_count} updated, {appended_count} appended.")
         except Exception as e:
-            print(f"[DB] Error executing batch upload: {e}")
+            print(f"[DB] Error writing to local jobs database: {e}")
     else:
-        print("\n[Scraper] No qualified jobs to upload.")
+        print("\n[Scraper] No qualified jobs to save.")
 
     print("\n====================================================")
     print("RUN COMPLETED SUCCESSFULLY")

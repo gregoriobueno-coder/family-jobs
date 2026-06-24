@@ -1,0 +1,38 @@
+[
+  {
+    "id": "d81bd49b058c1f929e395a4d10f80cc6",
+    "title": "Software Engineer, AI Product (London, United Kingdom)",
+    "organization": "Figma",
+    "url": "https://boards.greenhouse.io/figma/jobs/5551697004?gh_jid=5551697004",
+    "location": "London, England",
+    "type": "Greg",
+    "source": "Python Agent",
+    "userStatus": "Applied",
+    "postDate": "2026-06-23",
+    "compatibilityScore": 85
+  },
+  {
+    "id": "2749b83379164a72353ec84ea8274467",
+    "title": "Software Engineer - Figma Weave (Tel Aviv, Israel) ",
+    "organization": "Figma",
+    "url": "https://boards.greenhouse.io/figma/jobs/6073106004?gh_jid=6073106004",
+    "location": "Tel Aviv, Israel",
+    "type": "Greg",
+    "source": "Python Agent",
+    "userStatus": "Queued",
+    "postDate": "2026-06-23",
+    "compatibilityScore": 85
+  },
+  {
+    "id": "47d293adc6c0dc8630040f31994bb815",
+    "title": "Software Engineer, Production Engineering  (London, United Kingdom)",
+    "organization": "Figma",
+    "url": "https://boards.greenhouse.io/figma/jobs/5781928004?gh_jid=5781928004",
+    "location": "London, England",
+    "type": "Greg",
+    "source": "Python Agent",
+    "userStatus": "Queued",
+    "postDate": "2026-06-23",
+    "compatibilityScore": 85
+  }
+]

@@ -7,6 +7,10 @@ on:
   workflow_dispatch:
     # Allows manual trigger of the scraping pipeline from the GitHub Actions tab
 
+# Grant permission to commit and push changes back to the repository
+permissions:
+  contents: write
+
 jobs:
   run-pipeline:
     name: Run Scraper and Filter Pipeline
@@ -15,6 +19,9 @@ jobs:
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
+        with:
+          # persist-credentials: true is default but explicit here to clarify push authorization
+          persist-credentials: true
 
       - name: Set up Python
         uses: actions/setup-python@v5
@@ -33,8 +40,14 @@ jobs:
 
       - name: Execute Scraper Pipeline
         env:
-          GOOGLE_SHEET_API_URL: ${{ secrets.GOOGLE_SHEET_API_URL }}
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: |
-          echo "DEBUG_URL_REV: $(echo -n $GOOGLE_SHEET_API_URL | rev)"
           python scraper.py
+
+      - name: Commit and Push Database Changes
+        run: |
+          git config --global user.name "GitHub Action Scraper"
+          git config --global user.email "action@github.com"
+          git add database/jobs.json
+          git commit -m "chore: auto-update scraped job database [skip ci]" || exit 0
+          git push
