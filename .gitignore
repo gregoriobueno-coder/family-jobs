@@ -6,3 +6,10 @@ __pycache__/
 # OS Metadata
 .DS_Store
 Thumbs.db
+.vercel
+
+# Node Modules & Caches
+node_modules/
+npm_cache/
+package.json
+package-lock.json
