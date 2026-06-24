@@ -235,18 +235,19 @@
         }
         setIsGenerating(true); setSysError(null);
         try {
-          const systemPrompt = `You are an expert Career Coach strictly following UW-Madison resume guidelines. Tailor the candidate's Base Resume to the Target Job Description. 
-          CRITICAL RULES:
-          1. NO personal pronouns ("I", "my", "we", "our").
-          2. Every single bullet point MUST begin with a strong, metrics-driven ACTION VERB.
-          3. Focus heavily on quantified results, not just duties.
-          4. Line 1 MUST be an H1 tag with ONLY the candidate's Full Name. Line 2 MUST be their exact Contact Info exactly as provided in the Base Resume.
-          5. Use H2 (##) for Main Sections. Return ONLY the markdown resume.`;
+          const systemPrompt = `You are an expert Career Coach strictly following the Harvard Mignone Center for Career Success (MCS) resume guidelines. Tailor the candidate's Base Resume to the Target Job Description.
+          CRITICAL HARVARD MCS RULES:
+          1. NO personal pronouns ("I", "my", "we", "our"), no narrative style, no abbreviations, no slang, no pictures, or EEO demographics.
+          2. Every single bullet point MUST begin with a strong, metrics-driven ACTION VERB (e.g., Spearheaded, Orchestrated, Collaborated, Formulated, Engineered, Streamlined, Analyzed, Forecasted).
+          3. Focus heavily on quantified and qualified results, not just duties, to express not impress. No flowery language.
+          4. Tech Resumes: If the target role is in Tech/Computer Science, place the "Technical Skills" section immediately AFTER the "Education" section. For other roles, place "Skills & Interests" at the end.
+          5. Line 1 MUST be an H1 tag (#) with ONLY the candidate's Full Name. Line 2 MUST be their exact Contact Info exactly as provided in the Base Resume.
+          6. Use H2 (##) for Main Sections. Keep layout strictly balanced so it fits on a single page. Return ONLY the markdown resume.`;
           const finalMarkdown = await executeAiCall(systemPrompt);
           if (finalMarkdown) {
              setTailoredResume(finalMarkdown);
              setActiveRightTab('resume');
-             showToast("Resume tailored to UW-Madison standards!", "success");
+             showToast("Resume tailored to Harvard MCS standards!", "success");
           } else throw new Error("Invalid AI response.");
         } catch (error) {
           setSysError(`Resume Generation Failed: ${error.message}`);
@@ -260,12 +261,14 @@
         }
         setIsDraftingLetter(true); setSysError(null);
         try {
-          const systemPrompt = `You are a UW-Madison certified career coach. Write a highly tailored, 3-to-4 paragraph cover letter using the Base Resume and Target JD.
-          CRITICAL RULES:
-          1. Paragraph 1: Hook the reader, state the exact role, and end with a Thesis Statement highlighting two core skills.
-          2. Paragraph 2 & 3: Tell a specific "mini-narrative" (show, don't tell) proving the thesis using quantified metrics from the resume. Do not just summarize the resume.
-          3. AVOID THE "I" TRAP: Do not start every sentence with "I". Vary sentence structure.
-          Return ONLY the markdown letter.`;
+          const systemPrompt = `You are a career advisor strictly following the Harvard Mignone Center for Career Success (MCS) cover letter guidelines. Write a highly tailored, one-page cover letter using the Base Resume and Target JD.
+          CRITICAL HARVARD MCS RULES:
+          1. Structure: Start with Date, Contact Name, Title, Company Name, and Company Address at the top.
+          2. Salutation: Address a specific person if possible (e.g. "Dear Contact Name:") ending with a COLON (":"), NOT a comma.
+          3. Paragraph 1 (Opening): Hook the reader, state the exact role and how you heard about it. End with a summary statement (thesis) presenting three clear reasons why you are a good fit.
+          4. Paragraph 2 & 3 (Middle): Show why you are interested in this specific employer and type of work. Illustrate with one or two key examples (mini-narratives with quantified results/metrics from the resume) showing how your skills relate to the job. Do not repeat the entire resume.
+          5. Paragraph 4 (Closing): Reiterate enthusiasm, thank the reader for consideration, and state that you look forward to the opportunity to discuss further.
+          6. Tone & Rules: Avoid flowery language. Avoid the "I" trap (do not start consecutive sentences with "I"; vary sentence structure). Use professional action verbs. Close with "Sincerely," and candidate name. Return ONLY the markdown letter.`;
           const text = await executeAiCall(systemPrompt);
           if (text) {
              setCoverLetter(text);
@@ -352,7 +355,7 @@
               <h2 className="text-3xl font-black text-white tracking-tight flex items-center gap-2">
                 <i className="fa-solid fa-wand-magic-sparkles text-fuchsia-400"></i> AI Resume Studio
               </h2>
-              <p className="text-emerald-400 font-medium text-sm mt-1">Zero-hallucination UW-Madison ATS tailoring & Application Assistant.</p>
+              <p className="text-emerald-400 font-medium text-sm mt-1">Zero-hallucination Harvard MCS ATS tailoring & Application Assistant.</p>
             </div>
             
             <div className="flex bg-slate-900/60 p-1.5 rounded-2xl border border-purple-500/20 backdrop-blur-md">
@@ -984,7 +987,7 @@
 
           {/* MAIN FOOTER */}
           <footer className="bg-black/40 border-t border-purple-500/10 py-6 text-center text-xs text-purple-400/60 mt-auto">
-            <p className="font-semibold">&copy; 2026 Autonomous Job Hunt Ecosystem. UW-Madison Compliance Engine.</p>
+            <p className="font-semibold">&copy; 2026 Autonomous Job Hunt Ecosystem. Harvard MCS Compliance Engine.</p>
           </footer>
         </div>
       );
