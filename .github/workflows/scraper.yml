@@ -1,0 +1,39 @@
+name: Autonomous Job Scraper
+
+on:
+  schedule:
+    # Runs at 00:00 UTC every day (approx 8:00 PM EST)
+    - cron: '0 0 * * *'
+  workflow_dispatch:
+    # Allows manual trigger of the scraping pipeline from the GitHub Actions tab
+
+jobs:
+  run-pipeline:
+    name: Run Scraper and Filter Pipeline
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+          cache: 'pip'
+
+      - name: Install Dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install Playwright Chromium
+        run: |
+          playwright install chromium
+
+      - name: Execute Scraper Pipeline
+        env:
+          GOOGLE_SHEET_API_URL: ${{ secrets.GOOGLE_SHEET_API_URL }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: |
+          python scraper.py

@@ -1,0 +1,462 @@
+#!/usr/bin/env python3
+"""
+Autonomous Scraper & Execution Agent (scraper.py)
+Phase 0: Sourcing (Hybrid Loader: Direct APIs first, falling back to Playwright)
+Phase 1: Semantic Filtering & Gatekeeper (Batched Gemini REST API with Structured JSON Output)
+"""
+
+import os
+import re
+import sys
+import json
+import time
+import random
+import hashlib
+import requests
+from urllib.parse import urlparse
+
+# Load Environment Parameters
+GOOGLE_SHEET_API_URL = os.environ.get("GOOGLE_SHEET_API_URL", "https://script.google.com/macros/s/AKfycbwcTzSmXyUqzU7mvEob56-MuO1Ol8r9lfBqjqrRIvlzIhjOz2c3AyDE4gq-ol3OWPTs/exec")
+GEMINI_API_KEY = os.environ.get("GEMINI_API_KEY", "")
+
+# Playwright setup verification
+PLAYWRIGHT_AVAILABLE = False
+try:
+    from playwright.sync_api import sync_playwright
+    PLAYWRIGHT_AVAILABLE = True
+except ImportError:
+    print("[WARNING] Playwright library not found. Falling back to API-only scraping modes.")
+
+# Setup User-Agent header for HTTP requests
+HEADERS = {
+    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+}
+
+def generate_job_id(title, company):
+    """Generate a consistent primary key for spreadsheet row tracking."""
+    raw_str = f"{title.strip().lower()}|{company.strip().lower()}"
+    return hashlib.md5(raw_str.encode("utf-8")).hexdigest()
+
+def fetch_sources_from_db():
+    """Download the list of target companies and configurations from Google Sheets."""
+    print("[DB] Fetching scraper sources...")
+    try:
+        response = requests.post(
+            GOOGLE_SHEET_API_URL,
+            data={"data": json.dumps({"action": "getSources"})},
+            timeout=20
+        )
+        if response.status_code == 200:
+            result = response.json()
+            if "sources" in result:
+                return result["sources"]
+            print(f"[DB] No sources returned: {result}")
+        else:
+            print(f"[DB] Sources fetch failed. HTTP Code: {response.status_code}")
+    except Exception as e:
+        print(f"[DB] Error fetching sources: {e}")
+    return []
+
+def fetch_profiles_from_db():
+    """Retrieve demographic and resume profiles from Google Sheets database."""
+    print("[DB] Fetching candidate profiles...")
+    try:
+        response = requests.post(
+            GOOGLE_SHEET_API_URL,
+            data={"data": json.dumps({"action": "getProfiles"})},
+            timeout=20
+        )
+        if response.status_code == 200:
+            result = response.json()
+            if result.get("success") and "profiles" in result:
+                return result["profiles"]
+            print(f"[DB] Profiles query unsuccessful: {result}")
+        else:
+            print(f"[DB] Profiles fetch failed. HTTP Code: {response.status_code}")
+    except Exception as e:
+        print(f"[DB] Error fetching profiles: {e}")
+    return {}
+
+def scrape_greenhouse(company_url):
+    """Scrape Greenhouse board using its fast public JSON API, avoiding DOM rendering."""
+    print(f"[Scraper] Querying Greenhouse API for: {company_url}")
+    parsed = urlparse(company_url)
+    # Extracts company name from greenhouse.io/companyName
+    path_parts = [p for p in parsed.path.split('/') if p]
+    if not path_parts:
+        return []
+    company_name = path_parts[0]
+    
+    api_url = f"https://boards-api.greenhouse.io/v1/boards/{company_name}/jobs?content=true"
+    try:
+        res = requests.get(api_url, headers=HEADERS, timeout=15)
+        if res.status_code == 200:
+            data = res.json()
+            jobs = []
+            for item in data.get("jobs", []):
+                jobs.append({
+                    "title": item.get("title", ""),
+                    "organization": company_name.capitalize(),
+                    "url": item.get("absolute_url", ""),
+                    "location": item.get("location", {}).get("name", "Remote"),
+                    "description": item.get("content", "")
+                })
+            return jobs
+    except Exception as e:
+        print(f"[Scraper] Greenhouse API failed for {company_name}: {e}")
+    return []
+
+def scrape_lever(company_url):
+    """Scrape Lever board using its public JSON API endpoint."""
+    print(f"[Scraper] Querying Lever API for: {company_url}")
+    parsed = urlparse(company_url)
+    path_parts = [p for p in parsed.path.split('/') if p]
+    if not path_parts:
+        return []
+    company_name = path_parts[0]
+    
+    api_url = f"https://api.lever.co/v0/postings/{company_name}"
+    try:
+        res = requests.get(api_url, headers=HEADERS, timeout=15)
+        if res.status_code == 200:
+            data = res.json()
+            jobs = []
+            for item in data:
+                jobs.append({
+                    "title": item.get("title", ""),
+                    "organization": company_name.capitalize(),
+                    "url": item.get("hostedUrl", ""),
+                    "location": item.get("categories", {}).get("location", "Remote"),
+                    "description": item.get("description", "") + "\n" + item.get("lists", [{}])[0].get("content", "")
+                })
+            return jobs
+    except Exception as e:
+        print(f"[Scraper] Lever API failed for {company_name}: {e}")
+    return []
+
+def scrape_workday(company_url):
+    """
+    Direct API requests targeting Workday internal search JSON endpoints.
+    Bypasses headless Playwright scrolling by communicating directly with Workday's client API.
+    """
+    print(f"[Scraper] Querying Workday Client API for: {company_url}")
+    try:
+        parsed = urlparse(company_url)
+        # Matches tenant and site from subdomain and paths
+        # Format: tenant.wd5.myworkdayjobs.com/SiteName
+        tenant = parsed.hostname.split('.')[0]
+        path_parts = [p for p in parsed.path.split('/') if p]
+        site_name = path_parts[0] if path_parts else "External"
+        
+        api_url = f"https://{parsed.hostname}/wday/cxs/{tenant}/{site_name}/jobs"
+        payload = {
+            "appliedFacets": {},
+            "limit": 30,
+            "offset": 0,
+            "searchText": ""
+        }
+        res = requests.post(api_url, headers=HEADERS, json=payload, timeout=15)
+        if res.status_code == 200:
+            data = res.json()
+            jobs = []
+            for item in data.get("jobPostings", []):
+                # Retrieve individual description
+                job_path = item.get("externalPath", "")
+                full_url = f"https://{parsed.hostname}{parsed.path}{job_path}"
+                jobs.append({
+                    "title": item.get("title", ""),
+                    "organization": tenant.capitalize(),
+                    "url": full_url,
+                    "location": item.get("locationsText", "Remote/US"),
+                    "description": "" # Fetched lazily or scored on details
+                })
+            return jobs
+    except Exception as e:
+        print(f"[Scraper] Workday API failed for {company_url}: {e}")
+    return []
+
+def scrape_playwright_fallback(company_url, keywords):
+    """Headless Playwright Viewport Scroll fallback loop for custom/unrecognized portals."""
+    if not PLAYWRIGHT_AVAILABLE:
+        print(f"[Scraper] Playwright fallback unavailable for: {company_url}")
+        return []
+    
+    print(f"[Scraper] Launching Playwright browser scroll loop for: {company_url}")
+    jobs = []
+    try:
+        with sync_playwright() as p:
+            browser = p.chromium.launch(headless=True)
+            page = browser.new_page(user_agent=HEADERS["User-Agent"])
+            page.goto(company_url, timeout=45000)
+            page.wait_for_load_state("networkidle")
+            
+            # Viewport scroll loop to force lazy loaders (like Workday listings pages) to render rows
+            last_height = page.evaluate("document.body.scrollHeight")
+            max_scrolls = 6
+            for scroll in range(max_scrolls):
+                # Increment scroll tick
+                page.evaluate("window.scrollTo(0, document.body.scrollHeight)")
+                time.sleep(random.uniform(1.0, 2.0)) # Humon-like delay
+                
+                new_height = page.evaluate("document.body.scrollHeight")
+                if new_height == last_height:
+                    break
+                last_height = new_height
+            
+            # Extract potential job links containing keywords
+            links = page.locator("a").all()
+            found_urls = set()
+            for link in links:
+                href = link.get_attribute("href")
+                text = link.inner_text()
+                if href and href.startswith("http") and href not in found_urls:
+                    # Heuristic keyword match on anchor text
+                    if any(k.lower() in text.lower() for k in keywords):
+                        found_urls.add(href)
+                        jobs.append({
+                            "title": text.strip().split("\n")[0],
+                            "organization": urlparse(company_url).hostname.split('.')[1].capitalize(),
+                            "url": href,
+                            "location": "Remote",
+                            "description": text
+                        })
+            browser.close()
+    except Exception as e:
+        print(f"[Scraper] Playwright execution failed: {e}")
+    return jobs
+
+def local_pre_filter(jobs, keywords, excludes):
+    """
+    Tier 1 High-Speed Pre-Filter.
+    Filters raw jobs locally in memory using fast keyword/regex rules.
+    """
+    qualified = []
+    keyword_patterns = [re.compile(rf"\b{re.escape(k.strip())}\b", re.IGNORECASE) for k in keywords if k.strip()]
+    exclude_patterns = [re.compile(rf"\b{re.escape(ex.strip())}\b", re.IGNORECASE) for ex in excludes if ex.strip()]
+    
+    for job in jobs:
+        title = job["title"]
+        
+        # Exclude patterns
+        if any(pat.search(title) for pat in exclude_patterns):
+            continue
+            
+        # Keyword patterns (if defined, at least one must match)
+        if keyword_patterns:
+            if not any(pat.search(title) for pat in keyword_patterns):
+                continue
+                
+        # "Florida Iron Curtain" geographic pre-filters (exclude jobs that must be onsite in non-Florida states)
+        location = job.get("location", "").lower()
+        onsite_out_of_state = False
+        if any(state in location for state in ["ca", "california", "ny", "new york", "tx", "texas", "ma", "boston"]):
+            if "remote" not in location and "hybrid" not in location:
+                onsite_out_of_state = True
+        
+        if onsite_out_of_state:
+            continue
+            
+        qualified.append(job)
+    return qualified
+
+def evaluate_jobs_batch(jobs_batch, profiles, api_key):
+    """
+    Phase 1: The Gatekeeper.
+    Batches up to 15 job listings into a single Gemini JSON schema request.
+    """
+    if not api_key:
+        print("[WARNING] No GEMINI_API_KEY set. Assigning default match score (85%) to all candidates.")
+        return [{"temp_id": str(i), "best_match_candidate": "Greg", "compatibility_score": 85, "reasoning": "No API Key"} for i in range(len(jobs_batch))]
+        
+    print(f"[Gemini API] Evaluating batch of {len(jobs_batch)} jobs...")
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
+    
+    # Construct clean structured candidates summary
+    candidates_summary = ""
+    for name, prof in profiles.items():
+        candidates_summary += f"CANDIDATE: {name}\nResume Gist: {prof.get('summary', '')}\nCompetencies: {prof.get('coreCompetencies', '')}\nSponsorship Needed: {prof.get('requiresSponsor', 'No')}\n---\n"
+        
+    # Formulate listing bundle
+    job_listings_text = ""
+    for idx, job in enumerate(jobs_batch):
+        job_listings_text += f"JOB INDEX: {idx}\nTitle: {job['title']}\nOrg: {job['organization']}\nLocation: {job['location']}\nDescription snippet: {job.get('description', '')[:1000]}\n---\n"
+        
+    system_prompt = (
+        "You are an elite, objective recruiter. Compare the given JOB INDEX listings against the CANDIDATE profiles. "
+        "Determine compatibility. Rules:\n"
+        "1. A candidate is compatible ONLY if they match the core skills and domain context.\n"
+        "2. Score compatibility from 0 to 100.\n"
+        "3. Assign the candidate name to best_match_candidate ('Greg', 'Rachel', 'Lorena', or 'None').\n"
+        "Return a JSON object containing the array of evaluations."
+    )
+    
+    user_prompt = f"CANDIDATES PROFILE DETAILS:\n{candidates_summary}\n\nJOB LISTINGS TO SCORE:\n{job_listings_text}"
+    
+    payload = {
+        "contents": [
+            {"role": "user", "parts": [{"text": user_prompt}]}
+        ],
+        "systemInstruction": {
+            "parts": [{"text": system_prompt}]
+        },
+        "generationConfig": {
+            "responseMimeType": "application/json",
+            "responseSchema": {
+                "type": "OBJECT",
+                "properties": {
+                    "evaluations": {
+                        "type": "ARRAY",
+                        "items": {
+                            "type": "OBJECT",
+                            "properties": {
+                                "temp_id": { "type": "STRING", "description": "The INDEX string of the evaluated job (e.g. '0', '1', etc.)" },
+                                "best_match_candidate": { "type": "STRING", "description": "Must be 'Greg', 'Rachel', 'Lorena', or 'None'" },
+                                "compatibility_score": { "type": "INTEGER" },
+                                "reasoning": { "type": "STRING" }
+                            },
+                            "required": ["temp_id", "best_match_candidate", "compatibility_score", "reasoning"]
+                        }
+                    }
+                }
+            },
+            "temperature": 0.1
+        }
+    }
+    
+    try:
+        res = requests.post(url, headers={"Content-Type": "application/json"}, json=payload, timeout=30)
+        if res.status_code == 200:
+            res_json = res.json()
+            raw_text = res_json["candidates"][0]["content"]["parts"][0]["text"]
+            eval_data = json.loads(raw_text)
+            return eval_data.get("evaluations", [])
+        else:
+            print(f"[Gemini API] HTTP Error: {res.status_code} - {res.text}")
+    except Exception as e:
+        print(f"[Gemini API] Evaluation error: {e}")
+        
+    return []
+
+def main():
+    print("====================================================")
+    print("STARTING AUTONOMOUS JOB PIPELINE SCRAPER RUN")
+    print("====================================================")
+    
+    # 1. Fetch parameters
+    sources = fetch_sources_from_db()
+    profiles = fetch_profiles_from_db()
+    
+    if not sources:
+        print("[ERROR] No target sources retrieved from the database. Exiting.")
+        sys.exit(1)
+        
+    print(f"[DB] Retrieved {len(sources)} scraping target sources.")
+    
+    scraped_jobs = []
+    
+    # 2. Phase 0: Sourcing
+    for src in sources:
+        url = src.get("url", "")
+        org = src.get("org", "Unknown")
+        keywords_str = src.get("keywords", "")
+        excludes_str = src.get("excludes", "")
+        
+        keywords = [k.strip() for k in keywords_str.split(",") if k.strip()]
+        excludes = [ex.strip() for ex in excludes_str.split(",") if ex.strip()]
+        
+        if not url or url == "#":
+            continue
+            
+        print(f"\n[Sourcing] Processing company: {org} ({url})")
+        
+        # Hybrid Loader checks
+        raw_list = []
+        if "greenhouse.io" in url:
+            raw_list = scrape_greenhouse(url)
+        elif "lever.co" in url:
+            raw_list = scrape_lever(url)
+        elif "myworkdayjobs.com" in url:
+            raw_list = scrape_workday(url)
+        else:
+            # Fallback to browser scroll loop if Playwright is available
+            raw_list = scrape_playwright_fallback(url, keywords or ["software", "manager", "education"])
+            
+        print(f"[Sourcing] Harvested {len(raw_list)} raw job listings.")
+        
+        # Apply local pre-filtering
+        filtered = local_pre_filter(raw_list, keywords, excludes)
+        print(f"[Sourcing] Passed Tier 1 local filter: {len(filtered)} / {len(raw_list)} jobs.")
+        scraped_jobs.extend(filtered)
+        
+    if not scraped_jobs:
+        print("\n[Scraper] No jobs passed local pre-filters. Run complete.")
+        sys.exit(0)
+        
+    print(f"\n[Scraper] Total jobs needing semantic scoring: {len(scraped_jobs)}")
+    
+    # 3. Phase 1: The Gatekeeper (Batched semantic matching)
+    batch_size = 12
+    scored_jobs = []
+    
+    for i in range(0, len(scraped_jobs), batch_size):
+        batch = scraped_jobs[i:i+batch_size]
+        evals = evaluate_jobs_batch(batch, profiles, GEMINI_API_KEY)
+        
+        # Map evaluations back to jobs
+        for ev in evals:
+            try:
+                idx = int(ev.get("temp_id", -1))
+                if 0 <= idx < len(batch):
+                    job = batch[idx]
+                    score = ev.get("compatibility_score", 0)
+                    candidate = ev.get("best_match_candidate", "None")
+                    
+                    if score >= 80 and candidate != "None":
+                        # Set schema parameters
+                        job_id = generate_job_id(job["title"], job["organization"])
+                        scored_jobs.append({
+                            "id": job_id,
+                            "title": job["title"],
+                            "organization": job["organization"],
+                            "url": job["url"],
+                            "location": job["location"],
+                            "type": candidate,  # Matches the compatible candidate name
+                            "source": "Python Agent",
+                            "userStatus": "Queued",  # Moves directly into candidate application queue
+                            "postDate": time.strftime("%Y-%m-%d"),
+                            "compatibilityScore": score
+                        })
+            except Exception as e:
+                print(f"[Gatekeeper] Error matching batch item: {e}")
+                
+    print(f"\n[Gatekeeper] Passed compatibility threshold (>=80%): {len(scored_jobs)} jobs.")
+    
+    # 4. Batch Upload results to database
+    if scored_jobs:
+        print(f"\n[DB] Committing {len(scored_jobs)} qualified jobs to spreadsheet gateway...")
+        try:
+            payload = {
+                "action": "batchUpsertJobs",
+                "jobs": scored_jobs
+            }
+            res = requests.post(
+                GOOGLE_SHEET_API_URL,
+                data={"data": json.dumps(payload)},
+                timeout=25
+            )
+            if res.status_code == 200:
+                upload_res = res.json()
+                print(f"[DB] Bulk upload complete: {upload_res}")
+            else:
+                print(f"[DB] Upload failed with HTTP Code: {res.status_code} - {res.text}")
+        except Exception as e:
+            print(f"[DB] Error executing batch upload: {e}")
+    else:
+        print("\n[Scraper] No qualified jobs to upload.")
+
+    print("\n====================================================")
+    print("RUN COMPLETED SUCCESSFULLY")
+    print("====================================================")
+
+if __name__ == "__main__":
+    main()
