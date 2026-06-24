@@ -1822,5 +1822,17 @@
     "userStatus": "Queued",
     "postDate": "2026-06-23",
     "compatibilityScore": 90
+  },
+  {
+    "id": "72cf91965f365835f1fcd58de57bfbac",
+    "title": "Construction Project Manager (Starship Launch Infrastructure) ",
+    "organization": "Spacex",
+    "url": "https://boards.greenhouse.io/spacex/jobs/8461302002?gh_jid=8461302002",
+    "location": "Cape Canaveral, FL",
+    "type": "Greg",
+    "source": "Python Agent",
+    "userStatus": "Queued",
+    "postDate": "2026-06-24",
+    "compatibilityScore": 85
   }
 ]
