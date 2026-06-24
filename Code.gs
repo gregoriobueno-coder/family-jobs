@@ -27,7 +27,7 @@ function doGet(e) {
           if (row[j] !== "") hasData = true;
         }
       }
-      if (hasData) {
+      if (hasData && job.id && job.id !== "") {
         jobs.push(job);
       }
     }
@@ -44,7 +44,16 @@ function doPost(e) {
     var lock = LockService.getScriptLock();
     lock.waitLock(30000);
     
-    var postData = e.postData ? e.postData.contents : e.parameter.data;
+    var postData = "";
+    if (e.parameter && e.parameter.data) {
+      postData = e.parameter.data;
+    } else if (e.postData && e.postData.contents) {
+      postData = e.postData.contents;
+      if (postData.indexOf("data=") === 0) {
+        postData = decodeURIComponent(postData.substring(5));
+      }
+    }
+    
     if (!postData) {
       throw new Error("No data payload received.");
     }
