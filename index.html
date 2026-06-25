@@ -160,7 +160,7 @@
         const email = p.email || `${name.toLowerCase()}.bueno@email.com`;
         const linkedin = p.linkedIn || `linkedin.com/in/${name.toLowerCase()}`;
 
-        return `${name} ${lName}\n${address} | ${phone} | ${email} | ${linkedin}\n\n## PROFESSIONAL SUMMARY\n${p.summary || ''}\n\n## TARGET ROLES\n${p.targetRoles || ''}\n\n## CORE COMPETENCIES\n${p.coreCompetencies || ''}\n\n## PROFESSIONAL EXPERIENCE\n${p.experience || ''}`;
+        return `${name} ${lName}\n${address} | ${phone} | ${email} | ${linkedin}\n\n## PROFESSIONAL SUMMARY\n${p.summary || ''}\n\n## TARGET ROLES\n${p.targetRoles || ''}\n\n## CORE COMPETENCIES\n${p.coreCompetencies || ''}\n\n## PROFESSIONAL EXPERIENCE\n${p.experience || ''}\n\n## EDUCATION & CERTIFICATIONS\n${p.education || ''}`;
       };
 
       const compileDemographics = (p) => {
