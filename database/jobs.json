@@ -1,17 +1,5 @@
 [
   {
-    "id": "72cf91965f365835f1fcd58de57bfbac",
-    "title": "Construction Project Manager (Starship Launch Infrastructure) ",
-    "organization": "Spacex",
-    "url": "https://boards.greenhouse.io/spacex/jobs/8461302002?gh_jid=8461302002",
-    "location": "Cape Canaveral, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "855e9c5c0fd2ac0e8003c3a97a2de1fe",
     "title": "Business Intelligence & Reporting Analyst",
     "organization": "BankUnited",
@@ -48,18 +36,6 @@
     "compatibilityScore": 90
   },
   {
-    "id": "f3959372251b91292ff78bcc767a1c7d",
-    "title": "Digital Enablement - Senior Field Operations Digital / Analytics Integration Analyst",
-    "organization": "Boeing",
-    "url": "https://www.indeed.com/viewjob?jk=54dffa70a5cc97a9",
-    "location": "Jacksonville, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "20ada6251d899322ac56d36f4dd20f3e",
     "title": "Data Analyst Excel - Remote",
     "organization": "YO IT Consulting",
@@ -70,42 +46,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 80
-  },
-  {
-    "id": "8386a6988d5497394a107b67df59e5f2",
-    "title": "Data Analyst",
-    "organization": "Interactive Resources - iR",
-    "url": "https://www.linkedin.com/jobs/view/4432419298",
-    "location": "West Palm Beach, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "2968e530a8603eae331f819326015c88",
-    "title": "Business Analyst / Data Analyst",
-    "organization": "LHH",
-    "url": "https://www.linkedin.com/jobs/view/4431258450",
-    "location": "Boynton Beach, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "88afe83b77e897f723af6d544aaf27fe",
-    "title": "Data Analyst",
-    "organization": "LTM",
-    "url": "https://www.linkedin.com/jobs/view/4428717904",
-    "location": "Tampa, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "d8d7813eaffdbb2be3236279eb81c581",
@@ -141,42 +81,6 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "34dd5edd89fcaeae76c45543c89738e0",
-    "title": "AI/Data Analyst",
-    "organization": "Kforce Inc",
-    "url": "https://www.linkedin.com/jobs/view/4419993130",
-    "location": "West Palm Beach, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "a0cba6aefb2c98a325290d1f7d696ba1",
-    "title": "Sr. Data Analyst",
-    "organization": "Alliance Drawback Services",
-    "url": "https://www.linkedin.com/jobs/view/4428298642",
-    "location": "St. Petersburg, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "f63dc9d571126954359d5f0fb2614ca1",
-    "title": "Pricing Data Analyst",
-    "organization": "Chewy",
-    "url": "https://www.linkedin.com/jobs/view/4430167687",
-    "location": "Plantation, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
     "compatibilityScore": 85
   },
   {
@@ -252,54 +156,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "f5d394431f476e17da4cd02568c89352",
-    "title": "Aviation Business Intelligence Administrator",
-    "organization": "Miami Dade County",
-    "url": "https://www.indeed.com/viewjob?jk=f37157ea8d8820c8",
-    "location": "FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "007dcef5736810b57a918b746c6d7347",
-    "title": "Business Intelligence Analyst",
-    "organization": "Navy Federal Credit Union",
-    "url": "https://www.linkedin.com/jobs/view/4430774972",
-    "location": "Pensacola, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "beccf77c3f47230d96b37787b25aa87d",
-    "title": "Senior Business Intelligence Analyst (On-Site Florida)",
-    "organization": "FirstService Residential",
-    "url": "https://www.linkedin.com/jobs/view/4432858667",
-    "location": "Plantation, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "c56905e4f4114ee8c4385995a7ce6425",
-    "title": "Selenium Automation Engineer with strong Java expertise",
-    "organization": "Tata Consultancy Services (TCS)",
-    "url": "https://www.indeed.com/viewjob?jk=101a62eab0f18e58",
-    "location": "Tampa, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "e1c63ac9ec20cd63ba1add998fc083d3",
     "title": "Test Automation Engineer (Remote Opportunity)",
     "organization": "VetsEZ",
@@ -310,42 +166,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 90
-  },
-  {
-    "id": "6d88555b7233d9b88ee8899758051add",
-    "title": "Lead Software Development Engineer in Test (Java +Selenium)",
-    "organization": "The Depository Trust & Clearing Corporation (DTCC)",
-    "url": "https://www.linkedin.com/jobs/view/4402988564",
-    "location": "Tampa, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "c8786f723826be2a33bdf111971764d5",
-    "title": "Sr. QA Automation Engineer\u202f\u2013 POS Modernization",
-    "organization": "Publix Super Markets",
-    "url": "https://www.linkedin.com/jobs/view/4420910887",
-    "location": "Lakeland, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "9b432c717135058fb116c22771e1d725",
-    "title": "QA Engineer, AI",
-    "organization": "The Mortgage Office",
-    "url": "https://www.linkedin.com/jobs/view/4413805225",
-    "location": "San Mateo, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "6f8cc874e4894d5c15871f271fe470b4",
@@ -396,30 +216,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "b50ce011137923339dd3bc3ce8603b7c",
-    "title": "Data Analyst (Finance)",
-    "organization": "Sea",
-    "url": "https://www.linkedin.com/jobs/view/4432238200",
-    "location": "Singapore, Singapore",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "743eae7369378e7a08b69fb6133d3093",
-    "title": "Data Analyst, Regional BI & Planning",
-    "organization": "Shopee",
-    "url": "https://www.linkedin.com/jobs/view/4432242096",
-    "location": "Singapore, Singapore",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "a88c7cfa5fbe004c16b389c5ecc4275b",
     "title": "[TH] Business Intelligence - Fresh Graduate",
     "organization": "Shopee",
@@ -454,66 +250,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 90
-  },
-  {
-    "id": "744a3f91d9678ee3b5f6628027ba629f",
-    "title": "Data Analyst",
-    "organization": "Klook",
-    "url": "https://www.linkedin.com/jobs/view/4381423126",
-    "location": "Singapore, Singapore",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "0ece0558fcb98fbb8fbe03ced531c311",
-    "title": "Data Analyst",
-    "organization": "Advanced Energy",
-    "url": "https://www.linkedin.com/jobs/view/4410826129",
-    "location": "Singapore, Singapore",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "3de1fc6ace035121f0f7b89bf6c6ed70",
-    "title": "Data Analyst",
-    "organization": "Yara International",
-    "url": "https://www.linkedin.com/jobs/view/4430429056",
-    "location": "Singapore, Singapore",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "803db32d13f1c72be36484da375672dc",
-    "title": "Data Analyst",
-    "organization": "Constructor Tech",
-    "url": "https://www.linkedin.com/jobs/view/4432552682",
-    "location": "Singapore, Singapore",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "8b8677264676212d335ecc3ce7233160",
-    "title": "Data Analyst",
-    "organization": "Booz Allen Hamilton",
-    "url": "https://www.linkedin.com/jobs/view/4413279281",
-    "location": "Honolulu, HI",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "09b7d3f3d51b6b31c327ff1b17641c15",
@@ -636,18 +372,6 @@
     "compatibilityScore": 90
   },
   {
-    "id": "2971aeca07cc54c18b2b40ac4462b518",
-    "title": "Entry Level Data Analyst",
-    "organization": "Emonics LLC",
-    "url": "https://www.linkedin.com/jobs/view/4431254527",
-    "location": "Charlotte, NC",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "897c1c61d88b82c25b3e2ab9fdcd130b",
     "title": "Data Analyst",
     "organization": "NielsenIQ",
@@ -694,18 +418,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 98
-  },
-  {
-    "id": "881284432a5b96244dde216bd7f2da66",
-    "title": "Reporting and Analytics Specialist, Business Intelligence",
-    "organization": "Shopee",
-    "url": "https://www.linkedin.com/jobs/view/3770363772",
-    "location": "Manila, National Capital Region, Philippines",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "decf91e6a11ce3f9ed2db63b478b23a6",
@@ -780,18 +492,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "568625d94b10444bedc99cd49fda80d3",
-    "title": "Manual QA Engineer (Junior/Middle) (Remote, Contract)",
-    "organization": "INFUSE",
-    "url": "https://www.linkedin.com/jobs/view/4432428186",
-    "location": "Lviv, Lviv, Ukraine",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "d5e580b646a1e1bd16efdcd368a111e2",
     "title": "Software Test Engineer (QA Engineer)",
     "organization": "Infosys",
@@ -840,42 +540,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "970a452bd958d1a87f1349a9750299eb",
-    "title": "Project Manager/Construction Consulting Services",
-    "organization": "GLE Associates, Inc.",
-    "url": "https://www.indeed.com/viewjob?jk=1417cd2fa4d36ed8",
-    "location": "Tampa, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "660e8e3f0899fd8a02e3b871d38f912f",
-    "title": "Construction Project Manager",
-    "organization": "Allied Contractors Inc.",
-    "url": "https://www.indeed.com/viewjob?jk=5883193aa033081e",
-    "location": "Hialeah, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "f15ec8b796a13996ecb4365fc98e1b16",
-    "title": "Technical Project Manager III",
-    "organization": "Purpose Brands, LLC",
-    "url": "https://www.linkedin.com/jobs/view/4431452902",
-    "location": "Boca Raton, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "5b79db37989067695f49ee385d8e2881",
     "title": "Technical Project Manager",
     "organization": "SS&C Technologies",
@@ -888,78 +552,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "68bbef541b5876c21523f45c79287302",
-    "title": "Technology Solutions Project Manager",
-    "organization": "Power Design",
-    "url": "https://www.linkedin.com/jobs/view/4404085764",
-    "location": "St. Petersburg, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "ced1905b0a8be4d3a6e82f137045c381",
-    "title": "Project Manager",
-    "organization": "AdventHealth",
-    "url": "https://www.linkedin.com/jobs/view/4432228920",
-    "location": "Tampa, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "e1d002bbff301448e9a401f6509df3a8",
-    "title": "Senior Project Manager - Multifamily",
-    "organization": "Scott Humphrey Corporation",
-    "url": "https://www.linkedin.com/jobs/view/4432429024",
-    "location": "West Palm Beach, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "79b68909b2af562aa694d46e50fee854",
-    "title": "Senior Project Manager - Central / East Coast FL",
-    "organization": "Just Construction Recruitment",
-    "url": "https://www.linkedin.com/jobs/view/4432221696",
-    "location": "Florida, United States",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "d57e863475148a98d33332dab138f525",
-    "title": "Project Manager \u2013 Operational Technology Services - 1898 & Co",
-    "organization": "1898 & Co.",
-    "url": "https://www.linkedin.com/jobs/view/4381639297",
-    "location": "Orlando, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "3a537d39b2c907f74051491f881a091b",
-    "title": "Technical Project Manager",
-    "organization": "Kforce Inc",
-    "url": "https://www.linkedin.com/jobs/view/4431152551",
-    "location": "Orlando, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "fc2404bf57f5b2cd4358ffd73075f9be",
     "title": "Senior Project Manager",
     "organization": "UES",
@@ -970,114 +562,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 90
-  },
-  {
-    "id": "6c99cb04c4916a9afcaa68ff8f8bdcfa",
-    "title": "Senior Project Manager",
-    "organization": "Optomi",
-    "url": "https://www.linkedin.com/jobs/view/4429300652",
-    "location": "Orlando, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "0337d41fa031ce9eae1c2f4033e09815",
-    "title": "Senior Project Manager",
-    "organization": "Old Republic Title",
-    "url": "https://www.linkedin.com/jobs/view/4431449124",
-    "location": "Tampa, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "7fd34f588a60aa78ab6ea6284ccf2300",
-    "title": "Project Manager",
-    "organization": "avertra",
-    "url": "https://www.linkedin.com/jobs/view/4430560488",
-    "location": "Tampa, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "7e583a42f20b6a5f4832156d4162d2f9",
-    "title": "Payments Project Manager",
-    "organization": "Tata Consultancy Services",
-    "url": "https://www.linkedin.com/jobs/view/4412411112",
-    "location": "Tampa, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "05173361ef9e36663c9233caffa6952e",
-    "title": "PM Scrum Master",
-    "organization": "Virtusa",
-    "url": "https://www.linkedin.com/jobs/view/4417254524",
-    "location": "Tampa, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "150cd8cdc777e1632dcf02ba8f3d149e",
-    "title": "Project Manager + Technical Business Analyst (Miami)",
-    "organization": "Coderio",
-    "url": "https://www.linkedin.com/jobs/view/4431132899",
-    "location": "Miami, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "c30a625464d367763be6d044fcb6ea49",
-    "title": "Project Manager",
-    "organization": "CoAdvantage",
-    "url": "https://www.linkedin.com/jobs/view/4420247309",
-    "location": "Bradenton, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "2172bdac0e4097c59a3a60fce4f74ef9",
-    "title": "Senior Project Manager",
-    "organization": "CoAdvantage",
-    "url": "https://www.linkedin.com/jobs/view/4420249244",
-    "location": "Bradenton, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "be8d5e231820544f3fb5f74f70a8a381",
-    "title": "Specialist, Project Manager",
-    "organization": "Pearson",
-    "url": "https://www.linkedin.com/jobs/view/4432150316",
-    "location": "Tallahassee, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "3042edd4aace51b44170556dd4808fa4",
@@ -1176,30 +660,6 @@
     "compatibilityScore": 90
   },
   {
-    "id": "721357ba36d373b13aa552eebd906148",
-    "title": "Assistant Project Manager",
-    "organization": "Curran Young Construction",
-    "url": "https://www.linkedin.com/jobs/view/4432285839",
-    "location": "Bonita Springs, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "3a33eab5bf174f53540b0fa424216e8f",
-    "title": "Assistant Project Manager",
-    "organization": "Insight Global",
-    "url": "https://www.linkedin.com/jobs/view/4431252636",
-    "location": "West Palm Beach, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "0dd31e1b0ea7a9049476c0d4da43bd1d",
     "title": "Agile Scrum Master (Local Prefered) [Contract W2]",
     "organization": "Ampstek",
@@ -1222,42 +682,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 80
-  },
-  {
-    "id": "4b61a1386bdb3d67558b8e7176e0fb83",
-    "title": "Construction Project Manager",
-    "organization": "Dynamics Executive Search",
-    "url": "https://www.linkedin.com/jobs/view/4432435455",
-    "location": "Miami-Dade County, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "e61a21b5020b09bbb8c4a2581e61a6c0",
-    "title": "Construction Project Manager",
-    "organization": "Just Construction Recruitment",
-    "url": "https://www.linkedin.com/jobs/view/4432227112",
-    "location": "Jacksonville, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "f5689ac7e7dfbb573d8a06ec283773ae",
-    "title": "Construction Project Manager",
-    "organization": "Hays",
-    "url": "https://www.linkedin.com/jobs/view/4432288236",
-    "location": "Palm Beach County, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "246cfcca84eb0818a60ee53bc4f3f4aa",
@@ -1332,18 +756,6 @@
     "compatibilityScore": 90
   },
   {
-    "id": "a529c618521555b7abe34df0dbd41f90",
-    "title": "IT Project Manager",
-    "organization": "BDO Unibank",
-    "url": "https://www.linkedin.com/jobs/view/4430386259",
-    "location": "National Capital Region, Philippines",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "cf45fedb321d67aafb5943104f67ed7d",
     "title": "Senior Project Manager",
     "organization": "Tata Communications",
@@ -1377,18 +789,6 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "981a3c8f9c4a2cdb397598585e04be00",
-    "title": "Senior Project Manager",
-    "organization": "Clear Strategy",
-    "url": "https://www.linkedin.com/jobs/view/4427844182",
-    "location": "Dublin, County Dublin, Ireland",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
     "compatibilityScore": 85
   },
   {
@@ -1596,66 +996,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "c302d76569ee93f5de3465ff6ee5a964",
-    "title": "Scrum Master",
-    "organization": "National Grid",
-    "url": "https://www.linkedin.com/jobs/view/4429477182",
-    "location": "Warwick, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "aa7f3d183f44e438e1770227ef7a6241",
-    "title": "Scrum Master",
-    "organization": "Barclays",
-    "url": "https://www.linkedin.com/jobs/view/4429413594",
-    "location": "Glasgow, Scotland, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "5d373e07d8f08a9f3b44a26d192b9188",
-    "title": "Scrum Master",
-    "organization": "Inspired Thinking Group (ITG)",
-    "url": "https://www.linkedin.com/jobs/view/4422334800",
-    "location": "Birmingham, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "430bbe43e4c0940d72ec12acc2798363",
-    "title": "Scrum Master",
-    "organization": "Capgemini",
-    "url": "https://www.linkedin.com/jobs/view/4430495744",
-    "location": "Glasgow, Scotland, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "a671c689b98e1384a9883ba515512fbb",
-    "title": "Scrum Master",
-    "organization": "ECRS (ECR Software Corporation)",
-    "url": "https://www.linkedin.com/jobs/view/4430371726",
-    "location": "Boone, NC",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "abfd6aa51974465452bd7e146db1a0ae",
     "title": "Scrum Master",
     "organization": "Timebox Pro",
@@ -1678,54 +1018,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 95
-  },
-  {
-    "id": "01ab87fbff27e004762d7b7776e35c44",
-    "title": "Scrum Master",
-    "organization": "Evelyn Partners",
-    "url": "https://www.linkedin.com/jobs/view/4431120049",
-    "location": "Bracknell, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "ac20e291caade6b08a75cddf1e8c8015",
-    "title": "Scrum Master",
-    "organization": "HTC Global Services",
-    "url": "https://www.linkedin.com/jobs/view/4418875432",
-    "location": "Grand Rapids, MI",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "9fc85974828d3f0ebdeeccb328799eeb",
-    "title": "IT Scrum Master",
-    "organization": "Lincoln Investment",
-    "url": "https://www.linkedin.com/jobs/view/4410809902",
-    "location": "Florida",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "a3e6e05fcbae11185280a014fcba8288",
-    "title": "Agile Practitioner",
-    "organization": "MBDA",
-    "url": "https://www.linkedin.com/jobs/view/4429360124",
-    "location": "Bristol, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "2960087808d5532e7ee780d664f0a483",
@@ -1944,42 +1236,6 @@
     "compatibilityScore": 90
   },
   {
-    "id": "07e0e4ecb8d463b4b4381d65302b0fa5",
-    "title": "Operations Manager",
-    "organization": "CVS Health",
-    "url": "https://www.indeed.com/viewjob?jk=f3538d06e1ac33f3",
-    "location": "Lauderhill, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "daab2960f6c098de6db0fe33477946d9",
-    "title": "Operations Director, Palm Beach",
-    "organization": "Herm\u00e8s",
-    "url": "https://www.linkedin.com/jobs/view/4402711804",
-    "location": "Palm Beach, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "853a4427825dcfdfe73bfce717f1a764",
-    "title": "store manager-Doral, FL",
-    "organization": "Starbucks",
-    "url": "https://www.linkedin.com/jobs/view/4418811994",
-    "location": "Doral, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "aa33f60991fd8f3c8ca32f2fd5e4caf1",
     "title": "Operations Lead - Miami Design District",
     "organization": "ALO",
@@ -1990,174 +1246,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 90
-  },
-  {
-    "id": "4bb3d92218c9658eb9ed377f28943196",
-    "title": "Property Manager",
-    "organization": "Contemporary Management Concepts, LLLP",
-    "url": "https://www.indeed.com/viewjob?jk=52405c9a3ec7787a",
-    "location": "Spring Hill, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "03d6317017fd99ed6995191150464f9b",
-    "title": "Property Manager",
-    "organization": "Riverstone Communities",
-    "url": "https://www.indeed.com/viewjob?jk=ced8a417b7a99e55",
-    "location": "Clearwater, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "f068823cea118342002682ef4215abdf",
-    "title": "Property Manager -HOA",
-    "organization": "Castle Group",
-    "url": "https://www.indeed.com/viewjob?jk=2a792d5a3aa6f5c4",
-    "location": "Kissimmee, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "e21bd457cd6dd4ac9cc27c017ecf6057",
-    "title": "Assistant Property Manager",
-    "organization": "Campbell Property Management",
-    "url": "https://www.indeed.com/viewjob?jk=b44e59c9014ff785",
-    "location": "Aventura, FL, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "f3f35c7ba0f65ec3126bcbc9f6d2f748",
-    "title": "Assistant Property Manager, Multifamily",
-    "organization": "Cushman & Wakefield",
-    "url": "https://www.linkedin.com/jobs/view/4431238599",
-    "location": "Jacksonville, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "b19bbb68d3a2650a8c5113c02dd521f3",
-    "title": "Assistant Property Manager in Ocala, FL",
-    "organization": "The Collier Companies",
-    "url": "https://www.linkedin.com/jobs/view/4431706487",
-    "location": "Ocala, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "fbf555573038d13d78b46359f4e1346f",
-    "title": "Property Manager",
-    "organization": "RAM Partners, LLC",
-    "url": "https://www.linkedin.com/jobs/view/4431793994",
-    "location": "Maitland, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "82e0b4de43c3f428236b04c1b7a3ad69",
-    "title": "Property Manager - $2500 Sign-On Bonus",
-    "organization": "Bozzuto",
-    "url": "https://www.linkedin.com/jobs/view/4431719511",
-    "location": "Miami, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "c5a9db6566137ecb3b2c2e4073312cc0",
-    "title": "Assistant Property Manager",
-    "organization": "RAM Partners, LLC",
-    "url": "https://www.linkedin.com/jobs/view/4431785945",
-    "location": "Sanford, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "c096e646f3e8b589a04eb1272163622e",
-    "title": "Property Manager",
-    "organization": "Owens Realty Services",
-    "url": "https://www.linkedin.com/jobs/view/4432062640",
-    "location": "Orlando, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "e984ad7a49670f30c2f32af6b034d76d",
-    "title": "Property Manager",
-    "organization": "Talently",
-    "url": "https://www.linkedin.com/jobs/view/4417775221",
-    "location": "Cocoa, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "6205d6378aff4bb17dab6263ea1d55c0",
-    "title": "Property Manager",
-    "organization": "Westgate Resorts",
-    "url": "https://www.linkedin.com/jobs/view/4427371903",
-    "location": "Orlando, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "ab34fcc935b52c74cae58cd765ab1458",
-    "title": "Lease Up- On Site Property Manager",
-    "organization": "RESICAP",
-    "url": "https://www.linkedin.com/jobs/view/4414969738",
-    "location": "Fort Myers, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "d44b3abf054b84283facf00ea582f600",
-    "title": "Property Manager",
-    "organization": "AdventHealth",
-    "url": "https://www.linkedin.com/jobs/view/4432110677",
-    "location": "Orlando, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "ae5eb5df031e3ee934d2912ec86e71f7",
@@ -2244,18 +1332,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "750f533c02f9df4b6a740737192fba48",
-    "title": "Branch Operations Manager",
-    "organization": "CrossCountry Mortgage, LLC",
-    "url": "https://www.indeed.com/viewjob?jk=237ae4f014c3bdd3",
-    "location": "Remote, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "72cb12e8743b9a9e2d5a1b1b1483d4f1",
     "title": "B2B Business Development Representative",
     "organization": "Crate and Barrel",
@@ -2268,18 +1344,6 @@
     "compatibilityScore": 90
   },
   {
-    "id": "f1a98de068a3c7747813d6849a9bc7aa",
-    "title": "Operations Manager",
-    "organization": "Dobbies Garden Centres",
-    "url": "https://www.linkedin.com/jobs/view/4430822141",
-    "location": "Swindon, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
     "id": "bc84781902b98a4611c8e0693be9350f",
     "title": "Store Manager | Retail | Zara | Thailand",
     "organization": "Al-Futtaim",
@@ -2290,150 +1354,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 95
-  },
-  {
-    "id": "460be1ac7db1a693609b1cb49f25f263",
-    "title": "Retail Sales & Operations Manager",
-    "organization": "apetito UK",
-    "url": "https://www.linkedin.com/jobs/view/4429663724",
-    "location": "Dereham, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "36198128c7e0f90f837f2722037b2d4b",
-    "title": "Regional Operations Manager - East Anglia and Hertfordshire",
-    "organization": "Boots UK",
-    "url": "https://www.linkedin.com/jobs/view/4430988660",
-    "location": "Norwich, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "cfbad038dded2e4f71de0cbeff0a7581",
-    "title": "Real Estate Sales Agent & Property Manager (1099 Independent Contractor)",
-    "organization": "nan",
-    "url": "https://www.indeed.com/viewjob?jk=22f19595f6e04856",
-    "location": "Remote, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "ec9613ee2a2451c04124d2ccf9aa037d",
-    "title": "Property Manager",
-    "organization": "B.L.E.S.S, LLC",
-    "url": "https://www.indeed.com/viewjob?jk=290709a58bf1d6da",
-    "location": "Remote, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "20f477cbd91e1600e6cdebedeeb92c52",
-    "title": "Floating Leasing Consultant / Assistant Property Manager",
-    "organization": "The O'Neill Group, LLC",
-    "url": "https://www.linkedin.com/jobs/view/4432293089",
-    "location": "Bergen County, NJ",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "c35a344be1a98f1ea3f6670aa64f7874",
-    "title": "Property Manager",
-    "organization": "Hays",
-    "url": "https://www.linkedin.com/jobs/view/4430508024",
-    "location": "Bournemouth, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "626ff08194f98f977fd03957131ab699",
-    "title": "Property Manager",
-    "organization": "Cooke Curtis & Co",
-    "url": "https://www.linkedin.com/jobs/view/4431668854",
-    "location": "Cambridge, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "151fdaad8d95b353eb179632940aae30",
-    "title": "Regional Property Manager- Florida",
-    "organization": "TAM Residential",
-    "url": "https://www.linkedin.com/jobs/view/4432026403",
-    "location": "Clearwater, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "d367af0887ac8b14cb546c01c13f613a",
-    "title": "Property Manager",
-    "organization": "Travel Chapter",
-    "url": "https://www.linkedin.com/jobs/view/4430451410",
-    "location": "Wadebridge, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "c96d0ce3131489f12ff419a4900a1671",
-    "title": "Property Manager",
-    "organization": "Fresh Air Property Management",
-    "url": "https://www.linkedin.com/jobs/view/4432817270",
-    "location": "Chichester, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "18bcb3c25124ae04d6b021f5341c8ee3",
-    "title": "Property Manager",
-    "organization": "TeamJobs",
-    "url": "https://www.linkedin.com/jobs/view/4432594452",
-    "location": "Bournemouth, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "b389346b689f211cf2246c6e2e4d6c94",
-    "title": "Property Manager",
-    "organization": "Linley and Simpson",
-    "url": "https://www.linkedin.com/jobs/view/4431876939",
-    "location": "Wakefield, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-24",
-    "compatibilityScore": 85
   },
   {
     "id": "53dea8a4fb30e9defb747f086158afad",
