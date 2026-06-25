@@ -347,6 +347,23 @@ def evaluate_jobs_batch(jobs_batch, profiles, api_key):
         
     return []
 
+def group_candidate_criteria(sources):
+    """Group all target keywords and exclude keywords from sources by Sector Tag."""
+    candidate_keywords = {"Greg": set(), "Rachel": set(), "Lorena": set()}
+    candidate_excludes = {"Greg": set(), "Rachel": set(), "Lorena": set()}
+    for src in sources:
+        tag = src.get("Sector Tag")
+        if tag in candidate_keywords:
+            kw_str = src.get("Target Keywords") or ""
+            ex_str = src.get("Exclude Keywords") or ""
+            for k in kw_str.split(","):
+                if k.strip():
+                    candidate_keywords[tag].add(k.strip().lower())
+            for ex in ex_str.split(","):
+                if ex.strip():
+                    candidate_excludes[tag].add(ex.strip().lower())
+    return candidate_keywords, candidate_excludes
+
 def main():
     print("====================================================")
     print("STARTING AUTONOMOUS JOB PIPELINE SCRAPER RUN")
@@ -411,19 +428,7 @@ def main():
     }
     
     # Build candidate-specific keywords and excludes from sources.json
-    candidate_keywords = {"Greg": set(), "Rachel": set(), "Lorena": set()}
-    candidate_excludes = {"Greg": set(), "Rachel": set(), "Lorena": set()}
-    for src in sources:
-        tag = src.get("Sector Tag")
-        if tag in candidate_keywords:
-            kw_str = src.get("Target Keywords") or ""
-            ex_str = src.get("Exclude Keywords") or ""
-            for k in kw_str.split(","):
-                if k.strip():
-                    candidate_keywords[tag].add(k.strip().lower())
-            for ex in ex_str.split(","):
-                if ex.strip():
-                    candidate_excludes[tag].add(ex.strip().lower())
+    candidate_keywords, candidate_excludes = group_candidate_criteria(sources)
                     
     # Perform JobSpy searches
     for candidate, terms in jobspy_search_terms.items():

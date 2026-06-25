@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import unittest
-from scraper import generate_job_id, local_pre_filter
+from scraper import generate_job_id, local_pre_filter, group_candidate_criteria
 
 class TestScraperHeuristics(unittest.TestCase):
     
@@ -35,6 +35,45 @@ class TestScraperHeuristics(unittest.TestCase):
         # Only "Senior Python Engineer" in Orlando, FL should pass.
         self.assertEqual(len(filtered), 1)
         self.assertEqual(filtered[0]["title"], "Senior Python Engineer")
+
+    def test_group_candidate_criteria(self):
+        sources = [
+            {
+                "Organization": "Org1",
+                "Target Keywords": "project manager, scrum master",
+                "Exclude Keywords": "developer, programmer",
+                "Sector Tag": "Rachel"
+            },
+            {
+                "Organization": "Org2",
+                "Target Keywords": "data analyst, bi",
+                "Exclude Keywords": "accountant",
+                "Sector Tag": "Greg"
+            },
+            {
+                "Organization": "Org3",
+                "Target Keywords": "agile",
+                "Exclude Keywords": "qa",
+                "Sector Tag": "Rachel"
+            }
+        ]
+        
+        kws, exs = group_candidate_criteria(sources)
+        
+        # Rachel's grouped keywords and excludes
+        self.assertIn("project manager", kws["Rachel"])
+        self.assertIn("scrum master", kws["Rachel"])
+        self.assertIn("agile", kws["Rachel"])
+        self.assertNotIn("data analyst", kws["Rachel"])
+        self.assertIn("developer", exs["Rachel"])
+        self.assertIn("programmer", exs["Rachel"])
+        self.assertIn("qa", exs["Rachel"])
+        
+        # Greg's grouped keywords and excludes
+        self.assertIn("data analyst", kws["Greg"])
+        self.assertIn("bi", kws["Greg"])
+        self.assertIn("accountant", exs["Greg"])
+        self.assertNotIn("project manager", kws["Greg"])
 
 if __name__ == "__main__":
     unittest.main()
