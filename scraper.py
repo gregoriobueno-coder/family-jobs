@@ -13,7 +13,8 @@ import time
 import random
 import hashlib
 import requests
-from urllib.parse import urlparse
+from urllib.parse import urlparse, urljoin
+from jobspy import scrape_jobs
 
 # Local Database Paths
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -208,20 +209,23 @@ def scrape_playwright_fallback(company_url, keywords):
             for link in links:
                 href = link.get_attribute("href")
                 text = link.inner_text()
-                if href and href.startswith("http") and href not in found_urls:
-                    if sample_count < 10:
-                        print(f"  [DEBUG LINK] Text: '{text.strip().replace(chr(10), ' ')[:60]}', Href: '{href[:80]}'")
-                        sample_count += 1
-                    # Heuristic keyword match on anchor text
-                    if any(k.lower() in text.lower() for k in keywords):
-                        found_urls.add(href)
-                        jobs.append({
-                            "title": text.strip().split("\n")[0],
-                            "organization": urlparse(company_url).hostname.split('.')[1].capitalize(),
-                            "url": href,
-                            "location": "Remote",
-                            "description": text
-                        })
+                if href:
+                    # Resolve relative URLs
+                    full_href = urljoin(company_url, href)
+                    if full_href not in found_urls:
+                        if sample_count < 10:
+                            print(f"  [DEBUG LINK] Text: '{text.strip().replace(chr(10), ' ')[:60]}', Href: '{href[:80]}', Resolved: '{full_href[:80]}'")
+                            sample_count += 1
+                        # Heuristic keyword match on anchor text
+                        if any(k.lower() in text.lower() for k in keywords):
+                            found_urls.add(full_href)
+                            jobs.append({
+                                "title": text.strip().split("\n")[0],
+                                "organization": urlparse(company_url).hostname.split('.')[1].capitalize(),
+                                "url": full_href,
+                                "location": "Remote",
+                                "description": text
+                            })
             browser.close()
     except Exception as e:
         print(f"[Scraper] Playwright execution failed: {e}")
@@ -394,6 +398,106 @@ def main():
         filtered = local_pre_filter(raw_list, keywords, excludes)
         print(f"[Sourcing] Passed Tier 1 local filter: {len(filtered)} / {len(raw_list)} jobs.")
         scraped_jobs.extend(filtered)
+        
+    # 2b. Sourcing via JobSpy
+    print("\n[Sourcing] Starting JobSpy search queries...")
+    jobspy_raw_jobs = []
+    
+    # Define optimized search terms for each candidate to avoid rate limiting
+    jobspy_search_terms = {
+        "Greg": ["Data Analyst", "Business Intelligence", "QA Automation Engineer"],
+        "Rachel": ["Technical Project Manager", "Agile Project Manager", "Scrum Master"],
+        "Lorena": ["Visual Merchandising Manager", "Retail Operations Manager", "Property Manager"]
+    }
+    
+    # Build candidate-specific keywords and excludes from sources.json
+    candidate_keywords = {"Greg": set(), "Rachel": set(), "Lorena": set()}
+    candidate_excludes = {"Greg": set(), "Rachel": set(), "Lorena": set()}
+    for src in sources:
+        tag = src.get("Sector Tag")
+        if tag in candidate_keywords:
+            kw_str = src.get("Target Keywords") or ""
+            ex_str = src.get("Exclude Keywords") or ""
+            for k in kw_str.split(","):
+                if k.strip():
+                    candidate_keywords[tag].add(k.strip().lower())
+            for ex in ex_str.split(","):
+                if ex.strip():
+                    candidate_excludes[tag].add(ex.strip().lower())
+                    
+    # Perform JobSpy searches
+    for candidate, terms in jobspy_search_terms.items():
+        print(f"\n[JobSpy] Sourcing jobs for candidate: {candidate}")
+        kws = list(candidate_keywords[candidate])
+        exs = list(candidate_excludes[candidate])
+        
+        # Target locations
+        locations = ["Florida", "Remote"]
+        for loc in locations:
+            for term in terms:
+                print(f"  Querying: '{term}' in '{loc}'...")
+                try:
+                    # Limit results to 15 per query, past 7 days (168 hours)
+                    jobs_df = scrape_jobs(
+                        site_name=["indeed", "linkedin"],
+                        search_term=term,
+                        location=loc,
+                        results_wanted=15,
+                        hours_old=168,
+                        country_indeed="USA"
+                    )
+                    
+                    if jobs_df is not None and not jobs_df.empty:
+                        print(f"  [JobSpy] Found {len(jobs_df)} raw listings.")
+                        for _, row in jobs_df.iterrows():
+                            title = str(row.get("title", "")).strip()
+                            company = str(row.get("company", "")).strip()
+                            url = str(row.get("job_url", "")).strip()
+                            location_str = str(row.get("location", "")).strip()
+                            desc = str(row.get("description", "")).strip()
+                            is_remote = bool(row.get("is_remote", False))
+                            
+                            if not title or not url:
+                                continue
+                                
+                            if not location_str:
+                                location_str = "Remote" if is_remote else "Florida"
+                                
+                            jobspy_raw_jobs.append({
+                                "title": title,
+                                "organization": company if company else "Unknown",
+                                "url": url,
+                                "location": location_str,
+                                "description": desc,
+                                "candidate_hint": candidate  # keep track of who we searched this for
+                            })
+                    else:
+                        print("  [JobSpy] No jobs returned.")
+                except Exception as e:
+                    print(f"  [JobSpy] Query failed for '{term}' in '{loc}': {e}")
+                    
+                # Sleep to avoid rate limiting
+                time.sleep(random.uniform(2.0, 4.0))
+                
+    print(f"\n[JobSpy] Total jobs harvested: {len(jobspy_raw_jobs)}")
+    
+    # Filter JobSpy jobs using candidates' combined criteria
+    filtered_jobspy_jobs = []
+    for job in jobspy_raw_jobs:
+        candidate = job["candidate_hint"]
+        kws = list(candidate_keywords[candidate])
+        exs = list(candidate_excludes[candidate])
+        
+        # Apply local pre-filter criteria
+        passed = local_pre_filter([job], kws, exs)
+        if passed:
+            # Remove candidate hint before adding to global list
+            job_clean = job.copy()
+            del job_clean["candidate_hint"]
+            filtered_jobspy_jobs.append(job_clean)
+            
+    print(f"[JobSpy] Passed Tier 1 local filter: {len(filtered_jobspy_jobs)} / {len(jobspy_raw_jobs)} jobs.")
+    scraped_jobs.extend(filtered_jobspy_jobs)
         
     if not scraped_jobs:
         print("\n[Scraper] No jobs passed local pre-filters. Run complete.")
