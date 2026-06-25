@@ -216,42 +216,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "a88c7cfa5fbe004c16b389c5ecc4275b",
-    "title": "[TH] Business Intelligence - Fresh Graduate",
-    "organization": "Shopee",
-    "url": "https://www.linkedin.com/jobs/view/4300405780",
-    "location": "Bangkok, Bangkok City, Thailand",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "3120c7d5f9aa55816517ef72f2c7c12a",
-    "title": "Data Analyst",
-    "organization": "JSS",
-    "url": "https://www.linkedin.com/jobs/view/4429451313",
-    "location": "London Area, United Kingdom",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "50bf0805a983622233d1613abeb30cb3",
-    "title": "Data Analyst (BigQuery, Looker, SQL)",
-    "organization": "Aubay Spain",
-    "url": "https://www.linkedin.com/jobs/view/4431262700",
-    "location": "Valladolid, Castilla and Leon, Spain",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
     "id": "09b7d3f3d51b6b31c327ff1b17641c15",
     "title": "Finance & Business Intelligence Manager",
     "organization": "nan",
@@ -348,155 +312,11 @@
     "compatibilityScore": 95
   },
   {
-    "id": "e1067d5596f39422b229e51a4234e239",
-    "title": "AI & Data Analyst",
-    "organization": "Joramco",
-    "url": "https://www.linkedin.com/jobs/view/4432253292",
-    "location": "Amman, Jordan",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 80
-  },
-  {
-    "id": "b78a9e7493202a50ea9f4202a4bbade1",
-    "title": "Data Analyst I",
-    "organization": "Nielsen",
-    "url": "https://www.linkedin.com/jobs/view/4431204085",
-    "location": "Bengaluru, Karnataka, India",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "897c1c61d88b82c25b3e2ab9fdcd130b",
-    "title": "Data Analyst",
-    "organization": "NielsenIQ",
-    "url": "https://www.linkedin.com/jobs/view/4432203304",
-    "location": "Stockport, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "37a6fd74c74406ab7a70eb80a48f80d2",
-    "title": "Power BI Admin",
-    "organization": "Infosys",
-    "url": "https://www.linkedin.com/jobs/view/4423267382",
-    "location": "Hyderabad, Telangana, India",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "d4e318f09c05049e8faf339ccb2b50c0",
-    "title": "Data Analyst Intern",
-    "organization": "Glovo",
-    "url": "https://www.linkedin.com/jobs/view/4432239650",
-    "location": "Barcelona, Catalonia, Spain",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 80
-  },
-  {
-    "id": "071e490bcbd7a62e82b707b7c9e5d9c2",
-    "title": "Data Analyst - Business Intelligence",
-    "organization": "Shopee",
-    "url": "https://www.linkedin.com/jobs/view/3611203960",
-    "location": "Kuala Lumpur, Federal Territory of Kuala Lumpur, Malaysia",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 98
-  },
-  {
     "id": "decf91e6a11ce3f9ed2db63b478b23a6",
     "title": "QA Automation\u00a0Engineer",
     "organization": "West 4th Strategy",
     "url": "https://www.indeed.com/viewjob?jk=526b99ad41593723",
     "location": "Remote, US",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "72eff45a59c1340d38e06c674852e7f6",
-    "title": "QA Automation Engineer",
-    "organization": "Softcat",
-    "url": "https://www.linkedin.com/jobs/view/4431256260",
-    "location": "Manchester, England, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "6903c0714dd61d49d13be790c427dc4e",
-    "title": "QA Automation Engineer",
-    "organization": "Infinite Computer Solutions",
-    "url": "https://www.linkedin.com/jobs/view/4432442374",
-    "location": "New Jersey, United States",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "1491d3d90c4af448376ae764268770e7",
-    "title": "SDET Automation Testing",
-    "organization": "Capgemini",
-    "url": "https://www.linkedin.com/jobs/view/4422354631",
-    "location": "Bengaluru, Karnataka, India",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "57134359c7e8273ffb9282c1dbe9bc54",
-    "title": "Test Automation Engineer",
-    "organization": "Capgemini",
-    "url": "https://www.linkedin.com/jobs/view/4422367196",
-    "location": "Hyderabad, Telangana, India",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "d5e580b646a1e1bd16efdcd368a111e2",
-    "title": "Software Test Engineer (QA Engineer)",
-    "organization": "Infosys",
-    "url": "https://www.linkedin.com/jobs/view/4430598536",
-    "location": "Bengaluru East, Karnataka, India",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "0d28330379c8aeaaa19d5677a49c0d4e",
-    "title": "Test Automation Engineer",
-    "organization": "Capitec",
-    "url": "https://www.linkedin.com/jobs/view/4428939803",
-    "location": "Stellenbosch, Western Cape, South Africa",
     "type": "Greg",
     "source": "Python Agent",
     "userStatus": "Queued",
@@ -708,42 +528,6 @@
     "compatibilityScore": 90
   },
   {
-    "id": "9aa6b20c5ca700b337b178fb9ebbda8a",
-    "title": "Senior Project Manager",
-    "organization": "Schneider Electric",
-    "url": "https://www.linkedin.com/jobs/view/4403643459",
-    "location": "Oslo, Oslo, Norway",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "133f9bc11d365ec58c1c0512f389d161",
-    "title": "IT Project Manager (Barcelona)",
-    "organization": "Nuvolar Works",
-    "url": "https://www.linkedin.com/jobs/view/4431637891",
-    "location": "Barcelona, Catalonia, Spain",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "cf45fedb321d67aafb5943104f67ed7d",
-    "title": "Senior Project Manager",
-    "organization": "Tata Communications",
-    "url": "https://www.linkedin.com/jobs/view/4430902257",
-    "location": "Singapore, Singapore",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
     "id": "4613bdd9239c1834e245ea6a82dffa23",
     "title": "Senior Project Manager",
     "organization": "AECOM",
@@ -754,30 +538,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 85
-  },
-  {
-    "id": "a64414495074acbe2a878e478275d5b8",
-    "title": "Senior Project Manager",
-    "organization": "Tata Consultancy Services",
-    "url": "https://www.linkedin.com/jobs/view/4418821466",
-    "location": "Stevenage, England, UK",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "4922299c316b545fe8b818d8b7da0c28",
-    "title": "IT Project Manager",
-    "organization": "Maybank",
-    "url": "https://www.linkedin.com/jobs/view/4431457657",
-    "location": "Federal Territory of Kuala Lumpur, Malaysia",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
   },
   {
     "id": "2c2aff6b24eabc89d1724e03082da85a",
@@ -804,78 +564,6 @@
     "compatibilityScore": 80
   },
   {
-    "id": "e2c82ff6f75bd5a6942ae6b0611e5816",
-    "title": "Project Manager",
-    "organization": "PPL PRS Ltd",
-    "url": "https://www.linkedin.com/jobs/view/4431670169",
-    "location": "Leicester, England, UK",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "c57caf2f78a4f09a2e3ba73d8bb61c0c",
-    "title": "Technical Project Manager",
-    "organization": "CloudPay",
-    "url": "https://www.linkedin.com/jobs/view/4431689915",
-    "location": "Andover, England, UK",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "73ee589899681104a1cbaac369fc3dc9",
-    "title": "Project Manager",
-    "organization": "Found Talent",
-    "url": "https://www.linkedin.com/jobs/view/4428949336",
-    "location": "Manchester Area, United Kingdom",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "93e0e0e2e88b045df9fbbac04b425283",
-    "title": "Intermediate Agile Delivery Manager",
-    "organization": "Hippo",
-    "url": "https://www.linkedin.com/jobs/view/4431686034",
-    "location": "Manchester, England, UK",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "6440af54cf39a28023b8717e5c1e99b7",
-    "title": "Project Manager",
-    "organization": "Wondercom",
-    "url": "https://www.linkedin.com/jobs/view/4430380616",
-    "location": "Lisboa, Lisbon, Portugal",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "d5ec75e9d8b13f4a28eed37ae8d095b3",
-    "title": "Agile Delivery Manager",
-    "organization": "Opencast | B Corp\u2122",
-    "url": "https://www.linkedin.com/jobs/view/4428246435",
-    "location": "Manchester Area, United Kingdom",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
     "id": "aa082cf393db426c5f42b09ba0822f67",
     "title": "Project Manager, North Asia and SEAA",
     "organization": "CHANEL",
@@ -898,18 +586,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 95
-  },
-  {
-    "id": "51676637f4dbdf73e1a98ded8e26ce8b",
-    "title": "Project Manager",
-    "organization": "Sirius Digital Services",
-    "url": "https://www.linkedin.com/jobs/view/4429859145",
-    "location": "Portsmouth, England, UK",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
   },
   {
     "id": "1d536ed17e251f5d6d7df0e78ffd96f4",
@@ -972,18 +648,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "abfd6aa51974465452bd7e146db1a0ae",
-    "title": "Scrum Master",
-    "organization": "Timebox Pro",
-    "url": "https://www.linkedin.com/jobs/view/4428950299",
-    "location": "Parsippany, NJ",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
     "id": "2dd9517098aebc702dce9e06ac2a37ac",
     "title": "Scrum Master",
     "organization": "HeartCentrix Solutions",
@@ -994,18 +658,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 90
-  },
-  {
-    "id": "2960087808d5532e7ee780d664f0a483",
-    "title": "Scrum Master",
-    "organization": "IDR, Inc.",
-    "url": "https://www.linkedin.com/jobs/view/4432101829",
-    "location": "Cincinnati, OH",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
   },
   {
     "id": "a0085ccc7cfdb307205b28593824a857",
@@ -1224,42 +876,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "ae5eb5df031e3ee934d2912ec86e71f7",
-    "title": "Visual Merchandising Manager",
-    "organization": "Gucci",
-    "url": "https://www.linkedin.com/jobs/view/4430866620",
-    "location": "Bangkok City, Thailand",
-    "type": "Lorena",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "82c1954d5409906b54870989196228de",
-    "title": "Visual Merchandising Manager",
-    "organization": "Reliance Retail",
-    "url": "https://www.linkedin.com/jobs/view/4268194719",
-    "location": "Bengaluru, Karnataka, India",
-    "type": "Lorena",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "cdc2318472e1125c65298ce4173ce736",
-    "title": "Global Visual Merchandising Lead, Jordan Brand",
-    "organization": "Nike",
-    "url": "https://www.linkedin.com/jobs/view/4430167967",
-    "location": "Beaverton, OR",
-    "type": "Lorena",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
     "id": "64f57ee96ad00142e3cce5c2a32e3b2b",
     "title": "Windows & Creation Visual Merchandising Manager / Assistant Manager",
     "organization": "Louis Vuitton",
@@ -1270,30 +886,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 95
-  },
-  {
-    "id": "6b9708449fb1cf81b56abfac16bf0bed",
-    "title": "Global Visual Merchandising Lead, Running",
-    "organization": "Nike",
-    "url": "https://www.linkedin.com/jobs/view/4432499668",
-    "location": "Beaverton, OR",
-    "type": "Lorena",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "8f1ae9e1e7625a952a0d40c6b0b752de",
-    "title": "Manager Visual Merchandising",
-    "organization": "Ulta Beauty",
-    "url": "https://www.linkedin.com/jobs/view/4422680354",
-    "location": "Bolingbrook, IL",
-    "type": "Lorena",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
   },
   {
     "id": "e79300f008bab33f4425fe58dbbcdb54",
@@ -1318,18 +910,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 90
-  },
-  {
-    "id": "bc84781902b98a4611c8e0693be9350f",
-    "title": "Store Manager | Retail | Zara | Thailand",
-    "organization": "Al-Futtaim",
-    "url": "https://www.linkedin.com/jobs/view/4402697155",
-    "location": "Alberton, Gauteng, South Africa",
-    "type": "Lorena",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
   },
   {
     "id": "53dea8a4fb30e9defb747f086158afad",
@@ -1416,71 +996,11 @@
     "compatibilityScore": 90
   },
   {
-    "id": "e34ba9497088437adad85a1735d69a58",
-    "title": "Data Analyst",
-    "organization": "VidaCaixa",
-    "url": "https://www.linkedin.com/jobs/view/4432276498",
-    "location": "Barcelona, Catalonia, Spain",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
     "id": "5615447b76c1d5d662aaebb5cc02a6fb",
     "title": "Data Analyst",
     "organization": "Blossom",
     "url": "https://www.linkedin.com/jobs/view/4432406589",
     "location": "Florida",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "d594f65707a69e14d109a69d80e406fe",
-    "title": "Business Intelligence Developer",
-    "organization": "Scope (Aust)",
-    "url": "https://www.linkedin.com/jobs/view/4430867272",
-    "location": "Hawthorn, Victoria, Australia",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "b2e9467bc7f6d14588efb40a00ff0449",
-    "title": "Engineer Business Intelligence 3 (PERM)",
-    "organization": "Sportsman's Warehouse",
-    "url": "https://www.linkedin.com/jobs/view/4429353356",
-    "location": "West Jordan, UT",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "17bb110b8ca92951ebff6124d7532120",
-    "title": "Business Intelligence Analyst",
-    "organization": "Spencer - Richardson",
-    "url": "https://www.linkedin.com/jobs/view/4432817107",
-    "location": "Kilmarnock, Scotland, UK",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "1b451aa796dc6c7be14fe12815dc640f",
-    "title": "Business Intelligence Specialist",
-    "organization": "General Dynamics - Bath Iron Works",
-    "url": "https://www.linkedin.com/jobs/view/4433015309",
-    "location": "Bath, ME",
     "type": "Greg",
     "source": "Python Agent",
     "userStatus": "Queued",
@@ -1608,42 +1128,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "bcc51de97754cf611bc3cacbcd072666",
-    "title": "Technical Project Manager",
-    "organization": "Coates Group",
-    "url": "https://www.linkedin.com/jobs/view/4423282117",
-    "location": "Chicago, IL",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 100
-  },
-  {
-    "id": "0f937f42d05362eaeaa291da42ddd0df",
-    "title": "Technical Project Manager",
-    "organization": "firstPRO, Inc",
-    "url": "https://www.linkedin.com/jobs/view/4431725858",
-    "location": "West Chester, PA",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 100
-  },
-  {
-    "id": "eb0108bdfb5a4febb7f1b291b7e69e4a",
-    "title": "Scrum Master",
-    "organization": "Coforge",
-    "url": "https://www.linkedin.com/jobs/view/4430873022",
-    "location": "Sydney, New South Wales, Australia",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
     "id": "48bc6f1d724576cbdf6301c4fe7da1d5",
     "title": "Scrum Master",
     "organization": "Blackstone Talent Group",
@@ -1656,47 +1140,11 @@
     "compatibilityScore": 95
   },
   {
-    "id": "2ce95aa66d1a760601c9273f774d491d",
-    "title": "Scrum Master",
-    "organization": "KANINI",
-    "url": "https://www.linkedin.com/jobs/view/4429372177",
-    "location": "Tennessee, United States",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
     "id": "ade57177dfd61e4caa44e86ba1fd6c10",
     "title": "Scrum Master",
     "organization": "Jobgether",
     "url": "https://www.linkedin.com/jobs/view/4430417540",
     "location": "Florida",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "89d344e4f4e5d813c2fa02b1d4f3191c",
-    "title": "Scrum Master",
-    "organization": "Stealth Solutions, Inc.",
-    "url": "https://www.linkedin.com/jobs/view/4430450257",
-    "location": "Sterling, VA",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "36fa9af30abf0478d77b73893e22dff0",
-    "title": "Scrum Master",
-    "organization": "ea Change",
-    "url": "https://www.linkedin.com/jobs/view/4430492887",
-    "location": "England, United Kingdom",
     "type": "Rachel",
     "source": "Python Agent",
     "userStatus": "Queued",
