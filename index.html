@@ -98,11 +98,17 @@
 
     // Custom Fetch helper with automatic fallback to localhost port 8000 if opened on file:// protocol
     const customFetch = async (url, options = {}) => {
+      // Append cache-busting timestamp to GET requests to bypass CDN/Vercel/Browser caching
+      let targetUrl = url;
+      if (!options.method || options.method.toUpperCase() === 'GET') {
+        const separator = targetUrl.includes('?') ? '&' : '?';
+        targetUrl = `${targetUrl}${separator}t=${Date.now()}`;
+      }
       try {
-        return await fetch(url, options);
+        return await fetch(targetUrl, options);
       } catch (err) {
         if (url === "/api") {
-          const fallbackUrl = "http://localhost:8000/api";
+          const fallbackUrl = `http://localhost:8000/api${targetUrl.includes('?') ? '?' + targetUrl.split('?')[1] : ''}`;
           console.warn("Relative api fetch failed, falling back to absolute localhost URL:", fallbackUrl);
           return await fetch(fallbackUrl, options);
         }
