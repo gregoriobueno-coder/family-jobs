@@ -20,10 +20,13 @@ class TestScraperHeuristics(unittest.TestCase):
             {"title": "Software Engineer Intern", "location": "Remote"},
             {"title": "Software Engineer Co-op", "location": "Florida, US"},
             {"title": "Solutions Architect", "location": "California"},
-            {"title": "Product Lead", "location": "San Francisco, CA"}
+            {"title": "Product Lead", "location": "San Francisco, CA"},
+            {"title": "Senior Solutions Architect", "location": "Toronto, Ontario, Canada"},
+            {"title": "Lead Software Architect", "location": "Minneapolis, MN"},
+            {"title": "Scrum Master", "location": "Toronto, ON"}
         ]
         
-        keywords = ["Engineer", "Architect"]
+        keywords = ["Engineer", "Architect", "Master"]
         excludes = ["intern", "co-op"]
         
         # Test basic keyword filter and exclusions
@@ -31,7 +34,7 @@ class TestScraperHeuristics(unittest.TestCase):
         
         # Intern and Co-op should be excluded.
         # Product Lead should be excluded (does not match keywords).
-        # Solutions Architect in California onsite should be excluded by "Florida Iron Curtain" geographic filter.
+        # California, Toronto, and Minneapolis onsite jobs should be excluded by "Florida Iron Curtain" geographic filter.
         # Only "Senior Python Engineer" in Orlando, FL should pass.
         self.assertEqual(len(filtered), 1)
         self.assertEqual(filtered[0]["title"], "Senior Python Engineer")

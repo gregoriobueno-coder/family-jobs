@@ -252,18 +252,12 @@ def local_pre_filter(jobs, keywords, excludes):
             if not any(pat.search(title) for pat in keyword_patterns):
                 continue
                 
-        # "Florida Iron Curtain" geographic pre-filters (exclude jobs that must be onsite in non-Florida states)
+        # "Florida Iron Curtain" geographic pre-filters (must be Remote or in Florida)
         location = job.get("location", "").lower()
-        onsite_out_of_state = False
-        state_patterns = [
-            r'\bca\b', r'\bcalifornia\b', r'\bny\b', r'\bnew\s+york\b',
-            r'\btx\b', r'\btexas\b', r'\bma\b', r'\bboston\b'
-        ]
-        if any(re.search(pat, location) for pat in state_patterns):
-            if "remote" not in location and "hybrid" not in location:
-                onsite_out_of_state = True
+        is_remote = "remote" in location or "virtual" in location or "work from home" in location
+        is_florida = re.search(r'\bfl\b', location) or "florida" in location
         
-        if onsite_out_of_state:
+        if not is_remote and not is_florida:
             continue
             
         qualified.append(job)
