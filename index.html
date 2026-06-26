@@ -38,14 +38,14 @@
       margin: 0 auto;
       text-align: left;
     }
-    .resume-document h1 { font-size: 20pt; font-weight: bold; text-align: center; text-transform: uppercase; margin-bottom: 2px; color: #000; }
-    .resume-document .contact-info { text-align: center; font-size: 10pt; margin-bottom: 15px; font-family: Arial, Helvetica, sans-serif; }
-    .resume-document h2 { font-size: 12pt; font-weight: bold; text-transform: uppercase; border-bottom: 1.5px solid #000; padding-bottom: 1px; margin-top: 15px; margin-bottom: 8px; color: #000; }
-    .resume-document h3 { font-size: 11pt; font-weight: bold; margin-top: 8px; margin-bottom: 1px; display: flex; justify-content: space-between; }
-    .resume-document p { font-size: 10.5pt; margin-bottom: 6px; }
-    .resume-document ul { margin-left: 20px; margin-bottom: 8px; list-style-type: disc; }
-    .resume-document li { font-size: 10.5pt; margin-bottom: 3px; }
-    .resume-document strong { font-weight: bold; }
+    .resume-document h1 { font-size: 20pt !important; font-weight: bold !important; text-align: center !important; text-transform: uppercase !important; margin-bottom: 4px !important; color: #000 !important; }
+    .resume-document .contact-info { text-align: center !important; font-size: 10pt !important; margin-bottom: 15px !important; font-family: Arial, Helvetica, sans-serif !important; }
+    .resume-document h2 { font-size: 12pt !important; font-weight: bold !important; text-transform: uppercase !important; border-bottom: 1.5px solid #000 !important; padding-bottom: 2px !important; margin-top: 18px !important; margin-bottom: 8px !important; color: #000 !important; }
+    .resume-document h3 { font-size: 11pt !important; font-weight: bold !important; margin-top: 10px !important; margin-bottom: 2px !important; display: flex !important; justify-content: space-between !important; color: #000 !important; }
+    .resume-document p { font-size: 10.5pt !important; margin-bottom: 6px !important; color: #000 !important; }
+    .resume-document ul { margin-left: 24px !important; margin-bottom: 8px !important; list-style-type: disc !important; }
+    .resume-document li { font-size: 10.5pt !important; margin-bottom: 3px !important; list-style-type: disc !important; color: #000 !important; }
+    .resume-document strong { font-weight: bold !important; }
 
     /* Print Layout Styling */
     @media print {
@@ -157,16 +157,34 @@
       const [activeRightTab, setActiveRightTab] = useState('resume'); 
       const resumeOutputRef = useRef(null);
 
-      // Compile raw Markdown text from JSON Profile metadata
+      // Compile raw Markdown text from JSON Profile metadata matching Harvard MCS standards
       const compileResumeFromProfile = (p, name) => {
-        if (!p) return `Waiting for profile data from Google Sheets for ${name}...`;
+        if (!p) return `Waiting for profile data for ${name}...`;
         const lName = p.lastName || 'Bueno';
         const address = p.address || p.location || 'Orlando, FL';
         const phone = p.phone || '(555) 555-5555';
         const email = p.email || `${name.toLowerCase()}.bueno@email.com`;
         const linkedin = p.linkedIn || `linkedin.com/in/${name.toLowerCase()}`;
 
-        return `${name} ${lName}\n${address} | ${phone} | ${email} | ${linkedin}\n\n## PROFESSIONAL SUMMARY\n${p.summary || ''}\n\n## TARGET ROLES\n${p.targetRoles || ''}\n\n## CORE COMPETENCIES\n${p.coreCompetencies || ''}\n\n## PROFESSIONAL EXPERIENCE\n${p.experience || ''}\n\n## EDUCATION & CERTIFICATIONS\n${p.education || ''}`;
+        const isTech = name === 'Greg' || (p.targetRoles && (p.targetRoles.toLowerCase().includes('qa') || p.targetRoles.toLowerCase().includes('data') || p.targetRoles.toLowerCase().includes('engineer')));
+
+        let sections = [];
+        sections.push(`# ${name.toUpperCase()} ${lName.toUpperCase()}`);
+        sections.push(`${address} | ${phone} | ${email} | ${linkedin}`);
+
+        if (isTech) {
+          // Tech Resumes: Education and Tech Skills go first
+          sections.push(`## EDUCATION\n${p.education || ''}`);
+          sections.push(`## TECHNICAL SKILLS\n${p.coreCompetencies || ''}`);
+          sections.push(`## EXPERIENCE\n${p.experience || ''}`);
+        } else {
+          // Non-Tech Resumes: Experience goes first
+          sections.push(`## EXPERIENCE\n${p.experience || ''}`);
+          sections.push(`## EDUCATION\n${p.education || ''}`);
+          sections.push(`## SKILLS & INTERESTS\n${p.coreCompetencies || ''}`);
+        }
+
+        return sections.join('\n\n');
       };
 
       const compileDemographics = (p) => {
@@ -258,11 +276,17 @@
           const systemPrompt = `You are an expert Career Coach strictly following the Harvard Mignone Center for Career Success (MCS) resume guidelines. Tailor the candidate's Base Resume to the Target Job Description.
           CRITICAL HARVARD MCS RULES:
           1. NO personal pronouns ("I", "my", "we", "our"), no narrative style, no abbreviations, no slang, no pictures, or EEO demographics.
-          2. Every single bullet point MUST begin with a strong, metrics-driven ACTION VERB (e.g., Spearheaded, Orchestrated, Collaborated, Formulated, Engineered, Streamlined, Analyzed, Forecasted).
-          3. Focus heavily on quantified and qualified results, not just duties, to express not impress. No flowery language.
-          4. Tech Resumes: If the target role is in Tech/Computer Science, place the "Technical Skills" section immediately AFTER the "Education" section. For other roles, place "Skills & Interests" at the end.
-          5. Line 1 MUST be an H1 tag (#) with ONLY the candidate's Full Name. Line 2 MUST be their exact Contact Info exactly as provided in the Base Resume.
-          6. Use H2 (##) for Main Sections. Keep layout strictly balanced so it fits on a single page. Return ONLY the markdown resume.`;
+          2. DO NOT include any "Professional Summary", "Objective", or "Target Roles" section. These are strictly prohibited by Harvard MCS guidelines.
+          3. Every single experience bullet point MUST begin with a strong, metrics-driven ACTION VERB (e.g., Spearheaded, Orchestrated, Collaborated, Formulated, Engineered, Streamlined, Analyzed, Forecasted).
+          4. Focus heavily on quantified and qualified results, not just duties, to express not impress. Every bullet point should detail the task, action, and measurable outcome.
+          5. Section Headers & Order:
+             - Tech/CS Roles: H1 (Name), Contact Info, ## EDUCATION, ## TECHNICAL SKILLS, ## EXPERIENCE.
+             - Non-Tech Roles: H1 (Name), Contact Info, ## EXPERIENCE, ## EDUCATION, ## SKILLS & INTERESTS.
+          6. Experience Entry Layout:
+             **Organization Name**, City, State
+             *Position Title*, Month Year – Month Year (or Present)
+             - Bullet points...
+          7. Output Format: Return ONLY the raw, clean markdown resume. Do NOT wrap the output in \`\`\`markdown or \`\`\` code blocks. Do not add any introductory or concluding conversational text.`;
           const finalMarkdown = await executeAiCall(systemPrompt);
           if (finalMarkdown) {
              setTailoredResume(finalMarkdown);
