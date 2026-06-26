@@ -256,17 +256,18 @@
               { url: `https://api.allorigins.win/get?url=${encodeURIComponent(activeJob.url)}`, type: 'json-wrapper' }
             ];
 
-          for (const attempt of urlsToTry) {
-            if (htmlContent) break;
-            try {
-              const response = await fetch(attempt.url);
-              if (response.ok) {
-                 if (attempt.type === 'json-wrapper') {
-                    const proxyData = await response.json();
-                    if (proxyData.contents) htmlContent = proxyData.contents;
-                 } else htmlContent = await response.text();
-              }
-            } catch (e) { console.warn(`JD fetch failed for ${attempt.url}`); }
+            for (const attempt of urlsToTry) {
+              if (htmlContent) break;
+              try {
+                const response = await fetch(attempt.url);
+                if (response.ok) {
+                   if (attempt.type === 'json-wrapper') {
+                      const proxyData = await response.json();
+                      if (proxyData.contents) htmlContent = proxyData.contents;
+                   } else htmlContent = await response.text();
+                }
+              } catch (e) { console.warn(`JD fetch failed for ${attempt.url}`); }
+            }
           }
 
           if (htmlContent) {
