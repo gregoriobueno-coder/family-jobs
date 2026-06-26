@@ -208,5 +208,19 @@
     "Target Keywords": "property manager, sales manager, B2B, operations",
     "Exclude Keywords": "housekeeper, maintenance, driver",
     "Sector Tag": "Lorena"
+  },
+  {
+    "Organization": "We Work Remotely",
+    "URL": "https://weworkremotely.com/remote-jobs.rss",
+    "Target Keywords": "",
+    "Exclude Keywords": "",
+    "Sector Tag": "All"
+  },
+  {
+    "Organization": "Himalayas",
+    "URL": "https://himalayas.app/jobs/api",
+    "Target Keywords": "",
+    "Exclude Keywords": "",
+    "Sector Tag": "All"
   }
 ]

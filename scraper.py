@@ -173,6 +173,76 @@ def scrape_workday(company_url):
         print(f"[Scraper] Workday API failed for {company_url}: {e}")
     return []
 
+def scrape_weworkremotely(feed_url):
+    """Parse We Work Remotely public RSS feed XML."""
+    print(f"[Scraper] Fetching We Work Remotely RSS: {feed_url}")
+    jobs = []
+    try:
+        res = requests.get(feed_url, headers=HEADERS, timeout=15)
+        if res.status_code == 200:
+            import xml.etree.ElementTree as ET
+            root = ET.fromstring(res.content)
+            channel = root.find("channel")
+            items = channel.findall("item") if channel is not None else []
+            for item in items:
+                title_text = item.find("title").text or ""
+                link_text = item.find("link").text or ""
+                desc_text = item.find("description").text or ""
+                
+                # WWR title format is usually: "CompanyName: JobTitle"
+                company = "Unknown"
+                title = title_text
+                if ":" in title_text:
+                    parts = title_text.split(":", 1)
+                    company = parts[0].strip()
+                    title = parts[1].strip()
+                
+                jobs.append({
+                    "title": title,
+                    "organization": company,
+                    "url": link_text,
+                    "location": "Remote",
+                    "description": desc_text
+                })
+    except Exception as e:
+        print(f"[Scraper] We Work Remotely RSS failed: {e}")
+    return jobs
+
+def scrape_himalayas(api_url):
+    """Fetch job postings from Himalayas JSON API."""
+    print(f"[Scraper] Querying Himalayas API: {api_url}")
+    jobs = []
+    try:
+        res = requests.get(api_url, headers=HEADERS, timeout=15)
+        if res.status_code == 200:
+            data = res.json()
+            for item in data.get("jobs", []):
+                title = item.get("title", "")
+                company = item.get("companyName", "Unknown")
+                url = item.get("applicationLink", "")
+                desc = item.get("description", "")
+                
+                # Check location restrictions (must be US-friendly)
+                loc_restrictions = item.get("locationRestrictions", [])
+                is_us_eligible = not loc_restrictions or any(
+                    x.lower() in ["united states", "us", "usa", "worldwide", "north america"]
+                    for x in loc_restrictions
+                )
+                
+                if not is_us_eligible:
+                    continue
+                
+                jobs.append({
+                    "title": title,
+                    "organization": company,
+                    "url": url,
+                    "location": "Remote",
+                    "description": desc
+                })
+    except Exception as e:
+        print(f"[Scraper] Himalayas API failed: {e}")
+    return jobs
+
 def scrape_playwright_fallback(company_url, keywords):
     """Headless Playwright Viewport Scroll fallback loop for custom/unrecognized portals."""
     if not PLAYWRIGHT_AVAILABLE:
@@ -375,6 +445,16 @@ def main():
     
     scraped_jobs = []
     
+    # Build candidate-specific keywords and excludes from sources.json
+    candidate_keywords, candidate_excludes = group_candidate_criteria(sources)
+    
+    # Combined keywords/excludes for unified remote boards
+    all_kws = set()
+    all_exs = set()
+    for cand in ["Greg", "Rachel", "Lorena"]:
+        all_kws.update(candidate_keywords.get(cand, []))
+        all_exs.update(candidate_excludes.get(cand, []))
+    
     # 2. Phase 0: Sourcing
     for src in sources:
         url = src.get("url") or src.get("URL") or ""
@@ -386,6 +466,12 @@ def main():
         keywords = [k.strip() for k in keywords_str.split(",") if k.strip()]
         excludes = [ex.strip() for ex in excludes_str.split(",") if ex.strip()]
         
+        # If it is a unified remote board, use combined keywords/excludes to pre-filter
+        is_unified = "weworkremotely.com" in url or "himalayas.app" in url
+        if is_unified:
+            keywords = list(all_kws)
+            excludes = list(all_exs)
+        
         if not url or url == "#":
             continue
             
@@ -393,7 +479,11 @@ def main():
         
         # Hybrid Loader checks
         raw_list = []
-        if "greenhouse.io" in url:
+        if "weworkremotely.com" in url:
+            raw_list = scrape_weworkremotely(url)
+        elif "himalayas.app" in url:
+            raw_list = scrape_himalayas(url)
+        elif "greenhouse.io" in url:
             raw_list = scrape_greenhouse(url)
         elif "lever.co" in url:
             raw_list = scrape_lever(url)
@@ -420,9 +510,6 @@ def main():
         "Rachel": ["Technical Project Manager", "Agile Project Manager", "Scrum Master"],
         "Lorena": ["Visual Merchandising Manager", "Retail Operations Manager", "Property Manager"]
     }
-    
-    # Build candidate-specific keywords and excludes from sources.json
-    candidate_keywords, candidate_excludes = group_candidate_criteria(sources)
                     
     # Perform JobSpy searches
     for candidate, terms in jobspy_search_terms.items():
