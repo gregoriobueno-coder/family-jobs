@@ -112,6 +112,8 @@ class APIHandler(SimpleHTTPRequestHandler):
             self.handle_batch_upsert_jobs(payload)
         elif action == "generateResume":
             self.handle_generate_resume(payload)
+        elif action == "fetchUrl":
+            self.handle_fetch_url(payload)
         else:
             self.send_error_response(400, f"Unknown action: {action}")
 
@@ -248,7 +250,7 @@ class APIHandler(SimpleHTTPRequestHandler):
             self.send_error_response(500, "GEMINI_API_KEY environment variable is not configured.")
             return
 
-        model = payload.get("model", "gemini-2.5-flash")
+        model = payload.get("model", "gemini-1.5-flash")
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_api_key}"
         
         # Prepare body matching Gemini REST API spec
@@ -291,6 +293,25 @@ class APIHandler(SimpleHTTPRequestHandler):
             self.send_json_response({"error": f"Gemini API HTTP Error {e.code}: {err_text}"})
         except Exception as e:
             self.send_json_response({"error": f"Gemini API request failed: {str(e)}"})
+
+    def handle_fetch_url(self, payload):
+        target_url = payload.get("url")
+        if not target_url:
+            self.send_error_response(400, "Missing url parameter")
+            return
+            
+        try:
+            req = urllib.request.Request(
+                target_url, 
+                headers={
+                    "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
+                }
+            )
+            with urllib.request.urlopen(req, timeout=15) as response:
+                html = response.read().decode("utf-8", errors="ignore")
+                self.send_json_response({"success": True, "html": html})
+        except Exception as e:
+            self.send_json_response({"success": False, "error": str(e)})
 
     def send_json_response(self, data):
         response_bytes = json.dumps(data).encode("utf-8")

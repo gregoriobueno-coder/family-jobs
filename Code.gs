@@ -233,7 +233,7 @@ function doPost(e) {
         throw new Error("GEMINI_API_KEY Script Property is not configured in Google Apps Script settings.");
       }
       
-      var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + apiKey;
+      var url = "https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=" + apiKey;
       var payloadBody = {
         contents: [
           {

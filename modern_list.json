@@ -1,0 +1,687 @@
+[
+  {
+    "id": "accessibility",
+    "category": "accessibility",
+    "description": "Actionable coding guidelines for building accessible web applications, covering semantic HTML, focus management, forms, media, and testing. Use this skill when auditing or implementing accessibility features, keyboard navigation, or ARIA."
+  },
+  {
+    "id": "accessible-error-announcement",
+    "category": "accessibility",
+    "description": "Synchronize programmatic accessibility states (like aria-invalid) with the visual :user-invalid state to ensure screen reader users receive error feedback only after interaction, mirroring the visual experience."
+  },
+  {
+    "id": "language-detection",
+    "category": "built-in-ai",
+    "description": "Detect the language of user-generated content or already present site content."
+  },
+  {
+    "id": "language-model",
+    "category": "built-in-ai",
+    "description": "Run on-device natural language inference in the browser using the Prompt API, with streaming output, structured JSON responses, and multi-turn session management."
+  },
+  {
+    "id": "summarizer",
+    "category": "built-in-ai",
+    "description": "Summarize text content using the on-device Summarizer API."
+  },
+  {
+    "id": "translator",
+    "category": "built-in-ai",
+    "description": "Translate text between languages using the on-device Translator API."
+  },
+  {
+    "id": "css",
+    "category": "css",
+    "description": "Action-oriented guidelines for modern CSS architecture, layouts, and performance. Use this guide when authoring styles, managing design systems, or optimizing web rendering."
+  },
+  {
+    "id": "highlight-text-ranges",
+    "category": "css",
+    "description": "Highlight arbitrary text ranges on a page such as search results, spelling errors, or collaborative editing cursors."
+  },
+  {
+    "id": "css-layout",
+    "category": "css-layout",
+    "description": "Modern CSS layouts such as flexbox, grid, subgrid, container queries, anchor positioning, and intrinsic sizing. Use this skill when architecting responsive UI components or page layouts."
+  },
+  {
+    "id": "animated-select-picker",
+    "category": "forms",
+    "description": "Create a custom select component whose dropdown is animated. For example, the menu fades or slides into view, or the options animate upon selection."
+  },
+  {
+    "id": "autofill-address-form",
+    "category": "forms",
+    "description": "Build an address form with correct autocomplete attributes and autofill support."
+  },
+  {
+    "id": "autofill-highlight-inputs",
+    "category": "forms",
+    "description": "Use CSS to highlight form fields that have been autofilled by the browser and not edited by the user."
+  },
+  {
+    "id": "autofill-payment-form",
+    "category": "forms",
+    "description": "Build a payment form that collects card details with correct autocomplete values and autofill support."
+  },
+  {
+    "id": "autofill-sign-in-form",
+    "category": "forms",
+    "description": "Build a sign-in form with correct autocomplete values and autofill support."
+  },
+  {
+    "id": "autofill-sign-up-form",
+    "category": "forms",
+    "description": "Build a sign-up form with correct autocomplete values and autofill support."
+  },
+  {
+    "id": "brand-consistent-forms",
+    "category": "forms",
+    "description": "Match checkboxes, radio buttons, range sliders, and progress bars to your site's color palette without replacing them with custom components."
+  },
+  {
+    "id": "branded-select-styling",
+    "category": "forms",
+    "description": "Create custom select elements whose button, picker, arrow icon, and checkmark all seamlessly match your brand or design system's typography, colors, spacing, and border treatments."
+  },
+  {
+    "id": "custom-select-picker-layouts",
+    "category": "forms",
+    "description": "Create custom select pickers whose options are positioned in unique or interesting ways, rather than the traditional stacked list of options."
+  },
+  {
+    "id": "form-fields-automatically-fit-contents",
+    "category": "forms",
+    "description": "Allow form fields to grow and shrink to fit the user input, e.g. as the user types or selects a different option. Apply maximum and minimum size limits to create dynamic and responsive form fields that conform with the page design."
+  },
+  {
+    "id": "forms",
+    "category": "forms",
+    "description": "Best practices for building accessible, secure, and user-friendly web forms. Use this guide when creating or modifying forms, inputs, and submission flows."
+  },
+  {
+    "id": "required-field-feedback",
+    "category": "forms",
+    "description": "Provide error message for required form fields that were skipped or left empty *only* after user interaction, to avoid preemptive errors and ensure feedback is timely and contextually relevant to the user's flow."
+  },
+  {
+    "id": "rich-media-picker",
+    "category": "forms",
+    "description": "Create a custom select component whose options can contain complex HTML formatting (e.g. images, icons, and other rich formatting) rather than just plain text."
+  },
+  {
+    "id": "select-menu-interaction",
+    "category": "forms",
+    "description": "Validate that a non-default option has been chosen in a select menu only after the user has interacted with the control."
+  },
+  {
+    "id": "validate-input-after-interaction",
+    "category": "forms",
+    "description": "Show form field validation feedback (e.g. password complexity or email format requirements) only after the user has finished their initial interaction, avoiding premature errors on page load or while the user is typing."
+  },
+  {
+    "id": "html",
+    "category": "html",
+    "description": "Action-oriented guidelines for modern HTML architecture, semantics, native interactive APIs (Dialog, Popover, Details), focus management, and resource prioritization. Use this guide when structuring web documents, implementing native overlays, or optimizing resource loading order."
+  },
+  {
+    "id": "passkey-authentication",
+    "category": "passkeys",
+    "description": "Authenticate a returning user with a passkey for primary sign-in."
+  },
+  {
+    "id": "passkey-conditional-create",
+    "category": "passkeys",
+    "description": "Silently register a passkey for an existing user after a successful password login."
+  },
+  {
+    "id": "passkey-management",
+    "category": "passkeys",
+    "description": "Let users view and manage the passkeys registered to their account."
+  },
+  {
+    "id": "passkey-reauthentication",
+    "category": "passkeys",
+    "description": "Verify a signed-in user's identity using their existing passkeys before a sensitive action."
+  },
+  {
+    "id": "passkey-registration",
+    "category": "passkeys",
+    "description": "Register a passkey for an existing user account."
+  },
+  {
+    "id": "passkeys",
+    "category": "passkeys",
+    "description": "Comprehensive orientation and cross-cutting principles for implementing WebAuthn and Passkeys in web applications. Use this guide when handling passkey registration, authentication, management, or reauthentication."
+  },
+  {
+    "id": "batch-analytics-events",
+    "category": "performance",
+    "description": "Debounce and batch multiple analytics events together in a single beacon to minimize network contention and reduce server load, while still delivering real-time updates."
+  },
+  {
+    "id": "break-up-long-tasks",
+    "category": "performance",
+    "description": "Break up heavy synchronous processing (complex computations and/or long loops) or DOM updates, to let the browser handle user input and repaint the screen."
+  },
+  {
+    "id": "calculate-total-foreground-time",
+    "category": "performance",
+    "description": "Calculate the total time a user actually spent viewing a page, excluding periods when the tab was in the background."
+  },
+  {
+    "id": "conditional-async-dependencies",
+    "category": "performance",
+    "description": "Conditionally load or initialize async dependencies (such as importing polyfills for missing web features) without requiring complex orchestration across all of a page's script dependencies."
+  },
+  {
+    "id": "defer-rendering-heavy-content",
+    "category": "performance",
+    "description": "Reduce rendering times in content-heavy web pages (e.g. pages with long feeds, lots of articles, or complex dashboards), by deferring rendering for any content that is not immediately visible to the user."
+  },
+  {
+    "id": "defer-work-until-scroll-ends",
+    "category": "performance",
+    "description": "Defer expensive operations like DOM updates, data fetching, analytics tracking, or layout recalculation until after scrolling completes to maintain smooth scroll performance."
+  },
+  {
+    "id": "deprioritize-background-fetches",
+    "category": "performance",
+    "description": "Deprioritize background data fetches made with the Fetch API to prevent network contention with user-initiated requests."
+  },
+  {
+    "id": "detect-initial-visibility-state",
+    "category": "performance",
+    "description": "Reliably determine whether a page was initially loaded in the background, even in cases where the script is loaded asynchronously after the user foregrounded the page."
+  },
+  {
+    "id": "efficient-background-processing",
+    "category": "performance",
+    "description": "Conserve system resources and battery life by pausing background JavaScript execution (such as `<canvas>` animations, WebGL rendering, or high-frequency WebSocket data polling) when the component is off-screen and then resume them just-in-time when they scroll back into view."
+  },
+  {
+    "id": "faster-spa-view-transitions",
+    "category": "performance",
+    "description": "Enable faster transitions back to previously visited views in a Single-Page Application (SPA) by preserving their structural DOM state instead of destroying and rebuilding them on every navigation."
+  },
+  {
+    "id": "full-session-analytics",
+    "category": "performance",
+    "description": "Reliably track analytics, errors, and telemetry data across the user's entire page visit, and defer sending of the data until the user leaves the page."
+  },
+  {
+    "id": "identify-heavy-scripts",
+    "category": "performance",
+    "description": "Identify the scripts most responsible for long animation frames"
+  },
+  {
+    "id": "identify-inp-causes",
+    "category": "performance",
+    "description": "Identify slow running JavaScript that is impacting INP metric"
+  },
+  {
+    "id": "improve-next-page-load-performance",
+    "category": "performance",
+    "description": "Improve page load performance by prefetching or prerendering pages that the user is likely to visit next."
+  },
+  {
+    "id": "interactions-in-complex-layouts",
+    "category": "performance",
+    "description": "Make interactions snappier and more responsive (reducing Interaction to Next Paint (INP) scores) by avoiding layout re-calculations in complex layouts, such as data-heavy dashboards or spreadsheet-style grids."
+  },
+  {
+    "id": "optimize-image-priority",
+    "category": "performance",
+    "description": "Optimize the loading priority of Largest Contentful Paint (LCP) candidate images and deprioritize non-critical images to reduce critical resource load delays."
+  },
+  {
+    "id": "optimize-preload-priority",
+    "category": "performance",
+    "description": "Optimize the relative priority of preloaded content to reduce critical resource load delays."
+  },
+  {
+    "id": "optimize-script-priority",
+    "category": "performance",
+    "description": "Optimize the loading priority of scripts by boosting critical asynchronous scripts and deprioritizing non-essential or late-body scripts to improve sequencing and reduce delays."
+  },
+  {
+    "id": "performance",
+    "category": "performance",
+    "description": "Actionable guidelines for optimizing modern web applications. Use this guide when auditing performance, optimizing loading metrics, fixing slow interactions and optimizing Core Web Vitals (LCP, INP, CLS)"
+  },
+  {
+    "id": "resolution-optimized-pseudo-elements",
+    "category": "performance",
+    "description": "Use resolution-optimized images in CSS pseudo-elements (such as `::before` and `::after`) to reduce the number of DOM nodes."
+  },
+  {
+    "id": "schedule-tasks-by-priority",
+    "category": "performance",
+    "description": "Schedule tasks with different priorities to ensure critical work runs first while background work is deferred."
+  },
+  {
+    "id": "sequence-distributed-events",
+    "category": "performance",
+    "description": "Log and sequence operations in distributed microservices or high-throughput tracing environments by recording timestamps with nanosecond resolution."
+  },
+  {
+    "id": "privacy",
+    "category": "privacy",
+    "description": "Action-oriented guidelines for web developers to implement privacy by design, data minimization, third-party audits, and secure data handling. Use this skill when designing applications, integrating third-party services, handling user data, or configuring security headers."
+  },
+  {
+    "id": "security",
+    "category": "security",
+    "description": "Preventative security guidelines for web developers (XSS, CSP, Cookies, Cross-Origin Isolation). Use this skill to guide the process of auditing, testing, and deploying security policies safely."
+  },
+  {
+    "id": "adapt-scrollbar-to-contrast-preferences",
+    "category": "user-experience",
+    "description": "Enhance scrollbar visibility for users who prefer high-contrast interfaces"
+  },
+  {
+    "id": "anchor-positioning-tab-underline",
+    "category": "user-experience",
+    "description": "Transition an element seamlessly between two target element positions. For example, moving a selected tab underline between the previously selected tab and the currently selected tab."
+  },
+  {
+    "id": "animate-element-entry-exit",
+    "category": "user-experience",
+    "description": "Smoothly hide/show elements as they are added/removed from the DOM or as their display values are toggled."
+  },
+  {
+    "id": "animate-to-from-top-layer",
+    "category": "user-experience",
+    "description": "Animate elements such as dialogs, popovers, and tooltips as they're entering/exiting the top layer."
+  },
+  {
+    "id": "animate-to-intrinsic-sizes",
+    "category": "user-experience",
+    "description": "Smoothly animate interactive components (like accordions, menus, and expanding cards) to and from their natural dimensions."
+  },
+  {
+    "id": "apply-webgl-shaders",
+    "category": "user-experience",
+    "description": "Apply custom visual effects with WebGL shaders to HTML content."
+  },
+  {
+    "id": "calculate-event-differentials",
+    "category": "user-experience",
+    "description": "Calculate the duration and time remaining between dates and times."
+  },
+  {
+    "id": "calculate-with-intrinsic-sizes",
+    "category": "user-experience",
+    "description": "Calculate the size of an element based on its intrinsic size, while ensuring it fits within given design constraints."
+  },
+  {
+    "id": "capture-location-agnostic-data",
+    "category": "user-experience",
+    "description": "Record chronological data that should not change based on a user's location, such as birthdates, recurring alarms, or national holidays."
+  },
+  {
+    "id": "carousel-slide-effects",
+    "category": "user-experience",
+    "description": "Create a carousel of slides with images or other visual elements, where each slide animates as they enter/center/exit their scroller. For example, the slides may fade-in/fade-out, rotate, get bigger or smaller, etc."
+  },
+  {
+    "id": "carousel-snap-highlights",
+    "category": "user-experience",
+    "description": "Visually highlight the currently snapped non-interactive item in scroll-snapping carousels, galleries, or full-page swipe experiences. For example, expanding a card when snapped, or revealing hidden content."
+  },
+  {
+    "id": "child-state-based-styling",
+    "category": "user-experience",
+    "description": "Build a component that changes its styling based on the state of one of its child elements. For example, a component that renders in light or dark mode based on whether a theme toggle is checked (or not)."
+  },
+  {
+    "id": "complex-shapes",
+    "category": "user-experience",
+    "description": "Clip elements and their content to any free-form shape, like a symbol, brush stroke, or organic texture for more expressive designs."
+  },
+  {
+    "id": "component-specific-light-dark-theme",
+    "category": "user-experience",
+    "description": "Force certain elements to be in light mode or dark mode (e.g. code blocks, media players, etc) independently of the page's color-scheme."
+  },
+  {
+    "id": "consistent-cross-document-transitions",
+    "category": "user-experience",
+    "description": "Ensure critical page state is loaded and stable before initiating a cross-document view transition. This means critical CSS styles are loaded and applied, critical JavaScript is loaded and run, and the HTML visible for the user's initial view of the page has been parsed before the transition runs."
+  },
+  {
+    "id": "content-based-styling",
+    "category": "user-experience",
+    "description": "Build a component that changes its layout based on whether it contains specific child elements (or not). For example, if the component contains an image, use a multi-column layout, otherwise default to a single-column layout."
+  },
+  {
+    "id": "coordinate-global-events",
+    "category": "user-experience",
+    "description": "Schedule future meetings or events by explicitly binding them to a geographical IANA time zone so that event times remain accurate regardless of Daylight Saving Time (DST) transitions, \"skipped\" or \"repeated\" hours during clock changes."
+  },
+  {
+    "id": "cross-document-transitions",
+    "category": "user-experience",
+    "description": "Create smooth, seamless transitions between full page navigations, such as cross-fades, custom reveal effects, or morphing of content from one page to the next."
+  },
+  {
+    "id": "custom-button-actions",
+    "category": "user-experience",
+    "description": "Declaratively connect a button to any element to trigger custom, application-specific actions using declarative button commands, invoker commands, button commands, custom commands, or declarative toggle actions."
+  },
+  {
+    "id": "customize-scrollbar-color-and-thickness",
+    "category": "user-experience",
+    "description": "Customize the color or thickness of a scrollbar"
+  },
+  {
+    "id": "dark-mode",
+    "category": "user-experience",
+    "description": "Implement dark mode support in a way that respects the user's light/dark theme preference and adapts browser UI (e.g. scrollbars, form controls, etc)"
+  },
+  {
+    "id": "declarative-dialog-popover-control",
+    "category": "user-experience",
+    "description": "Toggle the visibility of a dialog or popover from a button without writing JavaScript."
+  },
+  {
+    "id": "deliver-optimized-decorative-images",
+    "category": "user-experience",
+    "description": "Deliver optimized decorative images (such as backgrounds, UI icons, or complex masks) by simultaneously providing next-generation image formats (like AVIF or WebP) alongside multiple pixel densities (like 1x and 2x) so the browser can dynamically negotiate the best combination of file size and visual quality for the user's device capabilities."
+  },
+  {
+    "id": "design-token-reactivity",
+    "category": "user-experience",
+    "description": "Define higher-order design tokens, like density modes (compact, comfortable, spacious) or themes and have descendant components react to changes directly and in component-appropriate ways."
+  },
+  {
+    "id": "directional-navigation-transitions",
+    "category": "user-experience",
+    "description": "Animate visual state changes to reflect the direction of a user's navigational flow, such as sliding new content in from the right when advancing forward or from the left when returning to a previous screen."
+  },
+  {
+    "id": "dynamic-sibling-animations",
+    "category": "user-experience",
+    "description": "Stagger animation or transition timing across sibling elements so each one starts after a computed delay based on its position in the sibling list."
+  },
+  {
+    "id": "dynamic-sibling-styling",
+    "category": "user-experience",
+    "description": "Create dynamic visual spectrums or layout arrangements that automatically adapt to the number of elements in a group."
+  },
+  {
+    "id": "export-html-media-from-canvas",
+    "category": "user-experience",
+    "description": "Capture and export dynamic HTML content as images or video frames from within canvas."
+  },
+  {
+    "id": "expose-canvas-content-to-browser-features",
+    "category": "user-experience",
+    "description": "Expose content rendered in a canvas to browser features like assistive technologies, translation, or reading mode."
+  },
+  {
+    "id": "flicker-free-client-side-ab-testing",
+    "category": "user-experience",
+    "description": "Deliver and render A/B tests, multi-variate tests, or other experiments using client-side JavaScript to alter or inject HTML, CSS, and JavaScript without the original content showing first before flickering or flashing to show the experiment content."
+  },
+  {
+    "id": "fluid-scaling",
+    "category": "user-experience",
+    "description": "Scale items like font size, spacing, and media sizes smoothly based on the parent container's size rather than using fixed breakpoints"
+  },
+  {
+    "id": "format-human-readable-durations",
+    "category": "user-experience",
+    "description": "Present elapsed time or durations to users in a readable, localized format, with the flexibility to display either detailed unit breakdowns (e.g., \"1 hour and 30 minutes\") or total unit counts (e.g., \"90 minutes\") depending on context."
+  },
+  {
+    "id": "group-element-transitions",
+    "category": "user-experience",
+    "description": "Transition a group of similar elements simultaneously using the same transition logic, such as removing a product from a shopping cart and having all the other products animate into their new positions."
+  },
+  {
+    "id": "improve-text-layout-and-legibility",
+    "category": "user-experience",
+    "description": "Improve the layout and legibility of short standalone text content, such as headings no longer than a few lines, by enabling the browser to apply evenly balanced line breaks when wrapping text."
+  },
+  {
+    "id": "individual-transform-properties",
+    "category": "user-experience",
+    "description": "Animate or override individual CSS transform properties (e.g. translate, rotate, scale) independently of other transform properties on a single element."
+  },
+  {
+    "id": "interactive-content-in-3d-scenes",
+    "category": "user-experience",
+    "description": "Integrate interactive HTML elements into a 3D scene."
+  },
+  {
+    "id": "interactive-content-reveal",
+    "category": "user-experience",
+    "description": "Create interactive reveal effects, such as a spotlight that follows the user's pointer to uncover details within an image or UI section."
+  },
+  {
+    "id": "interest-triggered-action-previews",
+    "category": "user-experience",
+    "description": "Show a live preview of a button's effect when a user signals interest (e.g. hovering, focusing, or long-pressing) but before they commit to clicking."
+  },
+  {
+    "id": "interest-triggered-tooltips",
+    "category": "user-experience",
+    "description": "Show a tooltip or supplemental information when a user hovers over, focuses on, or long-presses an interactive element, without requiring a click."
+  },
+  {
+    "id": "light-dismiss-a-dialog",
+    "category": "user-experience",
+    "description": "Create a modal dialog that can be closed via light dismiss (i.e. clicking or tapping outside of the dialog)"
+  },
+  {
+    "id": "manage-recurring-intervals",
+    "category": "user-experience",
+    "description": "Calculate recurring intervals for subscription billings or payroll cycles, automatically adjusting for edge cases such as month-end transitions (e.g., adding one month to January 31st) to ensure accurate period calculations."
+  },
+  {
+    "id": "model-partial-time-concepts",
+    "category": "user-experience",
+    "description": "Model date and time concepts that inherently lack a standard component (such as a specific year, day, or date) without using arbitrary placeholder values that introduce calculation errors."
+  },
+  {
+    "id": "move-dom-element-without-losing-state",
+    "category": "user-experience",
+    "description": "Move or reparent a DOM element without losing important element state, such as interactivity states (:focus/:active), `<iframe>` loading state, animation/transition state, etc"
+  },
+  {
+    "id": "navigation-drawer",
+    "category": "user-experience",
+    "description": "Create a navigation drawer component that, when triggered from a menu button, slides in from the side overlayed on top of existing page content, and slides out when dismissed (by swiping away, tapping outside, or pressing escape)."
+  },
+  {
+    "id": "overflow-clipping-control",
+    "category": "user-experience",
+    "description": "Adjust the visible clipping boundary of an element to align with the content edge, padding edge, or border edge—or a specified offset from any of these—offering finer-grained control over how content is clipped."
+  },
+  {
+    "id": "parallax-scroll-effects",
+    "category": "user-experience",
+    "description": "Create scroll-based effects (such as parallax) where foreground and background layers move at different rates, creating a sense of depth as the user scrolls."
+  },
+  {
+    "id": "persistent-app-tours",
+    "category": "user-experience",
+    "description": "Create persistent onboarding walkthroughs using tethered native overlays that stay open during user interaction."
+  },
+  {
+    "id": "persistent-toast-notifications",
+    "category": "user-experience",
+    "description": "Create non-intrusive toast and overlay notifications for persistent, stackable messaging and state communication."
+  },
+  {
+    "id": "persistent-top-layer-ui",
+    "category": "user-experience",
+    "description": "Keep a modal dialog, fullscreen element, or native popover visibly open and functionally active when its underlying DOM node is moved or reparented in the DOM."
+  },
+  {
+    "id": "physics-based-easing",
+    "category": "user-experience",
+    "description": "Create custom, physics-based animation and transition effects, like bounce and spring, that feel more natural and engaging than traditional easing curves."
+  },
+  {
+    "id": "platform-controls-dismiss-dialog",
+    "category": "user-experience",
+    "description": "Create a modal dialog that can be closed via standard platform-specific user actions, such as pressing the `Esc` key on desktop platforms, or a \"back\" or \"dismiss\" gesture on mobile platforms"
+  },
+  {
+    "id": "position-aware-tooltips",
+    "category": "user-experience",
+    "description": "Build tooltips and popovers with directional arrows (or other visual styling) that automatically point the correct way when the element flips to a fallback position."
+  },
+  {
+    "id": "precise-text-alignment",
+    "category": "user-experience",
+    "description": "Achieve precise vertical alignment with text of any font. For example, exactly equal visual padding above and below text, or aligning text perfectly flush with adjacent icons or images."
+  },
+  {
+    "id": "prevent-text-wrapping",
+    "category": "user-experience",
+    "description": "Ensure the browser does not insert line breaks into text and will allow text to overflow its container."
+  },
+  {
+    "id": "pull-to-reveal",
+    "category": "user-experience",
+    "description": "Build a pull-to-reveal feature that would enable the user to pull down on the screen to reveal more content, like a search bar."
+  },
+  {
+    "id": "reduce-style-repetition",
+    "category": "user-experience",
+    "description": "Reduce excessive style repetition by encapsulating complex or dynamic styling logic into reusable functions (such as a function that computes a gradient based on a set of input parameters)."
+  },
+  {
+    "id": "resilient-context-menus-and-nested-dropdowns",
+    "category": "user-experience",
+    "description": "Build accessible, responsive menus, tooltips, dropdowns, or contextual overlays that must be tethered to specific UI elements, guaranteeing that the overlay automatically repositions itself (e.g., flipping axes) when it encounters viewport edges, ensuring it never gets cut off."
+  },
+  {
+    "id": "same-document-transitions",
+    "category": "user-experience",
+    "description": "Visually connect persisting elements across different page states or navigations in a Single Page Application (SPA) (e.g. expanding a product thumbnail into a full-bleed hero image) by smoothly morphing their size, position, or other styling properties."
+  },
+  {
+    "id": "scroll-entry-exit-effects",
+    "category": "user-experience",
+    "description": "Create fade-in, scale-up, or other complex reveal-type effects on elements as they enter and exit the scrollport (or viewport) while the user is scrolling."
+  },
+  {
+    "id": "scroll-position-aware-elements",
+    "category": "user-experience",
+    "description": "Build floating buttons or widgets (back-to-top, scroll-to-bottom, chat launchers, etc.) that appear and disappear based on whether the user has scrolled at all."
+  },
+  {
+    "id": "scroll-progress-indicator",
+    "category": "user-experience",
+    "description": "Create a scroll progress bar, stepped progress tracker, or any visual affordance that communicates how far through a page or section the user has scrolled."
+  },
+  {
+    "id": "scroll-snap-realtime-feedback",
+    "category": "user-experience",
+    "description": "Provide real-time visual feedback in linked UI elements while a user scrolls through snap-aligned content, before the scroll gesture completes."
+  },
+  {
+    "id": "scroll-snap-state-sync",
+    "category": "user-experience",
+    "description": "Synchronize navigation indicators, linked content panels, and analytics tracking with the actively snapped item in a scrollable container."
+  },
+  {
+    "id": "scroll-target-on-load",
+    "category": "user-experience",
+    "description": "Build a scrollable list of elements (e.g. a carousel of images or a chat conversation thread) that can be displayed with a particular element scrolled into view on the initial render."
+  },
+  {
+    "id": "scrollability-affordance-hints",
+    "category": "user-experience",
+    "description": "Build scroll-shadow overlays, gradient fades, or directional arrow indicators that appear only when there's actually more content to scroll to in that direction."
+  },
+  {
+    "id": "scrollytelling",
+    "category": "user-experience",
+    "description": "Animate visual properties on a target element — such as fading a backdrop, shifting a background color, or to create scrollytelling experiences — driven entirely by the scrollport position of a completely different element."
+  },
+  {
+    "id": "search-hidden-content",
+    "category": "user-experience",
+    "description": "Hide content from view using patterns such as accordions, tabs, and \"Read more\" sections, while ensuring the hidden text reveals itself during native \"Find in page\" searches, allows search engine indexing, supports URL fragment deep links, and maintains ARIA accessibility."
+  },
+  {
+    "id": "shaped-cutouts",
+    "category": "user-experience",
+    "description": "Combine multiple shapes to create complex cutouts or 'knockout' effects in elements, such as adding a notch to an element."
+  },
+  {
+    "id": "shrinking-header-on-scroll",
+    "category": "user-experience",
+    "description": "Smoothly animate a fixed header or full-page cover on scroll to dynamically shrink, gain shadows, and transform its layout over a predefined scroll distance."
+  },
+  {
+    "id": "size-aware-styling",
+    "category": "user-experience",
+    "description": "Build a component whose styles can be conditionally dependent on its own width or height, rather than the width or height of the viewport. For example a card component that can change its layouts depending on how large it is, or a call-to-action button that can conditionally display helper text based on its width."
+  },
+  {
+    "id": "soft-edge-content-fade",
+    "category": "user-experience",
+    "description": "Apply a transparency gradient to content edges to indicate further scrollable areas or to obscure payment-walled text."
+  },
+  {
+    "id": "stabilize-reactive-state",
+    "category": "user-experience",
+    "description": "Manage task deadlines or schedules in data-driven views without unexpected side effects from shared mutable state."
+  },
+  {
+    "id": "stack-drill-down",
+    "category": "user-experience",
+    "description": "Build full-screen hierarchical navigation that lets users drill down into nested views and swipe or navigate back to return, with browser history kept in sync."
+  },
+  {
+    "id": "style-parent-with-has",
+    "category": "user-experience",
+    "description": "Style parent elements of a form field (e.g. labels or fieldsets) when the field is invalid."
+  },
+  {
+    "id": "support-global-calendar-systems",
+    "category": "user-experience",
+    "description": "Display and calculate dates in non-Gregorian calendar systems (e.g., Islamic, Hebrew, or Chinese) accurately for international users."
+  },
+  {
+    "id": "swipe-to-remove",
+    "category": "user-experience",
+    "description": "Let users act on items in a list (remove, archive, mark as read, etc.) with a horizontal swipe gesture, so they can process entries quickly without tapping a separate control."
+  },
+  {
+    "id": "visually-stable-font-fallbacks",
+    "category": "user-experience",
+    "description": "Define font styles such that text remains readable and visually consistent in the event that there's a swap between the perferred font and one of the fallbacks (or vise versa)."
+  },
+  {
+    "id": "visually-stable-mixed-fonts",
+    "category": "user-experience",
+    "description": "Define font styles such that text remains readable and visually consistent in situations where multiple fonts are used to render a single block of text."
+  },
+  {
+    "id": "visually-texture-content",
+    "category": "user-experience",
+    "description": "Apply realistic weathering and texture patterns to elements to give them an organic, aged, or physical material appearance."
+  },
+  {
+    "id": "agentic-forms",
+    "category": "webmcp",
+    "description": "Expose client-side functionality as tools to AI agents by annotating standard HTML forms with WebMCP attributes."
+  },
+  {
+    "id": "agentic-javascript-tools",
+    "category": "webmcp",
+    "description": "Programmatically register client-side JavaScript functions as tools for AI agents using the WebMCP Imperative API."
+  },
+  {
+    "id": "webmcp",
+    "category": "webmcp",
+    "description": "Use this guide to implement WebMCP (Web Model Context Protocol) in browser applications, exposing client-side functionality as tools to AI agents via declarative or imperative APIs."
+  }
+]

@@ -17,3 +17,5 @@ package-lock.json
 # Local Environment Variables
 .env
 .env.*
+.venv
+.env

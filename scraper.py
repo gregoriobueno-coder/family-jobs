@@ -338,12 +338,51 @@ def evaluate_jobs_batch(jobs_batch, profiles, api_key):
     Phase 1: The Gatekeeper.
     Batches up to 15 job listings into a single Gemini JSON schema request.
     """
+    def heuristic_fallback(jobs):
+        print("[Gatekeeper] Using heuristic fallback for evaluation...")
+        evals = []
+        for i, job in enumerate(jobs):
+            title = job.get("title", "").lower()
+            location = job.get("location", "").lower()
+            
+            best_match = "None"
+            score = 0
+            reasoning = "Failed to match"
+            
+            if any(k in title for k in ["data", "bi", "business intelligence", "qa", "automation"]):
+                best_match = "Greg"
+                score = 85
+                reasoning = "Heuristic match for Greg"
+            elif any(k in title for k in ["project manager", "scrum", "agile", "tpm"]):
+                best_match = "Rachel"
+                score = 85
+                reasoning = "Heuristic match for Rachel"
+            elif any(k in title for k in ["merchandising", "retail", "property", "store"]):
+                best_match = "Lorena"
+                score = 85
+                reasoning = "Heuristic match for Lorena"
+                
+            # Constraints
+            if best_match == "Rachel":
+                if "toronto" in location or "arlington" in location:
+                    best_match = "None"
+                    score = 0
+                    reasoning = "Rachel constraint: no Toronto or Arlington."
+                    
+            evals.append({
+                "temp_id": str(i),
+                "best_match_candidate": best_match,
+                "compatibility_score": score,
+                "reasoning": reasoning
+            })
+        return evals
+
     if not api_key:
-        print("[WARNING] No GEMINI_API_KEY set. Assigning default match score (85%) to all candidates.")
-        return [{"temp_id": str(i), "best_match_candidate": "Greg", "compatibility_score": 85, "reasoning": "No API Key"} for i in range(len(jobs_batch))]
+        print("[WARNING] No GEMINI_API_KEY set. Falling back to heuristic.")
+        return heuristic_fallback(jobs_batch)
         
     print(f"[Gemini API] Evaluating batch of {len(jobs_batch)} jobs...")
-    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key={api_key}"
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={api_key}"
     
     # Construct clean structured candidates summary
     candidates_summary = ""
@@ -406,10 +445,12 @@ def evaluate_jobs_batch(jobs_batch, profiles, api_key):
             return eval_data.get("evaluations", [])
         else:
             print(f"[Gemini API] HTTP Error: {res.status_code} - {res.text}")
+            return heuristic_fallback(jobs_batch)
     except Exception as e:
         print(f"[Gemini API] Evaluation error: {e}")
+        return heuristic_fallback(jobs_batch)
         
-    return []
+    return heuristic_fallback(jobs_batch)
 
 def group_candidate_criteria(sources):
     """Group all target keywords and exclude keywords from sources by Sector Tag."""
@@ -589,6 +630,30 @@ def main():
         print("\n[Scraper] No jobs passed local pre-filters. Run complete.")
         sys.exit(0)
         
+    # Filter out already existing jobs
+    jobs_file = os.path.join(DATABASE_DIR, "jobs.json")
+    existing_job_ids = set()
+    try:
+        if os.path.exists(jobs_file):
+            with open(jobs_file, "r", encoding="utf-8") as f:
+                jobs_data = json.load(f)
+                existing_job_ids = {j.get("id") for j in jobs_data if j.get("id")}
+    except Exception as e:
+        print(f"[DB] Error loading existing jobs: {e}")
+        
+    filtered_new_jobs = []
+    for job in scraped_jobs:
+        job_id = generate_job_id(job["title"], job["organization"])
+        if job_id not in existing_job_ids:
+            filtered_new_jobs.append(job)
+            
+    print(f"[Scraper] Filtered out {len(scraped_jobs) - len(filtered_new_jobs)} existing jobs.")
+    scraped_jobs = filtered_new_jobs
+    
+    if not scraped_jobs:
+        print("\n[Scraper] No new jobs to score. Run complete.")
+        sys.exit(0)
+        
     print(f"\n[Scraper] Total jobs needing semantic scoring: {len(scraped_jobs)}")
     
     # 3. Phase 1: The Gatekeeper (Batched semantic matching)
@@ -617,6 +682,7 @@ def main():
                             "organization": job["organization"],
                             "url": job["url"],
                             "location": job["location"],
+                            "description": job.get("description", "")[:4000],
                             "type": candidate,  # Matches the compatible candidate name
                             "source": "Python Agent",
                             "userStatus": "Queued",  # Moves directly into candidate application queue
