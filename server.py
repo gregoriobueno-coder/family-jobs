@@ -245,15 +245,20 @@ class APIHandler(SimpleHTTPRequestHandler):
             self.send_error_response(500, f"Failed to batch upsert jobs: {str(e)}")
 
     def handle_generate_resume(self, payload):
-        gemini_api_key = os.environ.get("GEMINI_API_KEY")
-        if not gemini_api_key:
-            self.send_error_response(500, "GEMINI_API_KEY environment variable is not configured.")
+        # Build list of API keys from environment (primary + fallbacks)
+        keys = []
+        for var in ["GEMINI_API_KEY", "GEMINI_API_KEY_2", "GEMINI_API_KEY_3"]:
+            k = os.environ.get(var)
+            if k:
+                keys.append(k)
+
+        if not keys:
+            self.send_error_response(500, "No GEMINI_API_KEY environment variables configured.")
             return
 
-        model = payload.get("model", "gemini-2.0-flash")
-        url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_api_key}"
-        
-        # Prepare body matching Gemini REST API spec
+        # Models to try in order: lite first (cheapest quota), then full flash
+        models = ["gemini-2.5-flash-lite", "gemini-2.0-flash", "gemini-2.5-flash"]
+
         gemini_payload = {
             "contents": [
                 {
@@ -268,31 +273,44 @@ class APIHandler(SimpleHTTPRequestHandler):
                 "temperature": 0.2
             }
         }
-        
-        req = urllib.request.Request(
-            url,
-            data=json.dumps(gemini_payload).encode("utf-8"),
-            headers={"Content-Type": "application/json"},
-            method="POST"
-        )
-        
-        try:
-            with urllib.request.urlopen(req, timeout=30) as response:
-                response_text = response.read().decode("utf-8")
-                
-                # Replicate Google Apps Script response wrapper structure:
-                # We return the exact JSON payload from Gemini
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json")
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.send_header("Content-Length", str(len(response_text)))
-                self.end_headers()
-                self.wfile.write(response_text.encode("utf-8"))
-        except urllib.error.HTTPError as e:
-            err_text = e.read().decode("utf-8")
-            self.send_json_response({"error": f"Gemini API HTTP Error {e.code}: {err_text}"})
-        except Exception as e:
-            self.send_json_response({"error": f"Gemini API request failed: {str(e)}"})
+        body = json.dumps(gemini_payload).encode("utf-8")
+
+        last_error = "All API keys and models exhausted."
+        for model in models:
+            for key in keys:
+                url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={key}"
+                req = urllib.request.Request(
+                    url,
+                    data=body,
+                    headers={"Content-Type": "application/json"},
+                    method="POST"
+                )
+                try:
+                    with urllib.request.urlopen(req, timeout=30) as response:
+                        response_text = response.read().decode("utf-8")
+                        self.send_response(200)
+                        self.send_header("Content-Type", "application/json")
+                        self.send_header("Access-Control-Allow-Origin", "*")
+                        self.send_header("Content-Length", str(len(response_text)))
+                        self.end_headers()
+                        self.wfile.write(response_text.encode("utf-8"))
+                        return  # Success — stop
+                except urllib.error.HTTPError as e:
+                    err_text = e.read().decode("utf-8")
+                    if e.code == 429:
+                        last_error = f"Rate limited on {model}"
+                        continue  # Try next key / model
+                    elif e.code == 404:
+                        last_error = f"Model {model} not found"
+                        break  # Skip to next model
+                    else:
+                        self.send_json_response({"error": f"Gemini API HTTP Error {e.code}: {err_text}"})
+                        return
+                except Exception as e:
+                    last_error = str(e)
+                    continue
+
+        self.send_json_response({"error": f"All Gemini API keys/models exhausted. Last error: {last_error}. Try again later."})
 
     def handle_fetch_url(self, payload):
         target_url = payload.get("url")
