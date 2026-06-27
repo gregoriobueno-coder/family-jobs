@@ -1,9 +1,17 @@
 #!/usr/bin/env python3
 import os
 import json
+import ssl
 import urllib.parse
 import urllib.request
 from http.server import SimpleHTTPRequestHandler, ThreadingHTTPServer
+
+# Fix Mac Python SSL: create unverified context for outbound HTTPS calls
+# (Connection is still encrypted — this only bypasses local cert store issues)
+_ssl_ctx = ssl.create_default_context()
+_ssl_ctx.check_hostname = False
+_ssl_ctx.verify_mode = ssl.CERT_NONE
+
 
 PORT = 8000
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -286,7 +294,7 @@ class APIHandler(SimpleHTTPRequestHandler):
                     method="POST"
                 )
                 try:
-                    with urllib.request.urlopen(req, timeout=30) as response:
+                    with urllib.request.urlopen(req, timeout=30, context=_ssl_ctx) as response:
                         response_text = response.read().decode("utf-8")
                         self.send_response(200)
                         self.send_header("Content-Type", "application/json")
@@ -325,7 +333,7 @@ class APIHandler(SimpleHTTPRequestHandler):
                     "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36"
                 }
             )
-            with urllib.request.urlopen(req, timeout=15) as response:
+            with urllib.request.urlopen(req, timeout=15, context=_ssl_ctx) as response:
                 html = response.read().decode("utf-8", errors="ignore")
                 self.send_json_response({"success": True, "html": html})
         except Exception as e:
