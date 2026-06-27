@@ -290,22 +290,57 @@
       };
 
       const executeAiCall = async (systemPrompt, extraContext = '') => {
-        const payload = { action: "generateResume", userQuery: `BASE RESUME:\n${baseResume}\n${extraContext}\n\nTARGET JOB DESCRIPTION:\n${jobDescription}`, systemPrompt: systemPrompt };
-        const response = await customFetch(GOOGLE_SHEET_API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: `data=${encodeURIComponent(JSON.stringify(payload))}`
-        });
-        
-        let errorMsg = `HTTP ${response.status}`;
+        const payload = {
+          action: "generateResume",
+          userQuery: `BASE RESUME:\n${baseResume}\n${extraContext}\n\nTARGET JOB DESCRIPTION:\n${jobDescription}`,
+          systemPrompt: systemPrompt
+        };
+
+        let response;
         try {
-           const errData = await response.json();
-           if (errData.error) errorMsg = errData.error;
-           if (!response.ok) throw new Error(errorMsg);
-           return errData.candidates?.[0]?.content?.parts?.[0]?.text;
-        } catch(e) {
-           throw new Error(e.message || errorMsg);
+          response = await customFetch(GOOGLE_SHEET_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `data=${encodeURIComponent(JSON.stringify(payload))}`
+          });
+        } catch (networkErr) {
+          console.error('[Studio] Network error:', networkErr);
+          throw new Error(`Network error: ${networkErr.message}`);
         }
+
+        let responseText;
+        try {
+          responseText = await response.text();
+        } catch (readErr) {
+          console.error('[Studio] Failed to read response body:', readErr);
+          throw new Error(`Failed to read server response: ${readErr.message}`);
+        }
+
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseErr) {
+          console.error('[Studio] Non-JSON response (HTTP ' + response.status + '):', responseText.substring(0, 500));
+          throw new Error(`Server returned non-JSON response (HTTP ${response.status}). Check console.`);
+        }
+
+        console.log('[Studio] API response (HTTP ' + response.status + '):', data);
+
+        if (data.error) {
+          throw new Error(data.error);
+        }
+
+        if (!response.ok) {
+          throw new Error(`Server error HTTP ${response.status}`);
+        }
+
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!text) {
+          console.error('[Studio] Unexpected response shape:', data);
+          throw new Error('AI returned empty content. Response shape unexpected.');
+        }
+
+        return text;
       };
 
       const handleGenerateResume = async () => {
