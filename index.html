@@ -165,6 +165,7 @@
       const [isDraftingLetter, setIsDraftingLetter] = useState(false);
       const [isAnalyzing, setIsAnalyzing] = useState(false);
       const [isAnswering, setIsAnswering] = useState(false);
+      const [aiStatus, setAiStatus] = useState(null); // { step, progress, detail }
       
       const [activeRightTab, setActiveRightTab] = useState('resume'); 
       const resumeOutputRef = useRef(null);
@@ -290,11 +291,14 @@
       };
 
       const executeAiCall = async (systemPrompt, extraContext = '') => {
+        const targetUrl = window.location.protocol === 'file:' ? 'http://localhost:8000/api' : '/api';
         const payload = {
           action: "generateResume",
           userQuery: `BASE RESUME:\n${baseResume}\n${extraContext}\n\nTARGET JOB DESCRIPTION:\n${jobDescription}`,
           systemPrompt: systemPrompt
         };
+
+        setAiStatus({ step: 'Connecting to AI server...', progress: 15, detail: `POST ${targetUrl}` });
 
         let response;
         try {
@@ -305,41 +309,47 @@
           });
         } catch (networkErr) {
           console.error('[Studio] Network error:', networkErr);
-          throw new Error(`Network error: ${networkErr.message}`);
+          throw new Error(`Network error reaching ${targetUrl}: ${networkErr.message}`);
         }
+
+        setAiStatus({ step: 'Reading server response...', progress: 40, detail: `HTTP ${response.status} from ${targetUrl}` });
 
         let responseText;
         try {
           responseText = await response.text();
         } catch (readErr) {
           console.error('[Studio] Failed to read response body:', readErr);
-          throw new Error(`Failed to read server response: ${readErr.message}`);
+          throw new Error(`Failed to read server response (HTTP ${response.status}): ${readErr.message}`);
         }
+
+        setAiStatus({ step: 'Parsing AI response...', progress: 75, detail: `${responseText.length} bytes received` });
 
         let data;
         try {
           data = JSON.parse(responseText);
         } catch (parseErr) {
-          console.error('[Studio] Non-JSON response (HTTP ' + response.status + '):', responseText.substring(0, 500));
-          throw new Error(`Server returned non-JSON response (HTTP ${response.status}). Check console.`);
+          const preview = responseText.substring(0, 300);
+          console.error('[Studio] Non-JSON response (HTTP ' + response.status + '):', preview);
+          throw new Error(`Server returned invalid response (HTTP ${response.status}). Raw: ${preview}`);
         }
 
         console.log('[Studio] API response (HTTP ' + response.status + '):', data);
 
         if (data.error) {
-          throw new Error(data.error);
+          throw new Error(`Server Error: ${data.error}`);
         }
 
         if (!response.ok) {
-          throw new Error(`Server error HTTP ${response.status}`);
+          throw new Error(`HTTP ${response.status} — ${responseText.substring(0,200)}`);
         }
 
         const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
         if (!text) {
           console.error('[Studio] Unexpected response shape:', data);
-          throw new Error('AI returned empty content. Response shape unexpected.');
+          throw new Error(`AI returned empty content. Model: ${data?.modelVersion || 'unknown'}. Shape: ${JSON.stringify(Object.keys(data))}`);
         }
 
+        setAiStatus({ step: 'Done!', progress: 100, detail: `Model: ${data.modelVersion || 'unknown'} · ${data.usageMetadata?.totalTokenCount || '?'} tokens` });
         return text;
       };
 
@@ -347,7 +357,7 @@
         if (!jobDescription || jobDescription.trim() === '' || jobDescription.includes("[PASTE THE FULL")) {
           return showToast("Paste a Job Description first!", "error");
         }
-        setIsGenerating(true); setSysError(null);
+        setIsGenerating(true); setSysError(null); setAiStatus(null);
         try {
           const systemPrompt = `You are an expert Career Coach strictly following the Harvard Mignone Center for Career Success (MCS) resume guidelines. Tailor the candidate's Base Resume to the Target Job Description.
           CRITICAL HARVARD MCS RULES:
@@ -372,14 +382,14 @@
         } catch (error) {
           setSysError(`Resume Generation Failed: ${error.message}`);
           showToast("Generation failed.", "error");
-        } finally { setIsGenerating(false); }
+        } finally { setIsGenerating(false); setTimeout(() => setAiStatus(null), 3000); }
       };
 
       const handleGenerateCoverLetter = async () => {
         if (!jobDescription || jobDescription.trim() === '' || jobDescription.includes("[PASTE THE FULL")) {
           return showToast("Paste a Job Description first!", "error");
         }
-        setIsDraftingLetter(true); setSysError(null);
+        setIsDraftingLetter(true); setSysError(null); setAiStatus(null);
         try {
           const systemPrompt = `You are a career advisor strictly following the Harvard Mignone Center for Career Success (MCS) cover letter guidelines. Write a highly tailored, one-page cover letter using the Base Resume and Target JD.
           CRITICAL HARVARD MCS RULES:
@@ -398,14 +408,14 @@
         } catch (error) {
           setSysError(`Cover Letter Failed: ${error.message}`);
           showToast("Failed to draft letter.", "error");
-        } finally { setIsDraftingLetter(false); }
+        } finally { setIsDraftingLetter(false); setTimeout(() => setAiStatus(null), 3000); }
       };
 
       const handleAnalyzeFit = async () => {
         if (!jobDescription || jobDescription.trim() === '' || jobDescription.includes("[PASTE THE FULL")) {
           return showToast("Paste a Job Description first!", "error");
         }
-        setIsAnalyzing(true); setSysError(null);
+        setIsAnalyzing(true); setSysError(null); setAiStatus(null);
         try {
           const systemPrompt = `You are a strict technical recruiter. Analyze the Base Resume against the Target Job Description. Provide:
 1. Match Percentage: (e.g., 85% Match)
@@ -420,7 +430,7 @@
         } catch (error) {
           setSysError(`Analysis Failed: ${error.message}`);
           showToast("Failed to analyze.", "error");
-        } finally { setIsAnalyzing(false); }
+        } finally { setIsAnalyzing(false); setTimeout(() => setAiStatus(null), 3000); }
       };
 
       const handleAskAssistant = async () => {
@@ -491,9 +501,58 @@
             </div>
           </div>
 
+          {/* AI Progress Bar */}
+          {aiStatus && (
+            <div className="mb-4 bg-slate-900/60 border border-purple-500/20 rounded-2xl p-4">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-xs font-bold text-fuchsia-300 flex items-center gap-2">
+                  <i className="fa-solid fa-circle-notch fa-spin"></i>
+                  {aiStatus.step}
+                </span>
+                <span className="text-[10px] text-purple-400/60 font-mono">{aiStatus.progress}%</span>
+              </div>
+              <div className="w-full bg-black/40 rounded-full h-1.5 overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-500"
+                  style={{
+                    width: `${aiStatus.progress}%`,
+                    background: aiStatus.progress === 100
+                      ? 'linear-gradient(90deg, #10b981, #34d399)'
+                      : 'linear-gradient(90deg, #a855f7, #ec4899)'
+                  }}
+                />
+              </div>
+              {aiStatus.detail && (
+                <p className="text-[10px] text-purple-400/50 font-mono mt-1.5 truncate">{aiStatus.detail}</p>
+              )}
+            </div>
+          )}
+
+          {/* Diagnostic Error Panel */}
           {sysError && (
-            <div className="mb-6 bg-rose-500/10 border border-rose-500/30 text-rose-300 p-4 rounded-2xl text-xs font-mono whitespace-pre-wrap">
-              {sysError}
+            <div className="mb-6 bg-rose-950/60 border border-rose-500/40 rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between bg-rose-500/10 px-4 py-2 border-b border-rose-500/20">
+                <span className="text-rose-300 font-black text-xs flex items-center gap-2">
+                  <i className="fa-solid fa-triangle-exclamation"></i>
+                  GENERATION FAILED — DIAGNOSTIC INFO
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => navigator.clipboard.writeText(sysError).then(() => showToast('Copied!', 'success'))}
+                    className="text-[10px] text-rose-400 hover:text-white bg-rose-500/10 hover:bg-rose-500/30 px-2 py-1 rounded-lg transition-all font-mono"
+                    title="Copy full error"
+                  >
+                    <i className="fa-solid fa-copy mr-1"></i>Copy
+                  </button>
+                  <button onClick={() => setSysError(null)} className="text-rose-400 hover:text-white text-xs px-2">
+                    <i className="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+              <pre className="text-rose-200 text-[11px] font-mono whitespace-pre-wrap break-all p-4 max-h-48 overflow-y-auto">{sysError}</pre>
+              <div className="px-4 py-2 bg-black/20 border-t border-rose-500/10">
+                <p className="text-[10px] text-rose-400/60 font-mono">Open browser DevTools → Console for more details. Look for [Studio] log entries.</p>
+              </div>
             </div>
           )}
 
