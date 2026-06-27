@@ -322,8 +322,8 @@ class handler(BaseHTTPRequestHandler):
                         return  # Success — stop here
                 except urllib.error.HTTPError as e:
                     err_text = e.read().decode("utf-8")
-                    if e.code == 429:
-                        last_error = f"Rate limited on {model}"
+                    if e.code in [429, 500, 502, 503, 504]:
+                        last_error = f"HTTP {e.code} on {model}"
                         continue  # Try next key / model
                     elif e.code == 404:
                         last_error = f"Model {model} not found"

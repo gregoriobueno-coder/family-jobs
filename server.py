@@ -305,12 +305,12 @@ class APIHandler(SimpleHTTPRequestHandler):
                         return  # Success — stop
                 except urllib.error.HTTPError as e:
                     err_text = e.read().decode("utf-8")
-                    if e.code == 429:
-                        last_error = f"Rate limited on {model}"
+                    if e.code in [429, 500, 502, 503, 504]:
+                        last_error = f"HTTP {e.code} on {model}"
                         continue  # Try next key / model
                     elif e.code == 404:
                         last_error = f"Model {model} not found"
-                        break  # Skip to next model
+                        break  # This model is unavailable, skip to next model
                     else:
                         self.send_json_response({"error": f"Gemini API HTTP Error {e.code}: {err_text}"})
                         return
