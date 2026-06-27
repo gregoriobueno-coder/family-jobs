@@ -250,7 +250,7 @@ class APIHandler(SimpleHTTPRequestHandler):
             self.send_error_response(500, "GEMINI_API_KEY environment variable is not configured.")
             return
 
-        model = payload.get("model", "gemini-1.5-flash")
+        model = payload.get("model", "gemini-2.0-flash")
         url = f"https://generativelanguage.googleapis.com/v1beta/models/{model}:generateContent?key={gemini_api_key}"
         
         # Prepare body matching Gemini REST API spec
