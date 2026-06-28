@@ -10,7 +10,9 @@
   
   <script src="https://unpkg.com/react@18.2.0/umd/react.production.min.js" crossorigin></script>
   <script src="https://unpkg.com/react-dom@18.2.0/umd/react-dom.production.min.js" crossorigin></script>
-  <script src="https://unpkg.com/@babel/standalone@7.22.20/babel.min.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <!-- PDF Generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/marked@4.3.0/marked.min.js"></script>
 
   <style>
@@ -461,31 +463,43 @@
         } finally { setIsAnswering(false); }
       };
 
-      // Native Browser Vector PDF Printing Method
-      const printPDF = (contentRef) => {
+      // Native 1-Click PDF Generation using html2pdf.js
+      const printPDF = (contentRef, filenamePrefix = "Document") => {
         if (!contentRef || !contentRef.current) return;
-        const printArea = document.getElementById('print-area');
-        printArea.innerHTML = contentRef.current.innerHTML;
         
-        // Temporarily reveal print area for standard window print engine
-        printArea.classList.remove('hidden');
+        showToast("Generating PDF, please wait...", "info");
         
-        const cleanup = () => {
-          printArea.classList.add('hidden');
-          printArea.innerHTML = '';
-          window.removeEventListener('afterprint', cleanup);
-        };
+        // Clone the element so we can adjust styles without affecting the UI
+        const element = contentRef.current.cloneNode(true);
         
-        window.addEventListener('afterprint', cleanup);
+        // Add a temporary container to body for html2pdf to process
+        const tempContainer = document.createElement('div');
+        tempContainer.appendChild(element);
         
-        // Fallback cleanup if print cancelled on older browsers
-        setTimeout(cleanup, 300000); 
+        // Apply basic print styling to the clone
+        element.style.padding = '20px';
+        element.style.backgroundColor = 'white';
+        element.style.color = 'black';
+        
+        document.body.appendChild(tempContainer);
 
-        // Delay the print prompt slightly to ensure DOM paints
-        setTimeout(() => {
-          window.print();
-        }, 100);
-        showToast("Print layout opened! Choose 'Save as PDF' to export a searchable vector document.", "success");
+        const opt = {
+          margin:       0.5,
+          filename:     `${filenamePrefix}_${new Date().getTime()}.pdf`,
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true },
+          jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        // Promise-based generation
+        html2pdf().set(opt).from(tempContainer).save().then(() => {
+          showToast(`Downloaded ${filenamePrefix} successfully!`, "success");
+          document.body.removeChild(tempContainer);
+        }).catch(err => {
+          console.error("PDF Error: ", err);
+          showToast("Failed to generate PDF.", "error");
+          document.body.removeChild(tempContainer);
+        });
       };
 
       const copyToClipboard = (text) => {
@@ -646,11 +660,11 @@
                   (activeRightTab === 'coverLetter' && coverLetter) ||
                   (activeRightTab === 'analyzer' && analysisResult)) && (
                   <button onClick={() => {
-                    if (activeRightTab === 'resume') printPDF(resumeOutputRef);
-                    if (activeRightTab === 'coverLetter') printPDF(coverLetterRef);
-                    if (activeRightTab === 'analyzer') printPDF(analyzerRef);
+                    if (activeRightTab === 'resume') printPDF(resumeOutputRef, "Resume");
+                    if (activeRightTab === 'coverLetter') printPDF(coverLetterRef, "Cover_Letter");
+                    if (activeRightTab === 'analyzer') printPDF(analyzerRef, "Analysis");
                   }} className="mb-2 mr-2 text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg border border-emerald-700 hover:bg-emerald-700 shadow-sm flex items-center shrink-0">
-                    <i className="fa-solid fa-print mr-1.5"></i> Save PDF
+                    <i className="fa-solid fa-download mr-1.5"></i> Download PDF
                   </button>
                 )}
               </div>
