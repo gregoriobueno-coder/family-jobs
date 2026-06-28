@@ -169,6 +169,8 @@
       
       const [activeRightTab, setActiveRightTab] = useState('resume'); 
       const resumeOutputRef = useRef(null);
+      const coverLetterRef = useRef(null);
+      const analyzerRef = useRef(null);
 
       // Compile raw Markdown text from JSON Profile metadata matching Harvard MCS standards
       const compileResumeFromProfile = (p, name) => {
@@ -460,16 +462,29 @@
       };
 
       // Native Browser Vector PDF Printing Method
-      const printPDF = () => {
-        if (!resumeOutputRef.current) return;
+      const printPDF = (contentRef) => {
+        if (!contentRef || !contentRef.current) return;
         const printArea = document.getElementById('print-area');
-        printArea.innerHTML = resumeOutputRef.current.innerHTML;
+        printArea.innerHTML = contentRef.current.innerHTML;
         
         // Temporarily reveal print area for standard window print engine
         printArea.classList.remove('hidden');
-        window.print();
-        printArea.classList.add('hidden');
-        printArea.innerHTML = '';
+        
+        const cleanup = () => {
+          printArea.classList.add('hidden');
+          printArea.innerHTML = '';
+          window.removeEventListener('afterprint', cleanup);
+        };
+        
+        window.addEventListener('afterprint', cleanup);
+        
+        // Fallback cleanup if print cancelled on older browsers
+        setTimeout(cleanup, 300000); 
+
+        // Delay the print prompt slightly to ensure DOM paints
+        setTimeout(() => {
+          window.print();
+        }, 100);
         showToast("Print layout opened! Choose 'Save as PDF' to export a searchable vector document.", "success");
       };
 
@@ -627,8 +642,14 @@
                     <i className="fa-solid fa-comment-dots mr-1"></i> Assistant
                   </button>
                 </div>
-                {activeRightTab === 'resume' && tailoredResume && (
-                  <button onClick={printPDF} className="mb-2 mr-2 text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg border border-emerald-700 hover:bg-emerald-700 shadow-sm flex items-center shrink-0">
+                {((activeRightTab === 'resume' && tailoredResume) ||
+                  (activeRightTab === 'coverLetter' && coverLetter) ||
+                  (activeRightTab === 'analyzer' && analysisResult)) && (
+                  <button onClick={() => {
+                    if (activeRightTab === 'resume') printPDF(resumeOutputRef);
+                    if (activeRightTab === 'coverLetter') printPDF(coverLetterRef);
+                    if (activeRightTab === 'analyzer') printPDF(analyzerRef);
+                  }} className="mb-2 mr-2 text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg border border-emerald-700 hover:bg-emerald-700 shadow-sm flex items-center shrink-0">
                     <i className="fa-solid fa-print mr-1.5"></i> Save PDF
                   </button>
                 )}
@@ -651,7 +672,7 @@
                   <div className="flex-1">
                     {coverLetter ? (
                       <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-slate-800">
-                        <div className="prose max-w-none text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: marked.parse(coverLetter) }} />
+                        <div ref={coverLetterRef} className="prose max-w-none text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: marked.parse(coverLetter) }} />
                         <button onClick={() => copyToClipboard(coverLetter)} className="mt-6 text-xs font-black text-teal-600 hover:text-teal-800 flex items-center gap-1.5"><i className="fa-regular fa-copy"></i> Copy Cover Letter</button>
                       </div>
                     ) : (
@@ -666,7 +687,7 @@
                   <div className="flex-1">
                     {analysisResult ? (
                       <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-slate-800">
-                        <div className="prose prose-purple max-w-none text-sm" dangerouslySetInnerHTML={{ __html: marked.parse(analysisResult) }} />
+                        <div ref={analyzerRef} className="prose prose-purple max-w-none text-sm" dangerouslySetInnerHTML={{ __html: marked.parse(analysisResult) }} />
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center text-slate-400 h-64">
