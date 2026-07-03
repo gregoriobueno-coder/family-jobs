@@ -310,8 +310,21 @@ def local_pre_filter(jobs, keywords, excludes):
     keyword_patterns = [re.compile(rf"\b{re.escape(k.strip())}\b", re.IGNORECASE) for k in keywords if k.strip()]
     exclude_patterns = [re.compile(rf"\b{re.escape(ex.strip())}\b", re.IGNORECASE) for ex in excludes if ex.strip()]
     
+    # Notorious Staffing/Consulting Mega-Agencies
+    agency_blacklist = [
+        "teksystems", "insight global", "apex systems", "randstad", "robert half", 
+        "revature", "bairesdev", "cybercoders", "infotree", "kforce", "tata consultancy", 
+        "tcs", "cognizant", "infosys", "wipro", "hcl", "synergis", "collabera", "modis",
+        "adecco", "manpower", "aerotek", "actalent", "judge group"
+    ]
+    
     for job in jobs:
         title = job["title"]
+        org = job.get("organization", "").lower()
+        
+        # Agency Pre-filter
+        if any(agency in org for agency in agency_blacklist):
+            continue
         
         # Exclude patterns
         if any(pat.search(title) for pat in exclude_patterns):
@@ -400,6 +413,7 @@ def evaluate_jobs_batch(jobs_batch, profiles, api_key):
         "1. A candidate is compatible ONLY if they match the core skills and domain context.\n"
         "2. Score compatibility from 0 to 100.\n"
         "3. Assign the candidate name to best_match_candidate ('Greg', 'Rachel', 'Lorena', or 'None').\n"
+        "4. If the job description indicates the employer is a staffing agency, consulting firm, or recruiting firm hiring on behalf of a third-party client (e.g. 'our client is looking for...'), you MUST assign the best_match_candidate to 'None' and score it 0.\n"
         "Return a JSON object containing the array of evaluations."
     )
     
