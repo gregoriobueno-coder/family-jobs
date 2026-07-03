@@ -2,112 +2,112 @@
   {
     "Organization": "NASA (Port Canaveral)",
     "URL": "https://www.usajobs.gov/Search/Results?l=Cape%20Canaveral%2C%20Florida&k=NASA",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Walt Disney World (Orlando)",
     "URL": "https://jobs.disneycareers.com/search-jobs?k=&l=Orlando%2C+FL",
-    "Target Keywords": "project manager, creative project manager, technical project manager, producer, project coordinator, technical trainer, operational trainer, training specialist, agile, jira",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Universal Studios (Orlando)",
     "URL": "https://jobs.universalparks.com/universal-orlando-resort/search-jobs/?location=Orlando",
-    "Target Keywords": "project manager, creative project manager, technical project manager, producer, project coordinator, technical trainer, operational trainer, training specialist, agile, jira",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "SeaWorld Orlando",
     "URL": "https://careers.seaworldparks.com/search/?location=Orlando",
-    "Target Keywords": "project manager, creative project manager, technical project manager, producer, project coordinator, technical trainer, operational trainer, training specialist, agile, jira",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Marriott (Central FL)",
     "URL": "https://jobs.marriott.com/marriott/jobs?page=1&location=Orlando",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Hilton (Central FL)",
     "URL": "https://jobs.hilton.com/us/en/search-results?location=Orlando",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Hyatt (Central FL)",
     "URL": "https://careers.hyatt.com/en-US/careers/search?location=Orlando",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Hard Rock Seminole",
     "URL": "https://gotoworkhappy.com/seminole-hard-rock-tampa/",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Orange County (FL)",
     "URL": "https://www.governmentjobs.com/careers/orangecountyfl",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "City of Orlando",
     "URL": "https://www.governmentjobs.com/careers/orlando",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "SpaceX (Space Coast)",
     "URL": "https://boards.greenhouse.io/spacex",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "L3Harris (Space Coast)",
     "URL": "https://careers.l3harris.com/search-jobs",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Publix Corporate (Lakeland)",
     "URL": "https://jobs.publix.com/search-jobs",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "CSX Logistics (Jacksonville)",
     "URL": "https://careers.csx.com/",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "BayCare Health (Tampa)",
     "URL": "https://baycare.org/careers/search-jobs",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },
   {
     "Organization": "Florida Blue (Statewide)",
     "URL": "https://careers.floridablue.com/",
-    "Target Keywords": "project manager, scrum master, agile pm, agile project manager, project coordinator, technical trainer, training specialist, implementation specialist, technical writer, documentation specialist, operational trainer, producer",
+    "Target Keywords": "project manager, project coordinator, program manager, process improvement manager",
     "Exclude Keywords": "director, vp, vice president, executive, cto, cio, software engineer, developer, programmer, nurse, clinical, police, fire, retail, cashier, culinary",
     "Sector Tag": "Rachel"
   },

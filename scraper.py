@@ -548,8 +548,14 @@ def main():
     # Define optimized search terms for each candidate to avoid rate limiting
     jobspy_search_terms = {
         "Greg": ["Data Analyst", "Business Intelligence", "QA Automation Engineer"],
-        "Rachel": ["Technical Project Manager", "Agile Project Manager", "Scrum Master"],
+        "Rachel": ["Program Manager", "Project Manager", "Process Improvement Manager"],
         "Lorena": ["Visual Merchandising Manager", "Retail Operations Manager", "Property Manager"]
+    }
+
+    jobspy_locations = {
+        "Greg": ["Florida", "Remote"],
+        "Rachel": ["Orlando, FL"],
+        "Lorena": ["Florida"]
     }
                     
     # Perform JobSpy searches
@@ -559,7 +565,7 @@ def main():
         exs = list(candidate_excludes[candidate])
         
         # Target locations
-        locations = ["Florida", "Remote"]
+        locations = jobspy_locations.get(candidate, ["Florida"])
         for loc in locations:
             for term in terms:
                 print(f"  Querying: '{term}' in '{loc}'...")
@@ -571,7 +577,8 @@ def main():
                         location=loc,
                         results_wanted=15,
                         hours_old=168,
-                        country_indeed="USA"
+                        country_indeed="USA",
+                        job_type="fulltime"
                     )
                     
                     if jobs_df is not None and not jobs_df.empty:
