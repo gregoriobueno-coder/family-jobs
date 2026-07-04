@@ -122,6 +122,8 @@ class APIHandler(SimpleHTTPRequestHandler):
             self.handle_generate_resume(payload)
         elif action == "fetchUrl":
             self.handle_fetch_url(payload)
+        elif action == "runAutoApply":
+            self.handle_run_auto_apply(payload)
         else:
             self.send_error_response(400, f"Unknown action: {action}")
 
@@ -251,6 +253,30 @@ class APIHandler(SimpleHTTPRequestHandler):
             })
         except Exception as e:
             self.send_error_response(500, f"Failed to batch upsert jobs: {str(e)}")
+
+    def handle_run_auto_apply(self, payload):
+        job_url = payload.get("url")
+        candidate = payload.get("candidate")
+        if not job_url or not candidate:
+            self.send_error_response(400, "url and candidate are required")
+            return
+            
+        try:
+            import subprocess
+            # Use the local virtual environment where playwright is installed
+            python_exec = os.path.join(BASE_DIR, "test_venv", "bin", "python3")
+            script_path = os.path.join(BASE_DIR, "auto_apply.py")
+            
+            # We use check=True so it raises an exception if the script fails
+            result = subprocess.run([python_exec, script_path, job_url, candidate, "--autonomous"], 
+                                    cwd=BASE_DIR, capture_output=True, text=True)
+                                    
+            if result.returncode == 0:
+                self.send_json_response({"success": True, "output": result.stdout})
+            else:
+                self.send_error_response(500, f"Auto-Applier failed: {result.stderr}")
+        except Exception as e:
+            self.send_error_response(500, f"Error running auto-applier: {str(e)}")
 
     def handle_generate_resume(self, payload):
         # Build list of API keys from environment (primary + fallbacks)

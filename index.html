@@ -780,7 +780,7 @@
     };
 
     function App() {
-      const [jobs, setJobs] = useState([]);
+const [jobs, setJobs] = useState([]);
       const [profiles, setProfiles] = useState(null); 
       const [isLoading, setIsLoading] = useState(true);
       
@@ -788,6 +788,7 @@
       const [inProgressJobs, setInProgressJobs] = useState(new Set());
       const [appliedJobs, setAppliedJobs] = useState({});
       const [hiddenJobs, setHiddenJobs] = useState(new Set());
+      const [applyingJobs, setApplyingJobs] = useState(new Set());
       
       const [currentView, setCurrentView] = useState('tracker');
       const [viewMode, setViewMode] = useState('kanban');
@@ -797,6 +798,36 @@
       const [activeTab, setActiveTab] = useState('All');
       const [isRefreshing, setIsRefreshing] = useState(false);
       const [toastMsg, setToastMsg] = useState(null);
+
+      const handleAutoApply = async (job) => {
+        setApplyingJobs(prev => new Set(prev).add(job.id));
+        showToast("Auto-Applier launched! Watch the magic...", "info");
+        try {
+          const payload = { action: "runAutoApply", url: job.url, candidate: job.type };
+          const response = await customFetch(GOOGLE_SHEET_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `data=${encodeURIComponent(JSON.stringify(payload))}`
+          });
+          const data = await response.json();
+          if (data.success) {
+            showToast("Application submitted successfully!", "success");
+            // Reload jobs to get the screenshot
+            await fetchDataFromGoogle(); 
+          } else {
+            showToast(data.error || "Auto Apply failed.", "error");
+            setSysError(data.error || "Auto Apply failed.");
+          }
+        } catch (error) {
+          showToast("Network error executing Auto Apply.", "error");
+        } finally {
+          setApplyingJobs(prev => {
+            const newSet = new Set(prev);
+            newSet.delete(job.id);
+            return newSet;
+          });
+        }
+      };
 
       // NAV MENU & MODAL STATES
       const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -1066,9 +1097,21 @@
                   </span>
                 )}
               </div>
-              <button onClick={() => handleTailorResume(job)} className="bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-white border border-emerald-500/20 px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1.5" title="Open in Resume Studio">
-                <i className="fa-solid fa-wand-magic-sparkles"></i> Studio
-              </button>
+              <div className="flex gap-1.5">
+                {!appliedJobs[job.id] && (
+                  <button 
+                    onClick={() => handleAutoApply(job)} 
+                    disabled={applyingJobs.has(job.id)}
+                    className="bg-fuchsia-600 hover:bg-fuchsia-500 disabled:opacity-50 text-white border border-fuchsia-500/20 px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1.5 shadow-lg shadow-fuchsia-500/20" 
+                    title="Run fully autonomous Playwright application">
+                    {applyingJobs.has(job.id) ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-robot"></i>}
+                    {applyingJobs.has(job.id) ? "Applying..." : "Auto Apply"}
+                  </button>
+                )}
+                <button onClick={() => handleTailorResume(job)} className="bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-white border border-emerald-500/20 px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1.5" title="Open in Resume Studio">
+                  <i className="fa-solid fa-wand-magic-sparkles"></i> Studio
+                </button>
+              </div>
             </div>
             <div className="flex justify-between gap-1 items-center bg-black/20 p-1.5 rounded-xl border border-purple-500/10">
               <select 
