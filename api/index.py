@@ -178,6 +178,8 @@ class handler(BaseHTTPRequestHandler):
             self.handle_list_models()
         elif action == "fetchUrl":
             self.handle_fetch_url(payload)
+        elif action == "runAutoApply":
+            self.handle_run_auto_apply(payload)
         else:
             self.send_error_response(400, f"Unknown action: {action}")
 
@@ -267,6 +269,62 @@ class handler(BaseHTTPRequestHandler):
             })
         except Exception as e:
             self.send_error_response(500, f"Failed to batch upsert jobs: {str(e)}")
+
+    def handle_run_auto_apply(self, payload):
+        job_url = payload.get("url")
+        candidate = payload.get("candidate")
+        if not job_url or not candidate:
+            self.send_error_response(400, "url and candidate are required")
+            return
+            
+        # If running locally (not Vercel), fall back to local subprocess
+        if not db.is_vercel:
+            try:
+                import subprocess
+                python_exec = os.path.join(db.base_dir, "test_venv", "bin", "python3")
+                script_path = os.path.join(db.base_dir, "auto_apply.py")
+                
+                result = subprocess.run([python_exec, script_path, job_url, candidate, "--autonomous"], 
+                                        cwd=db.base_dir, capture_output=True, text=True)
+                if result.returncode == 0:
+                    self.send_json_response({"success": True, "output": result.stdout, "local": True})
+                else:
+                    self.send_error_response(500, f"Auto-Applier failed: {result.stderr}")
+            except Exception as e:
+                self.send_error_response(500, f"Error running local auto-applier: {str(e)}")
+            return
+            
+        # If on Vercel, dispatch to GitHub Actions
+        if not db.github_token:
+            self.send_error_response(500, "GITHUB_TOKEN is missing. Cannot dispatch background bot.")
+            return
+            
+        try:
+            url = f"https://api.github.com/repos/{db.repo}/dispatches"
+            req = urllib.request.Request(url, method="POST")
+            req.add_header("Authorization", f"token {db.github_token}")
+            req.add_header("Accept", "application/vnd.github.v3+json")
+            req.add_header("User-Agent", "family-jobs-api")
+            
+            body = {
+                "event_type": "run_auto_apply",
+                "client_payload": {
+                    "url": job_url,
+                    "candidate": candidate
+                }
+            }
+            req.data = json.dumps(body).encode("utf-8")
+            req.add_header("Content-Type", "application/json")
+            
+            with urllib.request.urlopen(req, timeout=10) as res:
+                pass # A successful dispatch returns 204 No Content
+                
+            self.send_json_response({
+                "success": True, 
+                "output": "Vercel successfully dispatched background GitHub Action to run Playwright."
+            })
+        except Exception as e:
+            self.send_error_response(500, f"Failed to dispatch GitHub Action: {str(e)}")
 
     def handle_generate_resume(self, payload):
         # Build list of API keys from environment (primary + fallbacks)

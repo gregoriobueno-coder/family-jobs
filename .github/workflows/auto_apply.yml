@@ -1,0 +1,48 @@
+name: Auto Apply Bot (Playwright)
+
+on:
+  repository_dispatch:
+    types: [run_auto_apply]
+
+permissions:
+  contents: write
+
+jobs:
+  auto_apply:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          playwright install --with-deps chromium
+
+      - name: Run Auto-Applier
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          # You may need to add additional fallbacks if you use them in your script
+          # GEMINI_API_KEY_FALLBACK_1: ${{ secrets.GEMINI_API_KEY_FALLBACK_1 }}
+          # GEMINI_API_KEY_FALLBACK_2: ${{ secrets.GEMINI_API_KEY_FALLBACK_2 }}
+        run: |
+          # URL and candidate are passed via client_payload from Vercel
+          python auto_apply.py "${{ github.event.client_payload.url }}" "${{ github.event.client_payload.candidate }}" --autonomous
+
+      - name: Commit and push changes (Database & Screenshot)
+        run: |
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git add database/jobs.json
+          git add database/screenshots/ || true
+          git commit -m "chore: auto-apply receipt for ${{ github.event.client_payload.candidate }} [skip ci]" || echo "No changes to commit"
+          git push

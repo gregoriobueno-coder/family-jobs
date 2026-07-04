@@ -811,9 +811,14 @@ const [jobs, setJobs] = useState([]);
           });
           const data = await response.json();
           if (data.success) {
-            showToast("Application submitted successfully!", "success");
-            // Reload jobs to get the screenshot
-            await fetchDataFromGoogle(); 
+            if (data.local) {
+              showToast("Application submitted successfully!", "success");
+              await fetchDataFromGoogle(); 
+            } else {
+              // Vercel dispatch
+              showToast("Cloud Bot Dispatched! Application will appear soon.", "success");
+              updateJobStatus(job.id, 'InProgress');
+            }
           } else {
             showToast(data.error || "Auto Apply failed.", "error");
             setSysError(data.error || "Auto Apply failed.");
