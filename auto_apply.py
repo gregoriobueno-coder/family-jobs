@@ -1,7 +1,15 @@
 import sys
 import json
 import time
+import os
+import re
 from playwright.sync_api import sync_playwright
+
+try:
+    import google.generativeai as genai
+except ImportError:
+    print("google-generativeai not found. Please pip install google-generativeai")
+    sys.exit(1)
 
 def load_profile(name):
     try:
@@ -13,6 +21,60 @@ def load_profile(name):
     except Exception as e:
         print(f"Failed to load profiles.json: {e}")
         return None
+
+def update_job_status(job_url, screenshot_path):
+    try:
+        jobs_path = 'database/jobs.json'
+        with open(jobs_path, 'r') as f:
+            jobs = json.load(f)
+            
+        for job in jobs:
+            if job.get("url") == job_url or job_url in job.get("url", ""):
+                job["userStatus"] = "Applied"
+                job["appliedDate"] = time.strftime("%Y-%m-%d")
+                job["screenshotPath"] = screenshot_path
+                break
+                
+        with open(jobs_path, 'w') as f:
+            json.dump(jobs, f, indent=2)
+        print("✅ jobs.json database updated with Applied status.")
+    except Exception as e:
+        print(f"Failed to update jobs.json: {e}")
+
+def generate_documents(candidate_name, profile, job_description):
+    print("🧠 Generating Tailored Resume and Cover Letter via Gemini...")
+    api_key = os.environ.get("GEMINI_API_KEY")
+    if not api_key:
+        print("❌ ERROR: GEMINI_API_KEY environment variable not set.")
+        sys.exit(1)
+        
+    genai.configure(api_key=api_key)
+    model = genai.GenerativeModel('gemini-1.5-flash')
+    
+    prompt = f"""
+    You are an expert executive resume writer. 
+    Write a tailored Resume and Cover Letter for {candidate_name} based on their profile and the job description.
+    
+    CRITICAL INSTRUCTIONS:
+    1. Output ONLY valid HTML. DO NOT output markdown. DO NOT use ```html codeblocks. Just raw HTML.
+    2. Use inline CSS to style the documents cleanly. Use standard fonts like Arial or Helvetica. Make it look like a minimalist, professional Harvard-style PDF document.
+    3. The Resume MUST be wrapped entirely inside a <div id="resume">.
+    4. The Cover Letter MUST be wrapped entirely inside a <div id="cover_letter">.
+    5. Ensure proper margins and line heights.
+    
+    CANDIDATE PROFILE:
+    {json.dumps(profile)}
+    
+    JOB DESCRIPTION:
+    {job_description[:5000]}
+    """
+    
+    res = model.generate_content(prompt)
+    html_raw = res.text
+    # Clean up markdown code blocks if gemini disobeys
+    html_raw = re.sub(r'^```html', '', html_raw, flags=re.MULTILINE)
+    html_raw = re.sub(r'^```', '', html_raw, flags=re.MULTILINE).strip()
+    return html_raw
 
 def auto_apply(job_url, candidate_name):
     profile = load_profile(candidate_name)
@@ -38,6 +100,26 @@ def auto_apply(job_url, candidate_name):
             print("Navigating to application page...")
             page.goto(job_url, wait_until="networkidle")
             time.sleep(2)
+            
+            # Scrape Job Description for Tailoring
+            print("📖 Scraping Job Description...")
+            job_description = page.inner_text("body")
+            
+            # Generate PDFs in the background using a hidden page
+            html_content = generate_documents(candidate_name, profile, job_description)
+            pdf_page = context.new_page()
+            pdf_page.set_content(html_content)
+            
+            print("🖨️  Printing Tailored Resume to PDF...")
+            pdf_page.add_style_tag(content="#cover_letter { display: none !important; } #resume { display: block !important; }")
+            pdf_page.pdf(path="tailored_resume.pdf", format="Letter", margin={"top": "0.5in", "bottom": "0.5in", "left": "0.5in", "right": "0.5in"})
+            
+            print("🖨️  Printing Tailored Cover Letter to PDF...")
+            pdf_page.set_content(html_content) # reset
+            pdf_page.add_style_tag(content="#resume { display: none !important; } #cover_letter { display: block !important; }")
+            pdf_page.pdf(path="cover_letter.pdf", format="Letter", margin={"top": "0.5in", "bottom": "0.5in", "left": "0.5in", "right": "0.5in"})
+            
+            pdf_page.close()
 
             if "greenhouse.io" in page.url or "boards.greenhouse.io" in page.url:
                 print("✅ Greenhouse ATS Detected! Commencing data injection...")
@@ -58,23 +140,54 @@ def auto_apply(job_url, candidate_name):
                         if "linkedin" in placeholder.lower():
                             linkedin_fields.nth(i).fill(profile.get("linkedIn", ""))
                             break
-                            
+                    
+                    # File Uploads
+                    print("📎 Attaching Resume and Cover Letter PDFs...")
+                    resume_input = page.locator("input[type='file']").first
+                    if resume_input.is_visible():
+                        resume_input.set_input_files("tailored_resume.pdf")
+                    
+                    # Greenhouse usually has multiple file inputs. We try to find the cover letter one.
+                    inputs = page.locator("input[type='file']")
+                    if inputs.count() > 1:
+                        inputs.nth(1).set_input_files("cover_letter.pdf")
+
                     print("\n🎉 Core fields injected successfully!")
-                    print("⚠️ Pausing Playwright. Please manually upload the tailored Resume PDF and click 'Submit'!")
+                    
+                    if "--autonomous" in sys.argv:
+                        print("🚀 AUTONOMOUS MODE: Submitting Application...")
+                        submit_btn = page.locator("button[id='submit_app'], input[id='submit_app']").first
+                        if submit_btn.is_visible():
+                            submit_btn.click()
+                            print("Waiting for submission confirmation...")
+                            time.sleep(5) # Wait for network
+                            
+                            os.makedirs("database/screenshots", exist_ok=True)
+                            job_id = str(hash(job_url))[1:10]
+                            screenshot_path = f"database/screenshots/proof_{job_id}.png"
+                            page.screenshot(path=screenshot_path, full_page=True)
+                            print(f"📸 Autonomous Submission Complete. Screenshot saved to: {screenshot_path}")
+                            
+                            update_job_status(job_url, screenshot_path)
+                        else:
+                            print("Submit button not found.")
+                    else:
+                        print("⚠️ Pausing Playwright. Please manually click 'Submit'!")
+                        page.pause()
                 except Exception as e:
                     print(f"Minor error filling form: {e}")
+                    if "--autonomous" not in sys.argv: page.pause()
                     
-                page.pause()
             elif "lever.co" in page.url:
                 print("Lever ATS Detected! (Auto-fill experimental).")
-                page.pause()
+                if "--autonomous" not in sys.argv: page.pause()
             else:
                 print("Unknown ATS or generic job board. Please fill out manually.")
-                page.pause()
+                if "--autonomous" not in sys.argv: page.pause()
 
         except Exception as e:
             print(f"Critical Error: {e}")
-            page.pause()
+            if "--autonomous" not in sys.argv: page.pause()
 
         finally:
             browser.close()
@@ -82,7 +195,7 @@ def auto_apply(job_url, candidate_name):
 
 if __name__ == "__main__":
     if len(sys.argv) < 3:
-        print("Usage: python auto_apply.py <JOB_URL> <CANDIDATE_NAME>")
+        print("Usage: python auto_apply.py <JOB_URL> <CANDIDATE_NAME> [--autonomous]")
         sys.exit(1)
         
     url = sys.argv[1]

@@ -440,9 +440,10 @@ def evaluate_jobs_batch(jobs_batch, profiles, api_key):
                                 "temp_id": { "type": "STRING", "description": "The INDEX string of the evaluated job (e.g. '0', '1', etc.)" },
                                 "best_match_candidate": { "type": "STRING", "description": "Must be 'Greg', 'Rachel', 'Lorena', or 'None'" },
                                 "compatibility_score": { "type": "INTEGER" },
+                                "estimated_salary": { "type": "STRING", "description": "The exact salary or hourly rate extracted from the job description if present, otherwise 'Not Listed'." },
                                 "reasoning": { "type": "STRING" }
                             },
-                            "required": ["temp_id", "best_match_candidate", "compatibility_score", "reasoning"]
+                            "required": ["temp_id", "best_match_candidate", "compatibility_score", "estimated_salary", "reasoning"]
                         }
                     }
                 }
@@ -709,7 +710,8 @@ def main():
                             "source": "Python Agent",
                             "userStatus": "Queued",  # Moves directly into candidate application queue
                             "postDate": time.strftime("%Y-%m-%d"),
-                            "compatibilityScore": score
+                            "compatibilityScore": score,
+                            "salary": ev.get("estimated_salary", "Not Listed")
                         })
             except Exception as e:
                 print(f"[Gatekeeper] Error matching batch item: {e}")
