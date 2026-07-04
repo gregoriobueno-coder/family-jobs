@@ -1,0 +1,1136 @@
+
+    const { useState, useEffect, useCallback, useMemo, useRef } = React;
+
+    // Direct Web App API URL for local web server database API gateway
+    const GOOGLE_SHEET_API_URL = "/api";
+
+    // Custom Fetch helper with automatic fallback to localhost port 8000 if opened on file:// protocol
+    const customFetch = async (url, options = {}) => {
+      // Append cache-busting timestamp to GET requests to bypass CDN/Vercel/Browser caching
+      let targetUrl = url;
+      if (!options.method || options.method.toUpperCase() === 'GET') {
+        const separator = targetUrl.includes('?') ? '&' : '?';
+        targetUrl = `${targetUrl}${separator}t=${Date.now()}`;
+      }
+      try {
+        return await fetch(targetUrl, options);
+      } catch (err) {
+        if (url === "/api") {
+          const fallbackUrl = `http://localhost:8000/api${targetUrl.includes('?') ? '?' + targetUrl.split('?')[1] : ''}`;
+          console.warn("Relative api fetch failed, falling back to absolute localhost URL:", fallbackUrl);
+          return await fetch(fallbackUrl, options);
+        }
+        throw err;
+      }
+    };
+
+    const transitionHelper = (callback) => {
+      if (!document.startViewTransition) {
+        callback();
+        return;
+      }
+      document.startViewTransition(() => {
+        ReactDOM.flushSync(() => {
+          callback();
+        });
+      });
+    };
+
+    // Toast Notification Component
+    const Toast = ({ message, type, onClose }) => {
+      const typeStyles = {
+        success: "bg-emerald-500/20 text-emerald-300 border-emerald-500/40",
+        error: "bg-rose-500/20 text-rose-300 border-rose-500/40",
+        info: "bg-cyan-500/20 text-cyan-300 border-cyan-500/40"
+      };
+
+      return (
+        <div className={`fixed bottom-6 right-6 px-5 py-3 rounded-2xl border backdrop-blur-xl shadow-2xl z-[150] flex items-center gap-3 animate-[popIn_0.2s_ease-out] ${typeStyles[type] || typeStyles.info}`}>
+          <i className={`fa-solid ${type === 'success' ? 'fa-circle-check' : type === 'error' ? 'fa-circle-exclamation' : 'fa-circle-info'} text-lg`}></i>
+          <span className="text-sm font-semibold">{message}</span>
+          <button onClick={onClose} className="hover:opacity-70 transition-opacity ml-2">
+            <i className="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+      );
+    };
+
+    // AI Resume Studio Component
+    const ResumeBuilder = ({ showToast, activeJob, setSysError, sysError, dynamicProfiles }) => {
+      const [candidate, setCandidate] = useState('Greg');
+      const [baseResume, setBaseResume] = useState('');
+      const [demographicContext, setDemographicContext] = useState('');
+      const [jobDescription, setJobDescription] = useState('');
+      
+      const [tailoredResume, setTailoredResume] = useState('');
+      const [coverLetter, setCoverLetter] = useState('');
+      const [analysisResult, setAnalysisResult] = useState('');
+      const [appQuestion, setAppQuestion] = useState('');
+      const [appAnswer, setAppAnswer] = useState('');
+
+      const [isGenerating, setIsGenerating] = useState(false);
+      const [isFetchingJD, setIsFetchingJD] = useState(false);
+      const [isDraftingLetter, setIsDraftingLetter] = useState(false);
+      const [isAnalyzing, setIsAnalyzing] = useState(false);
+      const [isAnswering, setIsAnswering] = useState(false);
+      const [aiStatus, setAiStatus] = useState(null); // { step, progress, detail }
+      
+      const [activeRightTab, setActiveRightTab] = useState('resume'); 
+      const resumeOutputRef = useRef(null);
+      const coverLetterRef = useRef(null);
+      const analyzerRef = useRef(null);
+
+      // Compile raw Markdown text from JSON Profile metadata matching Harvard MCS standards
+      const compileResumeFromProfile = (p, name) => {
+        if (!p) return `Waiting for profile data for ${name}...`;
+        const lName = p.lastName || 'Bueno';
+        const address = p.address || p.location || 'Orlando, FL';
+        const phone = p.phone || '(555) 555-5555';
+        const email = p.email || `${name.toLowerCase()}.bueno@email.com`;
+        const linkedin = p.linkedIn || `linkedin.com/in/${name.toLowerCase()}`;
+
+        const isTech = name === 'Greg' || (p.targetRoles && (p.targetRoles.toLowerCase().includes('qa') || p.targetRoles.toLowerCase().includes('data') || p.targetRoles.toLowerCase().includes('engineer')));
+
+        let sections = [];
+        sections.push(`# ${name.toUpperCase()} ${lName.toUpperCase()}`);
+        sections.push(`${address} | ${phone} | ${email} | ${linkedin}`);
+
+        if (isTech) {
+          // Tech Resumes: Education and Tech Skills go first
+          sections.push(`## EDUCATION\n${p.education || ''}`);
+          sections.push(`## TECHNICAL SKILLS\n${p.coreCompetencies || ''}`);
+          sections.push(`## EXPERIENCE\n${p.experience || ''}`);
+        } else {
+          // Non-Tech Resumes: Experience goes first
+          sections.push(`## EXPERIENCE\n${p.experience || ''}`);
+          sections.push(`## EDUCATION\n${p.education || ''}`);
+          sections.push(`## SKILLS & INTERESTS\n${p.coreCompetencies || ''}`);
+        }
+
+        return sections.join('\n\n');
+      };
+
+      const compileDemographics = (p) => {
+        if (!p) return '';
+        return `Work Authorized: ${p.authorized || 'Yes'} | Requires Sponsorship: ${p.requiresSponsor || 'No'} | Target Salary: $${p.targetSalary || '0'} | Race: ${p.race || 'Declined'} | Veteran: ${p.veteranStatus || 'No'} | Disability: ${p.disabilityStatus || 'No'}`;
+      };
+
+      useEffect(() => { 
+        if(dynamicProfiles && dynamicProfiles[candidate]) {
+            setBaseResume(compileResumeFromProfile(dynamicProfiles[candidate], candidate)); 
+            setDemographicContext(compileDemographics(dynamicProfiles[candidate]));
+        } else {
+            setBaseResume(`Loading or Missing Profile for ${candidate} in Google Sheets...`);
+        }
+        setTailoredResume(''); setCoverLetter(''); setAnalysisResult(''); setAppAnswer(''); 
+      }, [candidate, dynamicProfiles]);
+
+      useEffect(() => {
+        if (activeJob) {
+          if (['Rachel', 'Greg', 'Lorena'].includes(activeJob.type)) {
+            setCandidate(activeJob.type);
+          }
+          if (activeJob.description) {
+            setJobDescription(`TARGET ROLE: ${activeJob.title}\nORGANIZATION: ${activeJob.organization}\nURL: ${activeJob.url}\n\n--- EXTRACTED TEXT ---\n${activeJob.description}`);
+          } else {
+            setJobDescription(`TARGET ROLE: ${activeJob.title}\nORGANIZATION: ${activeJob.organization}\nURL: ${activeJob.url}\n\n[PASTE THE FULL JOB DESCRIPTION OR CLICK 'AUTO-FETCH JD']`);
+          }
+        }
+      }, [activeJob]);
+
+      // Direct Web Scraping Fallback using Corsproxy.io and AllOrigins
+      const handleFetchJD = async () => {
+        if (!activeJob || !activeJob.url || activeJob.url === '#') return showToast("No valid URL available to fetch.", "error");
+        setIsFetchingJD(true);
+        try {
+          let htmlContent = null;
+          
+          // Try backend proxy first
+          try {
+            const payload = { action: "fetchUrl", url: activeJob.url };
+            const response = await customFetch(GOOGLE_SHEET_API_URL, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+              body: `data=${encodeURIComponent(JSON.stringify(payload))}`
+            });
+            if (response.ok) {
+              const result = await response.json();
+              if (result.success && result.html) {
+                htmlContent = result.html;
+              }
+            }
+          } catch (e) { console.warn(`Backend fetch proxy failed:`, e); }
+
+          if (!htmlContent) {
+            const urlsToTry = [
+              { url: `https://corsproxy.io/?${encodeURIComponent(activeJob.url)}`, type: 'direct' },
+              { url: `https://api.allorigins.win/get?url=${encodeURIComponent(activeJob.url)}`, type: 'json-wrapper' }
+            ];
+
+            for (const attempt of urlsToTry) {
+              if (htmlContent) break;
+              try {
+                const response = await fetch(attempt.url);
+                if (response.ok) {
+                   if (attempt.type === 'json-wrapper') {
+                      const proxyData = await response.json();
+                      if (proxyData.contents) htmlContent = proxyData.contents;
+                   } else htmlContent = await response.text();
+                }
+              } catch (e) { console.warn(`JD fetch failed for ${attempt.url}`); }
+            }
+          }
+
+          if (htmlContent) {
+            const tempDiv = document.createElement("div");
+            tempDiv.innerHTML = htmlContent;
+            const scripts = tempDiv.getElementsByTagName('script');
+            const styles = tempDiv.getElementsByTagName('style');
+            for (let i = scripts.length - 1; i >= 0; i--) scripts[i].parentNode.removeChild(scripts[i]);
+            for (let i = styles.length - 1; i >= 0; i--) styles[i].parentNode.removeChild(styles[i]);
+            
+            const rawText = tempDiv.innerText || tempDiv.textContent;
+            const cleanedText = rawText.replace(/\s+/g, ' ').substring(0, 5000); 
+            
+            setJobDescription(`TARGET ROLE: ${activeJob.title}\nORGANIZATION: ${activeJob.organization}\nURL: ${activeJob.url}\n\n--- EXTRACTED TEXT ---\n${cleanedText}`);
+            showToast("Job Description successfully fetched!", "success");
+          } else throw new Error("All proxy fetch attempts failed.");
+        } catch (error) {
+          showToast("Website blocked auto-fetch. Please paste manually.", "error");
+        } finally { setIsFetchingJD(false); }
+      };
+
+      const executeAiCall = async (systemPrompt, extraContext = '') => {
+        const targetUrl = window.location.protocol === 'file:' ? 'http://localhost:8000/api' : '/api';
+        const payload = {
+          action: "generateResume",
+          userQuery: `BASE RESUME:\n${baseResume}\n${extraContext}\n\nTARGET JOB DESCRIPTION:\n${jobDescription}`,
+          systemPrompt: systemPrompt
+        };
+
+        setAiStatus({ step: 'Connecting to AI server...', progress: 15, detail: `POST ${targetUrl}` });
+
+        let response;
+        try {
+          response = await customFetch(GOOGLE_SHEET_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `data=${encodeURIComponent(JSON.stringify(payload))}`
+          });
+        } catch (networkErr) {
+          console.error('[Studio] Network error:', networkErr);
+          throw new Error(`Network error reaching ${targetUrl}: ${networkErr.message}`);
+        }
+
+        setAiStatus({ step: 'Reading server response...', progress: 40, detail: `HTTP ${response.status} from ${targetUrl}` });
+
+        let responseText;
+        try {
+          responseText = await response.text();
+        } catch (readErr) {
+          console.error('[Studio] Failed to read response body:', readErr);
+          throw new Error(`Failed to read server response (HTTP ${response.status}): ${readErr.message}`);
+        }
+
+        setAiStatus({ step: 'Parsing AI response...', progress: 75, detail: `${responseText.length} bytes received` });
+
+        let data;
+        try {
+          data = JSON.parse(responseText);
+        } catch (parseErr) {
+          const preview = responseText.substring(0, 300);
+          console.error('[Studio] Non-JSON response (HTTP ' + response.status + '):', preview);
+          throw new Error(`Server returned invalid response (HTTP ${response.status}). Raw: ${preview}`);
+        }
+
+        console.log('[Studio] API response (HTTP ' + response.status + '):', data);
+
+        if (data.error) {
+          throw new Error(`Server Error: ${data.error}`);
+        }
+
+        if (!response.ok) {
+          throw new Error(`HTTP ${response.status} — ${responseText.substring(0,200)}`);
+        }
+
+        const text = data?.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!text) {
+          console.error('[Studio] Unexpected response shape:', data);
+          throw new Error(`AI returned empty content. Model: ${data?.modelVersion || 'unknown'}. Shape: ${JSON.stringify(Object.keys(data))}`);
+        }
+
+        setAiStatus({ step: 'Done!', progress: 100, detail: `Model: ${data.modelVersion || 'unknown'} · ${data.usageMetadata?.totalTokenCount || '?'} tokens` });
+        return text;
+      };
+
+      const handleGenerateResume = async () => {
+        if (!jobDescription || jobDescription.trim() === '' || jobDescription.includes("[PASTE THE FULL")) {
+          return showToast("Paste a Job Description first!", "error");
+        }
+        setIsGenerating(true); setSysError(null); setAiStatus(null);
+        try {
+          const systemPrompt = `You are an expert Career Coach strictly following the Harvard Mignone Center for Career Success (MCS) resume guidelines. Tailor the candidate's Base Resume to the Target Job Description.
+          CRITICAL HARVARD MCS RULES:
+          1. NO personal pronouns ("I", "my", "we", "our"), no narrative style, no abbreviations, no slang, no pictures, or EEO demographics.
+          2. DO NOT include any "Professional Summary", "Objective", or "Target Roles" section. These are strictly prohibited by Harvard MCS guidelines.
+          3. Every single experience bullet point MUST begin with a strong, metrics-driven ACTION VERB (e.g., Spearheaded, Orchestrated, Collaborated, Formulated, Engineered, Streamlined, Analyzed, Forecasted).
+          4. Focus heavily on quantified and qualified results, not just duties, to express not impress. Every bullet point should detail the task, action, and measurable outcome.
+          5. Section Headers & Order:
+             - Tech/CS Roles: H1 (Name), Contact Info, ## EDUCATION, ## TECHNICAL SKILLS, ## EXPERIENCE.
+             - Non-Tech Roles: H1 (Name), Contact Info, ## EXPERIENCE, ## EDUCATION, ## SKILLS & INTERESTS.
+          6. Experience Entry Layout:
+             **Organization Name**, City, State
+             *Position Title*, Month Year – Month Year (or Present)
+             - Bullet points...
+          7. Output Format: Return ONLY the raw, clean markdown resume. Do NOT wrap the output in \`\`\`markdown or \`\`\` code blocks. Do not add any introductory or concluding conversational text.`;
+          const finalMarkdown = await executeAiCall(systemPrompt);
+          if (finalMarkdown) {
+             setTailoredResume(finalMarkdown);
+             setActiveRightTab('resume');
+             showToast("Resume tailored to Harvard MCS standards!", "success");
+          } else throw new Error("Invalid AI response.");
+        } catch (error) {
+          setSysError(`Resume Generation Failed: ${error.message}`);
+          showToast("Generation failed.", "error");
+        } finally { setIsGenerating(false); setTimeout(() => setAiStatus(null), 3000); }
+      };
+
+      const handleGenerateCoverLetter = async () => {
+        if (!jobDescription || jobDescription.trim() === '' || jobDescription.includes("[PASTE THE FULL")) {
+          return showToast("Paste a Job Description first!", "error");
+        }
+        setIsDraftingLetter(true); setSysError(null); setAiStatus(null);
+        try {
+          const systemPrompt = `You are a career advisor strictly following the Harvard Mignone Center for Career Success (MCS) cover letter guidelines. Write a highly tailored, one-page cover letter using the Base Resume and Target JD.
+          CRITICAL HARVARD MCS RULES:
+          1. Structure: Start with Date, Contact Name, Title, Company Name, and Company Address at the top.
+          2. Salutation: Address a specific person if possible (e.g. "Dear Contact Name:") ending with a COLON (":"), NOT a comma.
+          3. Paragraph 1 (Opening): Hook the reader, state the exact role and how you heard about it. End with a summary statement (thesis) presenting three clear reasons why you are a good fit.
+          4. Paragraph 2 & 3 (Middle): Show why you are interested in this specific employer and type of work. Illustrate with one or two key examples (mini-narratives with quantified results/metrics from the resume) showing how your skills relate to the job. Do not repeat the entire resume.
+          5. Paragraph 4 (Closing): Reiterate enthusiasm, thank the reader for consideration, and state that you look forward to the opportunity to discuss further.
+          6. Tone & Rules: Avoid flowery language. Avoid the "I" trap (do not start consecutive sentences with "I"; vary sentence structure). Use professional action verbs. Close with "Sincerely," and candidate name. Return ONLY the markdown letter.`;
+          const text = await executeAiCall(systemPrompt);
+          if (text) {
+             setCoverLetter(text);
+             setActiveRightTab('coverLetter');
+             showToast("Cover Letter drafted!", "success");
+          } else throw new Error("Invalid AI response.");
+        } catch (error) {
+          setSysError(`Cover Letter Failed: ${error.message}`);
+          showToast("Failed to draft letter.", "error");
+        } finally { setIsDraftingLetter(false); setTimeout(() => setAiStatus(null), 3000); }
+      };
+
+      const handleAnalyzeFit = async () => {
+        if (!jobDescription || jobDescription.trim() === '' || jobDescription.includes("[PASTE THE FULL")) {
+          return showToast("Paste a Job Description first!", "error");
+        }
+        setIsAnalyzing(true); setSysError(null); setAiStatus(null);
+        try {
+          const systemPrompt = `You are a strict technical recruiter. Analyze the Base Resume against the Target Job Description. Provide:
+1. Match Percentage: (e.g., 85% Match)
+2. Skills Gap: Bullet points of what the JD asks for that is missing or weak in the resume.
+3. Interview Prep: 3 highly specific behavioral questions they will likely be asked to test those gaps, and a suggested strategy on how the candidate can pivot their existing experience to answer them.`;
+          const text = await executeAiCall(systemPrompt);
+          if (text) {
+             setAnalysisResult(text);
+             setActiveRightTab('analyzer');
+             showToast("Analysis complete!", "success");
+          } else throw new Error("Invalid AI response.");
+        } catch (error) {
+          setSysError(`Analysis Failed: ${error.message}`);
+          showToast("Failed to analyze.", "error");
+        } finally { setIsAnalyzing(false); setTimeout(() => setAiStatus(null), 3000); }
+      };
+
+      const handleAskAssistant = async () => {
+        if (!appQuestion || appQuestion.trim() === '') return showToast("Please type a question!", "error");
+        if (!jobDescription || jobDescription.trim() === '') return showToast("Please paste a Job Description first!", "error");
+        setIsAnswering(true); setSysError(null);
+        try {
+          const systemPrompt = `You are an expert career coach helping a candidate fill out an ATS job application. The user will ask a question about how to fill out a field (like salary expectations, sponsorship, or a short-answer question). Draft a highly professional response using the candidate's Base Resume and Demographic Profile. DO NOT hallucinate.`;
+          
+          const payload = { 
+              action: "generateResume", 
+              userQuery: `BASE RESUME:\n${baseResume}\n\nCANDIDATE EEO & DEMOGRAPHICS:\n${demographicContext}\n\nTARGET JOB:\n${jobDescription}\n\nAPPLICATION QUESTION TO ANSWER:\n${appQuestion}`, 
+              systemPrompt: systemPrompt 
+          };
+          const response = await customFetch(GOOGLE_SHEET_API_URL, { method: 'POST', headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, body: `data=${encodeURIComponent(JSON.stringify(payload))}` });
+          if (!response.ok) throw new Error(`Google Apps Script Failed.`);
+          const result = await response.json();
+          const answerText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+          if (answerText) {
+             setAppAnswer(answerText);
+             showToast("Response drafted!", "success");
+          } else throw new Error("Invalid AI response.");
+        } catch (error) {
+          setSysError(`Assistant Failed: ${error.message}`);
+          showToast("Failed to draft answer.", "error");
+        } finally { setIsAnswering(false); }
+      };
+
+      // Native 1-Click PDF Generation using html2pdf.js
+      const printPDF = (contentRef, filenamePrefix = "Document") => {
+        if (!contentRef || !contentRef.current) return;
+        
+        showToast("Generating PDF, please wait...", "info");
+        
+        // Clone the element so we can adjust styles without affecting the UI
+        const element = contentRef.current.cloneNode(true);
+        
+        // Add a temporary container to body for html2pdf to process
+        const tempContainer = document.createElement('div');
+        tempContainer.appendChild(element);
+        
+        // Apply basic print styling to the clone
+        element.style.padding = '20px';
+        element.style.backgroundColor = 'white';
+        element.style.color = 'black';
+        
+        document.body.appendChild(tempContainer);
+
+        const opt = {
+          margin:       0.5,
+          filename:     `${filenamePrefix}_${new Date().getTime()}.pdf`,
+          image:        { type: 'jpeg', quality: 0.98 },
+          html2canvas:  { scale: 2, useCORS: true },
+          jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
+        };
+
+        // Promise-based generation
+        html2pdf().set(opt).from(tempContainer).save().then(() => {
+          showToast(`Downloaded ${filenamePrefix} successfully!`, "success");
+          document.body.removeChild(tempContainer);
+        }).catch(err => {
+          console.error("PDF Error: ", err);
+          showToast("Failed to generate PDF.", "error");
+          document.body.removeChild(tempContainer);
+        });
+      };
+
+      const copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text).catch(() => {});
+        showToast("Copied to clipboard!", "info");
+      };
+
+      return (
+        <div className="max-w-[95rem] mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 animate-[popIn_0.3s_ease-out]">
+          <div className="mb-6 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+            <div>
+              <h2 className="text-3xl font-black text-white tracking-tight flex items-center gap-2">
+                <i className="fa-solid fa-wand-magic-sparkles text-fuchsia-400"></i> AI Resume Studio
+              </h2>
+              <p className="text-emerald-400 font-medium text-sm mt-1">Zero-hallucination Harvard MCS ATS tailoring & Application Assistant.</p>
+            </div>
+            
+            <div className="flex bg-slate-900/60 p-1.5 rounded-2xl border border-purple-500/20 backdrop-blur-md">
+              {['Greg', 'Rachel', 'Lorena'].map(name => (
+                <button 
+                  key={name} 
+                  onClick={() => transitionHelper(() => setCandidate(name))} 
+                  className={`px-6 py-2 rounded-xl text-sm font-black transition-all duration-300 ${candidate === name ? 'bg-gradient-to-r from-emerald-500 to-teal-500 text-white shadow-lg shadow-teal-500/10' : 'text-purple-300 hover:text-white hover:bg-purple-500/10'}`}
+                >
+                  {name}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          {/* AI Progress Bar */}
+          {aiStatus && (
+            <div className="mb-4 bg-slate-900/60 border border-purple-500/20 rounded-2xl p-4">
+              <div className="flex justify-between items-center mb-2">
+                <span className="text-xs font-bold text-fuchsia-300 flex items-center gap-2">
+                  <i className="fa-solid fa-circle-notch fa-spin"></i>
+                  {aiStatus.step}
+                </span>
+                <span className="text-[10px] text-purple-400/60 font-mono">{aiStatus.progress}%</span>
+              </div>
+              <div className="w-full bg-black/40 rounded-full h-1.5 overflow-hidden">
+                <div
+                  className="h-full rounded-full transition-all duration-500"
+                  style={{
+                    width: `${aiStatus.progress}%`,
+                    background: aiStatus.progress === 100
+                      ? 'linear-gradient(90deg, #10b981, #34d399)'
+                      : 'linear-gradient(90deg, #a855f7, #ec4899)'
+                  }}
+                />
+              </div>
+              {aiStatus.detail && (
+                <p className="text-[10px] text-purple-400/50 font-mono mt-1.5 truncate">{aiStatus.detail}</p>
+              )}
+            </div>
+          )}
+
+          {/* Diagnostic Error Panel */}
+          {sysError && (
+            <div className="mb-6 bg-rose-950/60 border border-rose-500/40 rounded-2xl overflow-hidden">
+              <div className="flex items-center justify-between bg-rose-500/10 px-4 py-2 border-b border-rose-500/20">
+                <span className="text-rose-300 font-black text-xs flex items-center gap-2">
+                  <i className="fa-solid fa-triangle-exclamation"></i>
+                  GENERATION FAILED — DIAGNOSTIC INFO
+                </span>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => navigator.clipboard.writeText(sysError).then(() => showToast('Copied!', 'success'))}
+                    className="text-[10px] text-rose-400 hover:text-white bg-rose-500/10 hover:bg-rose-500/30 px-2 py-1 rounded-lg transition-all font-mono"
+                    title="Copy full error"
+                  >
+                    <i className="fa-solid fa-copy mr-1"></i>Copy
+                  </button>
+                  <button onClick={() => setSysError(null)} className="text-rose-400 hover:text-white text-xs px-2">
+                    <i className="fa-solid fa-xmark"></i>
+                  </button>
+                </div>
+              </div>
+              <pre className="text-rose-200 text-[11px] font-mono whitespace-pre-wrap break-all p-4 max-h-48 overflow-y-auto">{sysError}</pre>
+              <div className="px-4 py-2 bg-black/20 border-t border-rose-500/10">
+                <p className="text-[10px] text-rose-400/60 font-mono">Open browser DevTools → Console for more details. Look for [Studio] log entries.</p>
+              </div>
+            </div>
+          )}
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <div className="space-y-6">
+              <div className="bg-slate-900/40 backdrop-blur-xl rounded-3xl shadow-xl border border-purple-500/10 p-6">
+                <div className="flex justify-between items-center mb-4">
+                  <h3 className="text-sm font-black text-fuchsia-300 uppercase tracking-widest flex items-center">
+                    <i className="fa-solid fa-id-card mr-2"></i>Base Profile data
+                  </h3>
+                  {!dynamicProfiles && <i className="fa-solid fa-circle-notch fa-spin text-fuchsia-300"></i>}
+                </div>
+                <textarea 
+                  value={baseResume} 
+                  onChange={(e) => setBaseResume(e.target.value)} 
+                  className="w-full h-40 bg-black/40 border border-purple-500/20 rounded-2xl p-4 text-xs font-mono text-purple-100 focus:outline-none focus:border-fuchsia-500/40 resize-none transition-all" 
+                  placeholder="Fetching master resume data..." 
+                />
+              </div>
+
+              <div className="bg-slate-900/40 backdrop-blur-xl rounded-3xl shadow-xl border border-purple-500/10 p-6">
+                <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-4 gap-3">
+                  <h3 className="text-sm font-black text-emerald-300 uppercase tracking-widest"><i className="fa-solid fa-crosshairs mr-2"></i>Target Job Description</h3>
+                  {activeJob && activeJob.url !== '#' && (
+                    <div className="flex gap-2 w-full sm:w-auto">
+                      <a href={activeJob.url} target="_blank" rel="noopener noreferrer" className="flex-1 sm:flex-none text-center text-xs font-bold bg-purple-500/10 text-purple-300 border border-purple-500/20 px-3 py-1.5 rounded-xl hover:bg-purple-500 hover:text-white transition-all">
+                        <i className="fa-solid fa-arrow-up-right-from-square mr-1"></i> View URL
+                      </a>
+                      <button onClick={handleFetchJD} disabled={isFetchingJD} className="flex-1 sm:flex-none text-center text-xs font-bold bg-emerald-500/10 text-emerald-300 border border-emerald-500/20 px-3 py-1.5 rounded-xl hover:bg-emerald-500 hover:text-white transition-all disabled:opacity-50">
+                        {isFetchingJD ? <i className="fa-solid fa-circle-notch fa-spin mr-1"></i> : <i className="fa-solid fa-cloud-arrow-down mr-1"></i>} Auto-Fetch
+                      </button>
+                    </div>
+                  )}
+                </div>
+                <textarea 
+                  value={jobDescription} 
+                  onChange={(e) => setJobDescription(e.target.value)} 
+                  className="w-full h-40 bg-black/40 border border-emerald-500/20 rounded-2xl p-4 text-xs font-mono text-purple-100 focus:outline-none focus:border-emerald-500/40 resize-none transition-all" 
+                  placeholder="Paste Target Job Description here..." 
+                />
+              </div>
+
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+                <button onClick={handleGenerateResume} disabled={isGenerating || !dynamicProfiles} className="bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 px-4 rounded-2xl shadow-lg shadow-emerald-600/10 border border-emerald-500/30 disabled:opacity-50 transition-colors">
+                  {isGenerating ? <i className="fa-solid fa-circle-notch fa-spin mr-2"></i> : <i className="fa-solid fa-file-invoice mr-2"></i>}
+                  {isGenerating ? 'Tailoring...' : 'Tailor Resume'}
+                </button>
+                <button onClick={handleGenerateCoverLetter} disabled={isDraftingLetter || !dynamicProfiles} className="bg-teal-600 hover:bg-teal-500 text-white font-bold py-3 px-4 rounded-2xl shadow-lg shadow-teal-600/10 border border-teal-500/30 disabled:opacity-50 transition-colors">
+                  {isDraftingLetter ? <i className="fa-solid fa-circle-notch fa-spin mr-2"></i> : <i className="fa-solid fa-envelope-open-text mr-2"></i>}
+                  {isDraftingLetter ? 'Drafting...' : 'Cover Letter'}
+                </button>
+                <button onClick={handleAnalyzeFit} disabled={isAnalyzing || !dynamicProfiles} className="bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-4 rounded-2xl shadow-lg shadow-purple-600/10 border border-purple-500/30 disabled:opacity-50 transition-colors">
+                  {isAnalyzing ? <i className="fa-solid fa-circle-notch fa-spin mr-2"></i> : <i className="fa-solid fa-chart-simple mr-2"></i>}
+                  {isAnalyzing ? 'Analyzing...' : 'Analyze Fit'}
+                </button>
+              </div>
+            </div>
+
+            <div className="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col h-[750px] lg:h-auto border border-purple-500/10">
+              <div className="bg-slate-100 border-b border-slate-200 px-4 pt-3 flex justify-between items-end shrink-0 overflow-x-auto">
+                <div className="flex gap-1">
+                  <button onClick={() => transitionHelper(() => setActiveRightTab('resume'))} className={`px-4 py-3 text-xs font-black rounded-t-xl transition-all ${activeRightTab === 'resume' ? 'bg-white text-emerald-700 border-t border-l border-r border-slate-200' : 'bg-transparent text-slate-500 hover:text-slate-800'}`}>
+                    <i className="fa-solid fa-file-contract mr-1"></i> Resume
+                  </button>
+                  <button onClick={() => transitionHelper(() => setActiveRightTab('coverLetter'))} className={`px-4 py-3 text-xs font-black rounded-t-xl transition-all ${activeRightTab === 'coverLetter' ? 'bg-white text-teal-700 border-t border-l border-r border-slate-200' : 'bg-transparent text-slate-500 hover:text-slate-800'}`}>
+                    <i className="fa-solid fa-envelope-open-text mr-1"></i> Letter
+                  </button>
+                  <button onClick={() => transitionHelper(() => setActiveRightTab('analyzer'))} className={`px-4 py-3 text-xs font-black rounded-t-xl transition-all ${activeRightTab === 'analyzer' ? 'bg-white text-purple-700 border-t border-l border-r border-slate-200' : 'bg-transparent text-slate-500 hover:text-slate-800'}`}>
+                    <i className="fa-solid fa-microscope mr-1"></i> Analysis
+                  </button>
+                  <button onClick={() => transitionHelper(() => setActiveRightTab('assistant'))} className={`px-4 py-3 text-xs font-black rounded-t-xl transition-all ${activeRightTab === 'assistant' ? 'bg-white text-blue-700 border-t border-l border-r border-slate-200' : 'bg-transparent text-slate-500 hover:text-slate-800'}`}>
+                    <i className="fa-solid fa-comment-dots mr-1"></i> Assistant
+                  </button>
+                </div>
+                {((activeRightTab === 'resume' && tailoredResume) ||
+                  (activeRightTab === 'coverLetter' && coverLetter) ||
+                  (activeRightTab === 'analyzer' && analysisResult)) && (
+                  <button onClick={() => {
+                    if (activeRightTab === 'resume') printPDF(resumeOutputRef, "Resume");
+                    if (activeRightTab === 'coverLetter') printPDF(coverLetterRef, "Cover_Letter");
+                    if (activeRightTab === 'analyzer') printPDF(analyzerRef, "Analysis");
+                  }} className="mb-2 mr-2 text-xs font-bold text-white bg-emerald-600 px-3 py-1.5 rounded-lg border border-emerald-700 hover:bg-emerald-700 shadow-sm flex items-center shrink-0">
+                    <i className="fa-solid fa-download mr-1.5"></i> Download PDF
+                  </button>
+                )}
+              </div>
+              
+              <div className="p-6 overflow-y-auto flex-1 bg-slate-50 flex flex-col">
+                {activeRightTab === 'resume' && (
+                  <div className="flex-1 flex justify-center bg-slate-200/40 p-2 rounded-2xl overflow-y-auto">
+                    {tailoredResume ? (
+                      <div ref={resumeOutputRef} className="resume-document w-full" dangerouslySetInnerHTML={{ __html: marked.parse(tailoredResume) }} />
+                    ) : (
+                      <div className="flex flex-col items-center justify-center text-slate-400 m-auto">
+                        <i className="fa-solid fa-file-import text-4xl mb-3 opacity-40"></i>
+                        <p className="text-sm font-semibold">Click Tailor Resume to generate document</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                {activeRightTab === 'coverLetter' && (
+                  <div className="flex-1">
+                    {coverLetter ? (
+                      <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-slate-800">
+                        <div ref={coverLetterRef} className="prose max-w-none text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: marked.parse(coverLetter) }} />
+                        <button onClick={() => copyToClipboard(coverLetter)} className="mt-6 text-xs font-black text-teal-600 hover:text-teal-800 flex items-center gap-1.5"><i className="fa-regular fa-copy"></i> Copy Cover Letter</button>
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center text-slate-400 h-64">
+                        <i className="fa-solid fa-envelope text-4xl mb-3 opacity-40"></i>
+                        <p className="text-sm font-semibold">Click Cover Letter to generate document</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                {activeRightTab === 'analyzer' && (
+                  <div className="flex-1">
+                    {analysisResult ? (
+                      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-slate-800">
+                        <div ref={analyzerRef} className="prose prose-purple max-w-none text-sm" dangerouslySetInnerHTML={{ __html: marked.parse(analysisResult) }} />
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center text-slate-400 h-64">
+                        <i className="fa-solid fa-chart-pie text-4xl mb-3 opacity-40"></i>
+                        <p className="text-sm font-semibold">Click Analyze Fit to begin analysis</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                {activeRightTab === 'assistant' && (
+                  <div className="flex flex-col">
+                    <textarea value={appQuestion} onChange={(e) => setAppQuestion(e.target.value)} className="w-full h-24 bg-white border border-slate-300 rounded-2xl p-4 text-sm text-slate-800 focus:outline-none focus:ring-2 focus:ring-blue-500/20 focus:border-blue-500 resize-none mb-3" placeholder="Paste application question here (e.g. 'Describe your experience with serverless setups...')" />
+                    <button onClick={handleAskAssistant} disabled={isAnswering} className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-2xl mb-4 disabled:opacity-50 flex items-center justify-center gap-2">
+                      {isAnswering ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-feather-pointed"></i>}
+                      Draft Answer
+                    </button>
+                    {appAnswer && (
+                      <div className="bg-white rounded-2xl p-5 border border-slate-200 shadow-inner text-sm text-slate-800 whitespace-pre-wrap relative">
+                        {appAnswer}
+                        <button onClick={() => copyToClipboard(appAnswer)} className="block mt-4 text-xs font-black text-blue-600 hover:text-blue-800 flex items-center gap-1.5"><i className="fa-regular fa-copy"></i> Copy Answer</button>
+                      </div>
+                    )}
+                  </div>
+                )}
+              </div>
+
+            </div>
+          </div>
+        </div>
+      );
+    };
+
+    function App() {
+      const [jobs, setJobs] = useState([]);
+      const [profiles, setProfiles] = useState(null); 
+      const [isLoading, setIsLoading] = useState(true);
+      
+      const [queuedJobs, setQueuedJobs] = useState(new Set());
+      const [inProgressJobs, setInProgressJobs] = useState(new Set());
+      const [appliedJobs, setAppliedJobs] = useState({});
+      const [hiddenJobs, setHiddenJobs] = useState(new Set());
+      
+      const [currentView, setCurrentView] = useState('tracker');
+      const [activeResumeJob, setActiveResumeJob] = useState(null);
+      const [sysError, setSysError] = useState(null); 
+
+      const [activeTab, setActiveTab] = useState('All');
+      const [isRefreshing, setIsRefreshing] = useState(false);
+      const [toastMsg, setToastMsg] = useState(null);
+
+      // NAV MENU & MODAL STATES
+      const [isMenuOpen, setIsMenuOpen] = useState(false);
+      const [isBearModalOpen, setIsBearModalOpen] = useState(false);
+      const bearModalRef = useRef(null);
+      
+      // ADD TARGET COMPANY STATES
+      const [isAddSourceModalOpen, setIsAddSourceModalOpen] = useState(false);
+      const addSourceModalRef = useRef(null);
+      const [newSourceOrg, setNewSourceOrg] = useState('');
+      const [newSourceUrl, setNewSourceUrl] = useState('');
+      const [newSourceKeywords, setNewSourceKeywords] = useState('');
+      const [newSourceExcludes, setNewSourceExcludes] = useState('');
+      const [newSourceSector, setNewSourceSector] = useState('All');
+      const [isAddingSource, setIsAddingSource] = useState(false);
+
+      const bearGifs = [
+        "https://media.giphy.com/media/11c7UUfNvwqw1i/giphy.gif", 
+        "https://media.giphy.com/media/IThjAlJnD9WNO/giphy.gif",
+        "https://media.giphy.com/media/xT0xeGSim7MhuCEvwQ/giphy.gif",
+        "https://media.giphy.com/media/WYEWpk4lRPDq0/giphy.gif",
+        "https://media.giphy.com/media/3o7TKoWXm3okO1kgHC/giphy.gif"
+      ];
+      
+      const bearPhrases = [
+        "The job hunt is an absolute grind, but you are tougher than it is. Take a deep breath, step away if you need to, and remember your worth isn't defined by an algorithm.",
+        "Every 'no' is just one step closer to the right 'yes'. You have incredible skills, and the right team is going to be incredibly lucky to have you.",
+        "It's okay to feel exhausted. Rest is productive too. Take a break, grab a snack, and come back when you're ready. The jobs will still be here.",
+        "You are doing an amazing job in a really tough market. Don't forget to celebrate the small wins today and be kind to yourself.",
+        "Your resume is strong, your experience is entirely valid, and you are absolutely enough. Keep your head up, you've got this!"
+      ];
+
+      const [currentBear, setCurrentBear] = useState(bearGifs[0]);
+      const [currentPhrase, setCurrentPhrase] = useState(bearPhrases[0]);
+
+      const handleBearHug = () => {
+        const randomGif = bearGifs[Math.floor(Math.random() * bearGifs.length)];
+        const randomPhrase = bearPhrases[Math.floor(Math.random() * bearPhrases.length)];
+        setCurrentBear(randomGif);
+        setCurrentPhrase(randomPhrase);
+        setIsBearModalOpen(true);
+        setIsMenuOpen(false);
+      };
+
+      const clearHiddenJobs = () => {
+         setHiddenJobs(new Set());
+         localStorage.removeItem('fb_hidden');
+         setIsMenuOpen(false);
+         showToast("All Hidden jobs have been restored to your feed!", "success");
+      };
+
+      const handleAddSource = async (e) => {
+        e.preventDefault();
+        if (!newSourceOrg || !newSourceUrl) return showToast("Org and URL are required.", "error");
+        
+        setIsAddingSource(true);
+        try {
+          const payload = { action: "addSource", org: newSourceOrg, url: newSourceUrl, keywords: newSourceKeywords, excludes: newSourceExcludes, sector: newSourceSector };
+          const response = await customFetch(GOOGLE_SHEET_API_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+            body: `data=${encodeURIComponent(JSON.stringify(payload))}`
+          });
+          if (!response.ok) throw new Error("Failed to add source");
+          showToast("Target Company successfully added to Scraper Sources!", "success");
+          setIsAddSourceModalOpen(false);
+          setNewSourceOrg(''); setNewSourceUrl(''); setNewSourceKeywords(''); setNewSourceExcludes(''); setNewSourceSector('All');
+        } catch (err) {
+          showToast("Error adding target company.", "error");
+        } finally {
+          setIsAddingSource(false);
+        }
+      };
+
+      // Client SWR loading implementation
+      useEffect(() => {
+        try {
+          const cachedJobs = localStorage.getItem('fb_jobs');
+          const cachedProfiles = localStorage.getItem('fb_profiles');
+          const cachedHidden = localStorage.getItem('fb_hidden');
+
+          if (cachedHidden) setHiddenJobs(new Set(JSON.parse(cachedHidden)));
+          
+          if (cachedJobs && cachedProfiles) {
+            setJobs(JSON.parse(cachedJobs));
+            setProfiles(JSON.parse(cachedProfiles));
+            setIsLoading(false); // Snappy UI: remove loader immediately if cache exists
+          }
+        } catch(e) { console.warn("Local storage parse error.", e); }
+        fetchDataFromGoogle();
+      }, []);
+
+      // Dialog side-effects
+      useEffect(() => {
+        if (isBearModalOpen) bearModalRef.current?.showModal();
+        else bearModalRef.current?.close();
+      }, [isBearModalOpen]);
+
+      useEffect(() => {
+        if (isAddSourceModalOpen) addSourceModalRef.current?.showModal();
+        else addSourceModalRef.current?.close();
+      }, [isAddSourceModalOpen]);
+
+      useEffect(() => { localStorage.setItem('fb_hidden', JSON.stringify(Array.from(hiddenJobs))); }, [hiddenJobs]);
+
+      const syncStatusToBackend = async (jobId, status) => {
+        try { 
+            await customFetch(GOOGLE_SHEET_API_URL, { 
+                method: 'POST', 
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
+                body: `data=${encodeURIComponent(JSON.stringify({ action: "updateStatus", jobId, status }))}` 
+            }); 
+        } catch(err) { console.error("Sync status failed", err); }
+      };
+
+      const fetchDataFromGoogle = async () => {
+        setIsRefreshing(true); setSysError(null);
+        try {
+          const jobsResponse = await customFetch(GOOGLE_SHEET_API_URL, { redirect: 'follow' });
+          if (!jobsResponse.ok) throw new Error(`HTTP Error ${jobsResponse.status} on Jobs GET.`);
+          
+          const rawJobsText = await jobsResponse.text();
+          let jobsData;
+          try { jobsData = JSON.parse(rawJobsText); } 
+          catch(e) { throw new Error(`Jobs GET returned Invalid JSON.`); }
+          
+          let validJobs = [];
+          if (Array.isArray(jobsData)) {
+              validJobs = jobsData.filter(job => job && job.title && job.organization).reverse();
+              setJobs(validJobs);
+              localStorage.setItem('fb_jobs', JSON.stringify(validJobs)); // Cache update
+              
+              const newQueued = new Set();
+              const newInProgress = new Set();
+              const newApplied = {};
+              
+              validJobs.forEach(job => {
+                  const st = (job.userStatus || '').toLowerCase();
+                  if (st === 'queued') newQueued.add(job.id);
+                  else if (st === 'inprogress') newInProgress.add(job.id);
+                  else if (st === 'applied' || st === 'saved') newApplied[job.id] = job.postDate || new Date().toLocaleDateString();
+              });
+              
+              setQueuedJobs(newQueued);
+              setInProgressJobs(newInProgress);
+              setAppliedJobs(newApplied);
+          }
+
+          const profileResponse = await customFetch(GOOGLE_SHEET_API_URL, { 
+              method: 'POST', 
+              headers: { 'Content-Type': 'application/x-www-form-urlencoded' }, 
+              body: `data=${encodeURIComponent(JSON.stringify({ action: "getProfiles" }))}` 
+          });
+          
+          if (!profileResponse.ok) throw new Error(`HTTP Error ${profileResponse.status} on Profiles POST.`);
+          const profileData = await profileResponse.json();
+          if (profileData.success) {
+            setProfiles(profileData.profiles);
+            localStorage.setItem('fb_profiles', JSON.stringify(profileData.profiles)); // Cache update
+          }
+
+        } catch (error) { 
+          setSysError(`CONNECTION FAILED:\n\n${error.message}`); 
+          showToast("Failed to fetch fresh database rows.", "error");
+        } 
+        finally { setIsLoading(false); setIsRefreshing(false); }
+      };
+
+      const showToast = (message, type = 'info') => { setToastMsg({ message, type }); };
+
+      const updateJobStatus = (id, newStatus) => {
+        const nQueued = new Set(queuedJobs);
+        const nInProgress = new Set(inProgressJobs);
+        const nApplied = { ...appliedJobs };
+
+        nQueued.delete(id);
+        nInProgress.delete(id);
+        delete nApplied[id];
+
+        if (newStatus === 'Queued') nQueued.add(id);
+        else if (newStatus === 'InProgress') nInProgress.add(id);
+        else if (newStatus === 'Applied') nApplied[id] = new Date().toLocaleDateString();
+
+        setQueuedJobs(nQueued);
+        setInProgressJobs(nInProgress);
+        setAppliedJobs(nApplied);
+
+        // Optimistic UI updates
+        const updatedJobs = jobs.map(j => j.id === id ? { ...j, userStatus: newStatus } : j);
+        setJobs(updatedJobs);
+        localStorage.setItem('fb_jobs', JSON.stringify(updatedJobs));
+
+        syncStatusToBackend(id, newStatus);
+        showToast(`Status updated to ${newStatus}`, "success");
+      };
+
+      const hideJob = (id) => {
+        const newHidden = new Set(hiddenJobs);
+        newHidden.add(id); setHiddenJobs(newHidden);
+        showToast("Job marked as Not Interested.", "info");
+      };
+
+      const handleTailorResume = (job) => { setActiveResumeJob(job); transitionHelper(() => setCurrentView('builder')); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+
+      const filteredJobs = jobs.filter(job => {
+        if (activeTab === 'Removed') return hiddenJobs.has(job.id);
+        if (hiddenJobs.has(job.id)) return false;
+
+        let passesTab = false;
+        if (activeTab === 'Applied') passesTab = !!appliedJobs[job.id];
+        else if (activeTab === 'Needs Work') passesTab = inProgressJobs.has(job.id);
+        else if (activeTab === 'Queued') passesTab = queuedJobs.has(job.id);
+        else if (activeTab === 'All') passesTab = true;
+        else if (activeTab === 'Rachel') passesTab = ['Rachel', 'Corporate', 'Edu', 'Federal', 'Florida', 'Gov'].includes(job.type);
+        else if (activeTab === 'Greg') passesTab = ['Greg'].includes(job.type);
+        else if (activeTab === 'Lorena') passesTab = ['Lorena'].includes(job.type);
+        else passesTab = job.type === activeTab;
+        
+        return passesTab;
+      });
+
+      return (
+        <div className="flex-grow flex flex-col">
+          
+          {/* TOAST SYSTEM */}
+          {toastMsg && (
+            <Toast message={toastMsg.message} type={toastMsg.type} onClose={() => setToastMsg(null)} />
+          )}
+
+          {/* BEAR HUG MODAL */}
+          <dialog ref={bearModalRef} onCancel={() => setIsBearModalOpen(false)} className="bg-transparent m-auto p-0 border-none backdrop:bg-black/80 backdrop:backdrop-blur-md animate-[popIn_0.2s_ease-out]">
+            <div className="bg-[#10061e] border border-fuchsia-500/30 rounded-3xl p-8 max-w-md w-[90vw] shadow-2xl shadow-fuchsia-500/10 text-center flex flex-col items-center">
+              <img src={currentBear} alt="Emotional Support Bear" className="w-56 h-56 rounded-2xl mb-6 shadow-xl object-cover border border-purple-500/20" />
+              <h3 className="text-2xl font-black text-fuchsia-300 mb-3 flex items-center gap-2">
+                <i className="fa-solid fa-heart text-rose-500"></i> You've got this
+              </h3>
+              <p className="text-purple-200 text-sm leading-relaxed mb-8">{currentPhrase}</p>
+              <div className="flex gap-3 w-full">
+                <button onClick={handleBearHug} className="flex-grow bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 text-white font-bold py-3 rounded-2xl transition-all shadow-lg">Another Bear</button>
+                <button onClick={() => setIsBearModalOpen(false)} className="px-5 bg-slate-900 border border-purple-500/20 text-purple-300 font-bold py-3 rounded-2xl transition-all hover:bg-slate-800">Close</button>
+              </div>
+            </div>
+          </dialog>
+
+          {/* ADD TARGET COMPANY MODAL */}
+          <dialog ref={addSourceModalRef} onCancel={() => setIsAddSourceModalOpen(false)} className="bg-transparent m-auto p-0 border-none backdrop:bg-black/80 backdrop:backdrop-blur-md animate-[popIn_0.2s_ease-out]">
+            <div className="bg-[#10061e] border border-emerald-500/30 rounded-3xl p-6 max-w-lg w-[90vw] shadow-2xl">
+              <div className="flex justify-between items-center mb-6">
+                <h2 className="text-xl font-black text-emerald-400 flex items-center gap-2">
+                  <i className="fa-solid fa-building-circle-check"></i> Add Target Company
+                </h2>
+                <button type="button" onClick={() => setIsAddSourceModalOpen(false)} className="text-purple-400 hover:text-white"><i className="fa-solid fa-xmark text-lg"></i></button>
+              </div>
+              <form onSubmit={handleAddSource} className="space-y-4">
+                  <div>
+                    <label className="block text-xs font-bold text-purple-300 mb-1 uppercase tracking-wider">Organization Name *</label>
+                    <input type="text" value={newSourceOrg} onChange={e => setNewSourceOrg(e.target.value)} required className="w-full bg-black/40 border border-purple-500/20 rounded-xl p-3 text-sm text-purple-100 focus:outline-none focus:border-emerald-500 transition-all" placeholder="e.g. SpaceX" />
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-purple-300 mb-1 uppercase tracking-wider">Careers Page URL *</label>
+                    <input type="url" value={newSourceUrl} onChange={e => setNewSourceUrl(e.target.value)} required className="w-full bg-black/40 border border-purple-500/20 rounded-xl p-3 text-sm text-purple-100 focus:outline-none focus:border-emerald-500 transition-all" placeholder="https://careers.spacex.com/jobs" />
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-bold text-purple-300 mb-1 uppercase tracking-wider">Include Keywords</label>
+                      <input type="text" value={newSourceKeywords} onChange={e => setNewSourceKeywords(e.target.value)} className="w-full bg-black/40 border border-purple-500/20 rounded-xl p-3 text-sm text-purple-100 focus:outline-none focus:border-emerald-500 transition-all" placeholder="comma-separated" />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-bold text-purple-300 mb-1 uppercase tracking-wider">Excludes</label>
+                      <input type="text" value={newSourceExcludes} onChange={e => setNewSourceExcludes(e.target.value)} className="w-full bg-black/40 border border-purple-500/20 rounded-xl p-3 text-sm text-purple-100 focus:outline-none focus:border-emerald-500 transition-all" placeholder="exclude matches" />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-bold text-purple-300 mb-1 uppercase tracking-wider">Sector Mapping</label>
+                    <select value={newSourceSector} onChange={e => setNewSourceSector(e.target.value)} className="w-full bg-black/40 border border-purple-500/20 rounded-xl p-3 text-sm text-purple-100 focus:outline-none focus:border-emerald-500 transition-all">
+                      <option value="All">All</option>
+                      <option value="Greg">Greg</option>
+                      <option value="Rachel">Rachel</option>
+                      <option value="Lorena">Lorena</option>
+                    </select>
+                  </div>
+                  <button type="submit" disabled={isAddingSource} className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-3 rounded-xl shadow-lg border border-emerald-500/30 transition-colors disabled:opacity-50 mt-4 flex items-center justify-center gap-2">
+                    {isAddingSource ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-plus"></i>}
+                    Add Target Source
+                  </button>
+                </form>
+            </div>
+          </dialog>
+
+          {/* MAIN NAV HEADER */}
+          <nav className="bg-[#140726]/80 border-b border-purple-500/10 backdrop-blur-xl sticky top-0 z-50 px-4 sm:px-6 lg:px-8 py-4">
+            <div className="max-w-[95rem] mx-auto flex justify-between items-center">
+              <div className="flex items-center gap-3 cursor-pointer" onClick={() => transitionHelper(() => setCurrentView('tracker'))}>
+                <div className="bg-gradient-to-tr from-fuchsia-500 to-purple-600 p-2.5 rounded-2xl shadow-lg shadow-purple-600/20">
+                  <i className="fa-solid fa-cubes text-lg text-white"></i>
+                </div>
+                <div>
+                  <h1 className="text-lg font-black tracking-wider text-white">AUTONOMOUS JOB HUNT</h1>
+                  <span className="text-[10px] text-fuchsia-400 font-bold uppercase tracking-widest">Enterprise Optimization Engine</span>
+                </div>
+              </div>
+
+              {/* NAV MENU OPTIONS */}
+              <div className="flex items-center gap-3">
+                <button 
+                  onClick={() => transitionHelper(() => setCurrentView(currentView === 'tracker' ? 'builder' : 'tracker'))} 
+                  className={`hidden sm:flex items-center gap-2 px-4 py-2 rounded-xl text-sm font-bold border transition-all ${currentView === 'builder' ? 'bg-fuchsia-600 text-white border-fuchsia-500' : 'bg-purple-950/20 text-purple-300 border-purple-500/10 hover:border-purple-500/30'}`}
+                >
+                  <i className={`fa-solid ${currentView === 'builder' ? 'fa-list-check' : 'fa-wand-magic-sparkles'}`}></i>
+                  {currentView === 'builder' ? 'Job Board' : 'Resume Studio'}
+                </button>
+
+                {/* THE PURPLE BEAR UTILITY HUB */}
+                <div className="relative">
+                  <button onClick={() => setIsMenuOpen(!isMenuOpen)} className="bg-purple-600 hover:bg-purple-500 text-white font-bold p-2.5 rounded-xl border border-purple-400/20 shadow-md flex items-center justify-center">
+                    <i className="fa-solid fa-paw"></i>
+                  </button>
+                  {isMenuOpen && (
+                    <div className="absolute right-0 mt-3 w-56 bg-[#160a2c] border border-purple-500/20 rounded-2xl shadow-2xl p-2 z-[60] animate-[popIn_0.15s_ease-out]">
+                      <div className="text-[10px] text-purple-400 font-bold uppercase tracking-widest px-3 py-2 border-b border-purple-500/10">Purple Bear Utility Hub</div>
+                      <button onClick={fetchDataFromGoogle} className="w-full text-left text-xs font-bold text-purple-200 hover:bg-purple-500/10 hover:text-white px-3 py-2.5 rounded-xl flex items-center gap-2 transition-all mt-1">
+                        <i className={`fa-solid fa-arrows-rotate ${isRefreshing ? 'fa-spin text-emerald-400' : ''}`}></i> Database Hard Sync
+                      </button>
+                      <button onClick={() => { setIsAddSourceModalOpen(true); setIsMenuOpen(false); }} className="w-full text-left text-xs font-bold text-purple-200 hover:bg-purple-500/10 hover:text-white px-3 py-2.5 rounded-xl flex items-center gap-2 transition-all">
+                        <i className="fa-solid fa-plus text-emerald-400"></i> Add Target Company
+                      </button>
+                      <button onClick={clearHiddenJobs} className="w-full text-left text-xs font-bold text-purple-200 hover:bg-purple-500/10 hover:text-white px-3 py-2.5 rounded-xl flex items-center gap-2 transition-all">
+                        <i className="fa-solid fa-trash-arrow-up text-cyan-400"></i> Restore Hidden Feed
+                      </button>
+                      <button onClick={handleBearHug} className="w-full text-left text-xs font-bold text-purple-200 hover:bg-purple-500/10 hover:text-white px-3 py-2.5 rounded-xl flex items-center gap-2 transition-all border-t border-purple-500/10 mt-1.5">
+                        <i className="fa-solid fa-heart text-fuchsia-400 animate-pulse"></i> Bear Support Hub
+                      </button>
+                    </div>
+                  )}
+                </div>
+              </div>
+            </div>
+          </nav>
+
+          {/* MAIN PAGE ROUTER CONTAINER */}
+          {currentView === 'builder' ? (
+            <ResumeBuilder 
+              showToast={showToast} 
+              activeJob={activeResumeJob} 
+              setSysError={setSysError} 
+              sysError={sysError} 
+              dynamicProfiles={profiles} 
+            />
+          ) : (
+            <div className="max-w-[95rem] mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex-grow flex flex-col">
+              
+              {/* BOARD HEADER */}
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8">
+                <div>
+                  <h2 className="text-3xl font-black text-white tracking-tight flex items-center gap-2">
+                    <i className="fa-solid fa-table-list text-fuchsia-400"></i> Job Pipeline Board
+                  </h2>
+                  <p className="text-purple-300/80 text-sm mt-1">Real-time status updates and triage interface synced with Google Sheets.</p>
+                </div>
+                
+                <div className="flex items-center gap-3">
+                  {isRefreshing && (
+                    <span className="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl">
+                      <i className="fa-solid fa-circle-notch fa-spin"></i> Refreshing
+                    </span>
+                  )}
+                  <button onClick={fetchDataFromGoogle} className="bg-purple-950/40 hover:bg-purple-900/60 text-purple-200 border border-purple-500/10 p-3 rounded-2xl transition-all shadow-md">
+                    <i className="fa-solid fa-arrows-rotate"></i>
+                  </button>
+                </div>
+              </div>
+
+              {/* TABS SELECTOR */}
+              <div className="flex gap-2 border-b border-purple-500/10 pb-2 mb-8 overflow-x-auto">
+                {['All', 'Queued', 'Needs Work', 'Applied', 'Rachel', 'Greg', 'Lorena', 'Removed'].map(tab => (
+                  <button 
+                    key={tab} 
+                    onClick={() => transitionHelper(() => setActiveTab(tab))} 
+                    className={`px-5 py-2.5 rounded-xl text-xs font-black tracking-wider uppercase transition-all shrink-0 ${activeTab === tab ? 'bg-fuchsia-600 text-white shadow-lg shadow-fuchsia-600/10' : 'text-purple-300 hover:text-white hover:bg-purple-500/10'}`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+
+              {/* LOADER */}
+              {isLoading ? (
+                <div className="flex-grow flex flex-col items-center justify-center py-20 text-purple-400">
+                  <i className="fa-solid fa-circle-notch fa-spin text-4xl mb-4 text-fuchsia-500"></i>
+                  <p className="font-bold text-sm tracking-widest uppercase">Loading Database Schema...</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                  {filteredJobs.length === 0 ? (
+                    <div className="col-span-full py-16 text-center text-purple-400 border border-purple-500/10 rounded-3xl bg-slate-900/20">
+                      <i className="fa-solid fa-folder-open text-4xl mb-3 opacity-30"></i>
+                      <p className="font-semibold text-sm">No jobs matches found in this pipeline tab.</p>
+                    </div>
+                  ) : (
+                    filteredJobs.map(job => (
+                      <div key={job.id} className="bg-slate-900/40 backdrop-blur-md border border-purple-500/10 hover:border-purple-500/40 rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-fuchsia-500/10 shadow-lg shadow-black/20 group">
+                        <div>
+                          {/* CARD METADATA HEADER */}
+                          <div className="flex justify-between items-center mb-3">
+                            <span className="text-[10px] font-black uppercase bg-purple-500/15 text-purple-300 border border-purple-500/20 px-2 py-0.5 rounded">
+                              <i className="fa-solid fa-tag mr-1 text-fuchsia-400"></i> {job.type}
+                            </span>
+                            <span className="text-[10px] font-mono text-purple-400/80">
+                              {job.source || 'Scraped'}
+                            </span>
+                          </div>
+
+                          <h3 className="text-lg font-black text-white leading-snug group-hover:text-fuchsia-300 transition-colors">
+                            <a href={job.url} target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-2">
+                              {job.title}
+                              <i className="fa-solid fa-arrow-up-right-from-square text-xs text-purple-400 group-hover:text-fuchsia-300 transition-colors"></i>
+                            </a>
+                          </h3>
+                          <p className="text-emerald-400 font-bold text-sm mt-1">{job.organization}</p>
+                          <p className="text-xs text-purple-300/60 mt-2 flex items-center gap-1"><i className="fa-solid fa-location-dot"></i> {job.location || 'Remote/US'}</p>
+                        </div>
+
+                        {/* CARD ACTIONS */}
+                        <div className="mt-6 pt-4 border-t border-purple-500/10 flex justify-between items-center">
+                          <div className="flex flex-col gap-1">
+                            {job.postDate && (
+                              <span className="text-[10px] text-purple-400/80 font-mono flex items-center gap-1">
+                                <i className="fa-regular fa-calendar"></i> {job.postDate}
+                              </span>
+                            )}
+                            {job.compatibilityScore && (
+                              <span className="text-[10px] text-emerald-400/80 font-mono flex items-center gap-1">
+                                <i className="fa-solid fa-bolt"></i> Match: {job.compatibilityScore}%
+                              </span>
+                            )}
+                          </div>
+                          
+                          <div className="flex gap-2 justify-end items-center">
+                            <button onClick={() => handleTailorResume(job)} className="bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-white border border-emerald-500/20 px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5" title="Open in Resume Studio">
+                              <i className="fa-solid fa-wand-magic-sparkles"></i> Studio
+                            </button>
+
+                            {!appliedJobs[job.id] ? (
+                              <button onClick={() => updateJobStatus(job.id, 'Applied')} className="text-teal-400 hover:text-white bg-teal-500/10 hover:bg-teal-500 border border-teal-500/20 h-8 w-8 flex items-center justify-center rounded-xl transition-all" title="Mark as Applied">
+                                <i className="fa-solid fa-check"></i>
+                              </button>
+                            ) : (
+                              <span className="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 h-8 px-2 flex items-center justify-center rounded-xl text-[10px] font-bold" title="Already Applied">
+                                <i className="fa-solid fa-check-double mr-1"></i> Applied
+                              </span>
+                            )}
+
+                            <button onClick={() => hideJob(job.id)} className="text-rose-400 hover:text-white bg-rose-500/10 hover:bg-rose-500 border border-rose-500/20 h-8 w-8 flex items-center justify-center rounded-xl transition-all" title="Remove Job">
+                              <i className="fa-solid fa-trash-can"></i>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    ))
+                  )}
+                </div>
+              )}
+            </div>
+          )}
+
+          {/* MAIN FOOTER */}
+          <footer className="bg-black/40 border-t border-purple-500/10 py-6 text-center text-xs text-purple-400/60 mt-auto">
+            <p className="font-semibold">&copy; 2026 Autonomous Job Hunt Ecosystem. Harvard MCS Compliance Engine.</p>
+          </footer>
+        </div>
+      );
+    }
+
+    const container = document.getElementById('root');
+    const root = ReactDOM.createRoot(container);
+    root.render(<App />);
+  
