@@ -372,18 +372,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "bf323dec6bc17d84e475b2d49a2bc8d9",
-    "title": "SCRUM MASTER L1",
-    "organization": "Wipro",
-    "url": "https://www.indeed.com/viewjob?jk=af96000f5a4ab3f1",
-    "location": "Jacksonville, FL, US",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
     "id": "0a0069b3275f392afce94b7f14897bc4",
     "title": "Azure Scrum Master - 6343825",
     "organization": "Accenture",
@@ -408,30 +396,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "f27750b8665b72faa3b5dcffc99cc0c0",
-    "title": "Senior Project Lead - Scrum Master",
-    "organization": "HCLTech",
-    "url": "https://www.indeed.com/viewjob?jk=00c8cbf695959a95",
-    "location": "Chattahoochee, FL, US",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "4d97ab2e741d2c75e620661f1dccebf4",
-    "title": "Scrum Master",
-    "organization": "Tata Consultancy Services (TCS)",
-    "url": "https://www.indeed.com/viewjob?jk=92ab79f47d2780cc",
-    "location": "Jacksonville, FL, US",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 100
-  },
-  {
     "id": "d3512d550b758e32442b825d0020b7f2",
     "title": "Agile Program Manager",
     "organization": "OST, Inc.",
@@ -442,18 +406,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 95
-  },
-  {
-    "id": "67604b162cdfc918eb02c9a3ba444d00",
-    "title": "Principal Scrum Master",
-    "organization": "Kforce Inc",
-    "url": "https://www.linkedin.com/jobs/view/4365591433",
-    "location": "North Palm Beach, FL",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
   },
   {
     "id": "0dd31e1b0ea7a9049476c0d4da43bd1d",
@@ -478,42 +430,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 95
-  },
-  {
-    "id": "246cfcca84eb0818a60ee53bc4f3f4aa",
-    "title": "IT Project Manager",
-    "organization": "Insight Global",
-    "url": "https://www.linkedin.com/jobs/view/4431232718",
-    "location": "Miramar, FL",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
-    "id": "749c5d6fc62528366ce73cf9371fb517",
-    "title": "Scrum Master",
-    "organization": "Kforce Inc",
-    "url": "https://www.linkedin.com/jobs/view/4369290198",
-    "location": "North Palm Beach, FL",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
-    "id": "98ef6bd3b7737af00b16ce8707959347",
-    "title": "Scrum Master - Financial Services",
-    "organization": "Insight Global",
-    "url": "https://www.linkedin.com/jobs/view/4432107541",
-    "location": "Florida, United States",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
   },
   {
     "id": "f33738371ff397fa9b1cc798bb4f900e",
@@ -1068,18 +984,6 @@
     "compatibilityScore": 90
   },
   {
-    "id": "4f8df8160ac02947104f92cd8cc96d0e",
-    "title": "Project Manager",
-    "organization": "Kforce Inc",
-    "url": "https://www.linkedin.com/jobs/view/4390957279",
-    "location": "North Palm Beach, FL",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
-  },
-  {
     "id": "b7a6ca8c155c5c9d0d126e4b880bca88",
     "title": "Project Manager",
     "organization": "Epic",
@@ -1356,18 +1260,6 @@
     "compatibilityScore": 88
   },
   {
-    "id": "34dd5edd89fcaeae76c45543c89738e0",
-    "title": "AI/Data Analyst",
-    "organization": "Kforce Inc",
-    "url": "https://www.linkedin.com/jobs/view/4419993130",
-    "location": "West Palm Beach, FL",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-26",
-    "compatibilityScore": 85
-  },
-  {
     "id": "a0cba6aefb2c98a325290d1f7d696ba1",
     "title": "Sr. Data Analyst",
     "organization": "Alliance Drawback Services",
@@ -1486,18 +1378,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 85
-  },
-  {
-    "id": "3a537d39b2c907f74051491f881a091b",
-    "title": "Technical Project Manager",
-    "organization": "Kforce Inc",
-    "url": "https://www.linkedin.com/jobs/view/4431152551",
-    "location": "Orlando, FL",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
   },
   {
     "id": "7bfbc1337b981fbb0e310f5058f00606",
@@ -1656,18 +1536,6 @@
     "compatibilityScore": 95
   },
   {
-    "id": "cc61d3410a1445e74950dfd550ea18c7",
-    "title": "Senior Project Manager ($75/hr, up to $1,500/week)",
-    "organization": "Ethos",
-    "url": "https://www.linkedin.com/jobs/view/4400000860",
-    "location": "Florida",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 90
-  },
-  {
     "id": "e8fe61287de49bfb0256b01745a32a78",
     "title": "Project Manager",
     "organization": "nan",
@@ -1786,18 +1654,6 @@
     "userStatus": "Queued",
     "postDate": "2026-06-25",
     "compatibilityScore": 90
-  },
-  {
-    "id": "d740b55108b9e7c6dac3d3ea5719924a",
-    "title": "Agile Scrum Master (Data Analytics) - (Remote)",
-    "organization": "Stage 4 Solutions",
-    "url": "https://www.linkedin.com/jobs/view/4429891467",
-    "location": "Remote",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-25",
-    "compatibilityScore": 95
   },
   {
     "id": "d31b754ce2bf4e4bd32cf739c01c48c0",
@@ -2346,19 +2202,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "5a51a5adeb1678d8a9841a15fcfeee74",
-    "title": "Data Analyst",
-    "organization": "Robert Half",
-    "url": "https://www.linkedin.com/jobs/view/4420435218",
-    "location": "Tallahassee, FL",
-    "description": "nan",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-28",
-    "compatibilityScore": 85
-  },
-  {
     "id": "f1632fd574ae1e649e92e0f47aad6bfc",
     "title": "Director, Business Intelligence & Analytics - 992052",
     "organization": "Nova Southeastern University",
@@ -2663,19 +2506,6 @@
     "organization": "CGI",
     "url": "https://www.linkedin.com/jobs/view/4414536219",
     "location": "Deerfield Beach, FL",
-    "description": "nan",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-28",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "70bf75908ed1e95f95dcb4e847dd10ae",
-    "title": "IT Project Manager",
-    "organization": "Kforce Inc",
-    "url": "https://www.linkedin.com/jobs/view/4366939301",
-    "location": "North Palm Beach, FL",
     "description": "nan",
     "type": "Rachel",
     "source": "Python Agent",
@@ -3390,19 +3220,6 @@
     "title": "Senior QA Engineer",
     "organization": "Total Quality Logistics",
     "url": "https://www.linkedin.com/jobs/view/4430583413",
-    "location": "Tampa, FL",
-    "description": "nan",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-06-29",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "f8c3ff17a1622976696d69d3c9f3eb9c",
-    "title": "Selenium Automation Engineer with strong Java expertise",
-    "organization": "Tata Consultancy Services",
-    "url": "https://www.linkedin.com/jobs/view/4431285132",
     "location": "Tampa, FL",
     "description": "nan",
     "type": "Greg",
@@ -4504,19 +4321,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "901ee17a7ba2bd8532c10087dbe431bb",
-    "title": "Technical Data Analyst",
-    "organization": "Insight Global",
-    "url": "https://www.linkedin.com/jobs/view/4434367264",
-    "location": "Orlando, FL",
-    "description": "nan",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-01",
-    "compatibilityScore": 85
-  },
-  {
     "id": "beccf77c3f47230d96b37787b25aa87d",
     "title": "Senior Business Intelligence Analyst (On-Site Florida)",
     "organization": "FirstService Residential",
@@ -4847,19 +4651,6 @@
     "organization": "Stryker",
     "url": "https://www.linkedin.com/jobs/view/4424344958",
     "location": "Tampa, FL",
-    "description": "nan",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-01",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "3f43545a0fa93598b2b9fd04977e9a9a",
-    "title": "Project Manager",
-    "organization": "Insight Global",
-    "url": "https://www.linkedin.com/jobs/view/4431897916",
-    "location": "Florida",
     "description": "nan",
     "type": "Rachel",
     "source": "Python Agent",
@@ -5466,19 +5257,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "e9d64f8cb4600ecea03eb1ab2046b23d",
-    "title": "Senior Project Manager",
-    "organization": "Robert Half",
-    "url": "https://www.linkedin.com/jobs/view/4435367413",
-    "location": "Delray Beach, FL",
-    "description": "nan",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-02",
-    "compatibilityScore": 85
-  },
-  {
     "id": "f866beada2857d3ac38298744fcfae60",
     "title": "Senior Project Manager",
     "organization": "Phillips Infrastructure",
@@ -5497,19 +5275,6 @@
     "organization": "Jacobs",
     "url": "https://www.linkedin.com/jobs/view/4425934160",
     "location": "Orlando, FL",
-    "description": "nan",
-    "type": "Rachel",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-02",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "f78cc26ee36e208363ef1ab51ff5ae74",
-    "title": "Information Technology Project Manager",
-    "organization": "Insight Global",
-    "url": "https://www.linkedin.com/jobs/view/4434133302",
-    "location": "Boca Raton, FL",
     "description": "nan",
     "type": "Rachel",
     "source": "Python Agent",
@@ -5908,19 +5673,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "638fadff345e199b7c96a2b87b109549",
-    "title": "Property Manager",
-    "organization": "Robert Half",
-    "url": "https://www.linkedin.com/jobs/view/4435362509",
-    "location": "Orlando, FL",
-    "description": "nan",
-    "type": "Lorena",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-02",
-    "compatibilityScore": 85
-  },
-  {
     "id": "48f596c29a7876426b5e4ebaa37a0295",
     "title": "Senior Data Analyst - CRM",
     "organization": "Signature Aviation",
@@ -5991,32 +5743,6 @@
     "organization": "Ashley Furniture Industries",
     "url": "https://www.linkedin.com/jobs/view/4394494505",
     "location": "Tampa, FL",
-    "description": "nan",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-03",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "1dfd6898ccbbaceccaf6c68395bf4382",
-    "title": "Business Intelligence Specialist",
-    "organization": "Insight Global",
-    "url": "https://www.linkedin.com/jobs/view/4435213468",
-    "location": "Miami, FL",
-    "description": "nan",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-03",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "47d35c534cc841f02cee512bc1c4477c",
-    "title": "Test Automation Consultant",
-    "organization": "Infosys",
-    "url": "https://www.linkedin.com/jobs/view/4421996633",
-    "location": "Jacksonville, FL",
     "description": "nan",
     "type": "Greg",
     "source": "Python Agent",
@@ -7013,32 +6739,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "a75e71b959d4869765bbe0beb33a80af",
-    "title": "Retail Banker I (Bilingual Spanish or Russian Preferred) - Sunny Isles",
-    "organization": "TD",
-    "url": "https://www.indeed.com/viewjob?jk=ce92bb68f0960c26",
-    "location": "Sunny Isles Beach, FL, US",
-    "description": "**Work Location:**\n\nSunny Isles Beach, Florida, United States of America\n**Hours:**\n\n40\n**Pay Details:**\n\n$22\\.50 \\- $29\\.00 USD\nTD is committed to providing fair and equitable compensation opportunities to all colleagues. Growth opportunities and skill development are defining features of the colleague experience at TD. Our compensation policies and practices have been designed to allow colleagues to progress through the salary range over time as they progress in their role. The base pay actually offered may vary based upon the candidate's skills and experience, job\\-related knowledge, geographic location, and other specific business and organizational needs.\n\n\nAs a candidate, you are encouraged to ask compensation related questions and have an open dialogue with your recruiter who can provide you more specific details for this role.\n\n\n**Line of Business:**\n\nPersonal \\& Commercial Banking\n**Job Description:**\n\nThe Retail Banker I is a customer liaison that is integral to delivering TD\u2019s Brand promise by utilizing financial expertise and consultative advice to assist Customers with their banking solutions/needs. This role contributes to the achievement of business objectives that enable growth through identifying appropriate TD solutions that help Customers achieve their financial goals and optimize their relationship with TD.\n\n\n**Depth \\& Scope:**\n\n* Proficient in products, services and routine transactions in order to identify opportunities to educate on Bank products and services to Customers and/or refer them to appropriate team member or internal Bank partners, while ensuring a positive Customer experience\n* Requires a broad knowledge and understanding of the full product suite, services and processes of business area, and could be characterized by low to moderate complexity/risk\n* Establishes and nurtures Customer relationships by consistently displaying product knowledge, actively listening to Customer needs while engaging in additional conversation to identify any additional needs and offer a solution or partner referral\n* Makes product recommendations based on Customer needs and highlights product features and benefits that ultimately support Customers through challenging times and life events, save time and money, and exceed their needs\n* Utilizes Customer relationship management tools to proactively play a key role in customer assessments, proactively identifies Customer solutions and lead\\-focused outbound sales activities\n* Independently resolves customer issues, errors and problems, escalating when necessary\n* Builds working relationships with customers and explains detailed and/or complicated information.\n* Requires full proficiency gained through job related training to perform a range of activities\n* Participates in Customer outreach, servicing and advice activities to deliver on our unexpectedly human promise\n* Engages in conversations with customers about loan products, facilitates the application intake\n* Must maintain an active registration status with NMLS (Nationwide Mortgage Licensing System and Registry)\n\n**Education \\& Experience:**\n\n* HS Diploma or GED\n* 1\\+ years' experience working with customers and or sales in any capacity or equivalent demonstrated through any of the following: volunteering, education, military experience preferred.\n* Teller experience preferred\n* Must be able to complete teller training upon hire to take customer transactions\n* Demonstrated ability to engage in customer conversations while educating them on products and services preferred\n* Demonstrated organization skills to handle multiple tasks in a fast\\-paced environment\n* Excellent communication skills with ability to be concise, clear and consistent\n* Demonstrated ability to schedule and prioritize work\n* Demonstrated ability to work independently and within deadlines\n* Sound judgment in decision making and effective problem solving\n* Proficient in Microsoft Office\n* Notary License (Preferred)\n\n**Customer Accountabilitie",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-04",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "84fadce5d8c86f25b3cdfb3a11d1238a",
-    "title": "Retail Banker I - Lake Worth Road (Bilingual Spanish or Creole Preferred)",
-    "organization": "TD",
-    "url": "https://www.indeed.com/viewjob?jk=f766517aec30fecc",
-    "location": "Greenacres, FL, US",
-    "description": "**Work Location:**\n\nGreenacres, Florida, United States of America\n**Hours:**\n\n40\n**Pay Details:**\n\n$22\\.50 \\- $29\\.00 USD\nTD is committed to providing fair and equitable compensation opportunities to all colleagues. Growth opportunities and skill development are defining features of the colleague experience at TD. Our compensation policies and practices have been designed to allow colleagues to progress through the salary range over time as they progress in their role. The base pay actually offered may vary based upon the candidate's skills and experience, job\\-related knowledge, geographic location, and other specific business and organizational needs.\n\n\nAs a candidate, you are encouraged to ask compensation related questions and have an open dialogue with your recruiter who can provide you more specific details for this role.\n\n\n**Line of Business:**\n\nPersonal \\& Commercial Banking\n**Job Description:**\n\nThe Retail Banker I is a customer liaison that is integral to delivering TD\u2019s Brand promise by utilizing financial expertise and consultative advice to assist Customers with their banking solutions/needs. This role contributes to the achievement of business objectives that enable growth through identifying appropriate TD solutions that help Customers achieve their financial goals and optimize their relationship with TD.\n\n\n**Depth \\& Scope:**\n\n* Proficient in products, services and routine transactions in order to identify opportunities to educate on Bank products and services to Customers and/or refer them to appropriate team member or internal Bank partners, while ensuring a positive Customer experience\n* Requires a broad knowledge and understanding of the full product suite, services and processes of business area, and could be characterized by low to moderate complexity/risk\n* Establishes and nurtures Customer relationships by consistently displaying product knowledge, actively listening to Customer needs while engaging in additional conversation to identify any additional needs and offer a solution or partner referral\n* Makes product recommendations based on Customer needs and highlights product features and benefits that ultimately support Customers through challenging times and life events, save time and money, and exceed their needs\n* Utilizes Customer relationship management tools to proactively play a key role in customer assessments, proactively identifies Customer solutions and lead\\-focused outbound sales activities\n* Independently resolves customer issues, errors and problems, escalating when necessary\n* Builds working relationships with customers and explains detailed and/or complicated information.\n* Requires full proficiency gained through job related training to perform a range of activities\n* Participates in Customer outreach, servicing and advice activities to deliver on our unexpectedly human promise\n* Engages in conversations with customers about loan products, facilitates the application intake\n* Must maintain an active registration status with NMLS (Nationwide Mortgage Licensing System and Registry)\n\n**Education \\& Experience:**\n\n* HS Diploma or GED\n* 1\\+ years' experience working with customers and or sales in any capacity or equivalent demonstrated through any of the following: volunteering, education, military experience preferred.\n* Teller experience preferred\n* Must be able to complete teller training upon hire to take customer transactions\n* Demonstrated ability to engage in customer conversations while educating them on products and services preferred\n* Demonstrated organization skills to handle multiple tasks in a fast\\-paced environment\n* Excellent communication skills with ability to be concise, clear and consistent\n* Demonstrated ability to schedule and prioritize work\n* Demonstrated ability to work independently and within deadlines\n* Sound judgment in decision making and effective problem solving\n* Proficient in Microsoft Office\n* Notary License (Preferred)\n\n**Customer Accountabilities:**\n\n*",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-04",
-    "compatibilityScore": 85
-  },
-  {
     "id": "a98363b50323cf3734460007a9f8c7d7",
     "title": "Manager, E-commerce & Retail Operations",
     "organization": "Unrivaled Basketball",
@@ -7046,19 +6746,6 @@
     "location": "Miami, FL",
     "description": "nan",
     "type": "Lorena",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-04",
-    "compatibilityScore": 85
-  },
-  {
-    "id": "882c83b867f97566ab48b594e7795e14",
-    "title": "Property Management Coordinator (Bilingual English/Spanish)",
-    "organization": "nan",
-    "url": "https://www.indeed.com/viewjob?jk=b52b5661afcb1cff",
-    "location": "Miami, FL, US",
-    "description": "**About AWA Realty**\n\nAWA Realty is a boutique real estate brokerage and property management firm based in Brickell, Miami. We specialize in serving international investors \u2014 primarily from Latin America \u2014 who own residential properties across Miami\\-Dade, Broward, Palm Beach, and Orange counties. Our team manages a growing portfolio of residential units and is known for delivering personalized, professional service to both property owners and tenants.\n\n**About the Role**\n\nWe are looking for a detail\\-oriented, bilingual Property Management Coordinator to join our Brickell office. This is a hands\\-on, full\\-time role at the center of our day\\-to\\-day operations. You will be the main point of contact for tenants and property owners, coordinate maintenance and vendors, manage leasing paperwork, and keep our office running smoothly.\n\nThis role is ideal for someone who is organized, communicates clearly in both English and Spanish, and thrives in a fast\\-paced, small\\-team environment where no two days are the same.\n\n**Responsibilities**\n\n* Serve as the primary contact for tenants and property owners, handling inquiries, maintenance requests, and day\\-to\\-day communication in English and Spanish\n* Manage the full leasing cycle: draft and process lease agreements, addendums, renewals, notices, and move\\-out documentation\n* Coordinate maintenance and repairs \u2014 receive requests, contact vendors, follow up until resolution, and document everything\n* Track rent payments, follow up on delinquencies, and maintain accurate records in AppFolio\n* Support onboarding of new tenants and new properties into the portfolio\n* Prepare monthly owner reports and assist with basic bookkeeping tasks\n* Handle general office administrative tasks including correspondence, filing, and vendor coordination\n* Assist with compliance documentation for Florida landlord\\-tenant law requirements\n\n**Qualifications**\n\n* Bilingual fluency in English and Spanish \u2014 required\n* 2\\+ years of experience in property management, real estate, or office administration\n* Familiarity with property management software (AppFolio preferred; other platforms considered)\n* Strong organizational skills and attention to detail\n* Professional and clear communicator \u2014 written and verbal\n* Able to work independently, prioritize tasks, and follow through without constant supervision\n* Knowledge of Florida landlord\\-tenant law is a plus, but not required\n\n**Compensation \\& Benefits**\n\n* $48,000 \u2013 $58,000 per year, based on experience\n* Paid time off\n* Full\\-time, Monday through Friday, in\\-office (Brickell, Miami)\n\n**To Apply**\n\nSubmit your resume and a brief note (3\u20135 sentences) explaining your experience managing properties or working in a real estate environment. Applications without this note will not be reviewed.\n\nPay: $48,000\\.00 \\- $58,000\\.00 per year\n\nBenefits:\n\n* Flexible schedule\n* Paid time off\n\nWork Location: In person",
-    "type": "Greg",
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
