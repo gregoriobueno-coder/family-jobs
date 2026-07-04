@@ -606,6 +606,7 @@ def main():
                             location_str = str(row.get("location", "")).strip()
                             desc = str(row.get("description", "")).strip()
                             is_remote = bool(row.get("is_remote", False))
+                            date_posted = str(row.get("date_posted", "")).strip()
                             
                             if not title or not url:
                                 continue
@@ -619,6 +620,7 @@ def main():
                                 "url": url,
                                 "location": location_str,
                                 "description": desc,
+                                "date_posted": date_posted,
                                 "candidate_hint": candidate  # keep track of who we searched this for
                             })
                     else:
@@ -709,7 +711,7 @@ def main():
                             "type": candidate,  # Matches the compatible candidate name
                             "source": "Python Agent",
                             "userStatus": "Queued",  # Moves directly into candidate application queue
-                            "postDate": time.strftime("%Y-%m-%d"),
+                            "postDate": job.get("date_posted", time.strftime("%Y-%m-%d"))[:10],
                             "compatibilityScore": score,
                             "salary": ev.get("estimated_salary", "Not Listed")
                         })
