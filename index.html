@@ -159,6 +159,7 @@
       const [tailoredResume, setTailoredResume] = useState('');
       const [coverLetter, setCoverLetter] = useState('');
       const [analysisResult, setAnalysisResult] = useState('');
+      const [mockResult, setMockResult] = useState('');
       const [appQuestion, setAppQuestion] = useState('');
       const [appAnswer, setAppAnswer] = useState('');
 
@@ -166,6 +167,7 @@
       const [isFetchingJD, setIsFetchingJD] = useState(false);
       const [isDraftingLetter, setIsDraftingLetter] = useState(false);
       const [isAnalyzing, setIsAnalyzing] = useState(false);
+      const [isMocking, setIsMocking] = useState(false);
       const [isAnswering, setIsAnswering] = useState(false);
       const [aiStatus, setAiStatus] = useState(null); // { step, progress, detail }
       
@@ -415,26 +417,48 @@
         } finally { setIsDraftingLetter(false); setTimeout(() => setAiStatus(null), 3000); }
       };
 
-      const handleAnalyzeFit = async () => {
+      const handleAtsScore = async () => {
         if (!jobDescription || jobDescription.trim() === '' || jobDescription.includes("[PASTE THE FULL")) {
           return showToast("Paste a Job Description first!", "error");
         }
         setIsAnalyzing(true); setSysError(null); setAiStatus(null);
         try {
-          const systemPrompt = `You are a strict technical recruiter. Analyze the Base Resume against the Target Job Description. Provide:
-1. Match Percentage: (e.g., 85% Match)
-2. Skills Gap: Bullet points of what the JD asks for that is missing or weak in the resume.
-3. Interview Prep: 3 highly specific behavioral questions they will likely be asked to test those gaps, and a suggested strategy on how the candidate can pivot their existing experience to answer them.`;
+          const systemPrompt = `You are a strict ATS (Applicant Tracking System) simulator. Analyze the Base Resume against the Target Job Description. Provide:
+1. ATS Match Score: A strict 0-100% score representing keyword and hard-skill match.
+2. Missing Keywords: Bullet points of exact skills, tools, or domain experience that the JD requires but are missing from the resume.
+3. Recommendation: A 1-sentence verdict on whether the candidate should apply, edit the resume, or skip.`;
           const text = await executeAiCall(systemPrompt);
           if (text) {
              setAnalysisResult(text);
              setActiveRightTab('analyzer');
-             showToast("Analysis complete!", "success");
+             showToast("ATS Scan complete!", "success");
           } else throw new Error("Invalid AI response.");
         } catch (error) {
-          setSysError(`Analysis Failed: ${error.message}`);
+          setSysError(`ATS Scan Failed: ${error.message}`);
           showToast("Failed to analyze.", "error");
         } finally { setIsAnalyzing(false); setTimeout(() => setAiStatus(null), 3000); }
+      };
+
+      const handleMockInterview = async () => {
+        if (!jobDescription || jobDescription.trim() === '' || jobDescription.includes("[PASTE THE FULL")) {
+          return showToast("Paste a Job Description first!", "error");
+        }
+        setIsMocking(true); setSysError(null); setAiStatus(null);
+        try {
+          const systemPrompt = `You are an expert technical interviewer and behavioral hiring manager. Based ONLY on the provided Job Description and the candidate's Base Resume, generate a Mock Interview Prep sheet:
+1. Generate 3 highly specific technical/domain questions they will likely be asked.
+2. Generate 2 behavioral questions tailored to the company/culture implied by the JD.
+3. For EACH question, provide a suggested 'STAR Method' answer strategy utilizing the specific experiences listed in the candidate's Base Resume.`;
+          const text = await executeAiCall(systemPrompt);
+          if (text) {
+             setMockResult(text);
+             setActiveRightTab('interview');
+             showToast("Mock Interview Prep generated!", "success");
+          } else throw new Error("Invalid AI response.");
+        } catch (error) {
+          setSysError(`Mock Interview Failed: ${error.message}`);
+          showToast("Failed to generate prep.", "error");
+        } finally { setIsMocking(false); setTimeout(() => setAiStatus(null), 3000); }
       };
 
       const handleAskAssistant = async () => {
@@ -633,9 +657,13 @@
                   {isDraftingLetter ? <i className="fa-solid fa-circle-notch fa-spin mr-2"></i> : <i className="fa-solid fa-envelope-open-text mr-2"></i>}
                   {isDraftingLetter ? 'Drafting...' : 'Cover Letter'}
                 </button>
-                <button onClick={handleAnalyzeFit} disabled={isAnalyzing || !dynamicProfiles} className="bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-4 rounded-2xl shadow-lg shadow-purple-600/10 border border-purple-500/30 disabled:opacity-50 transition-colors">
-                  {isAnalyzing ? <i className="fa-solid fa-circle-notch fa-spin mr-2"></i> : <i className="fa-solid fa-chart-simple mr-2"></i>}
-                  {isAnalyzing ? 'Analyzing...' : 'Analyze Fit'}
+                <button onClick={handleAtsScore} disabled={isAnalyzing || !dynamicProfiles} className="bg-purple-600 hover:bg-purple-500 text-white font-bold py-3 px-4 rounded-2xl shadow-lg shadow-purple-600/10 border border-purple-500/30 disabled:opacity-50 transition-colors">
+                  {isAnalyzing ? <i className="fa-solid fa-circle-notch fa-spin mr-2"></i> : <i className="fa-solid fa-microscope mr-2"></i>}
+                  {isAnalyzing ? 'Scanning...' : 'ATS Scan'}
+                </button>
+                <button onClick={handleMockInterview} disabled={isMocking || !dynamicProfiles} className="bg-rose-600 hover:bg-rose-500 text-white font-bold py-3 px-4 rounded-2xl shadow-lg shadow-rose-600/10 border border-rose-500/30 disabled:opacity-50 transition-colors">
+                  {isMocking ? <i className="fa-solid fa-circle-notch fa-spin mr-2"></i> : <i className="fa-solid fa-user-tie mr-2"></i>}
+                  {isMocking ? 'Generating...' : 'Interview Prep'}
                 </button>
               </div>
             </div>
@@ -650,7 +678,10 @@
                     <i className="fa-solid fa-envelope-open-text mr-1"></i> Letter
                   </button>
                   <button onClick={() => transitionHelper(() => setActiveRightTab('analyzer'))} className={`px-4 py-3 text-xs font-black rounded-t-xl transition-all ${activeRightTab === 'analyzer' ? 'bg-white text-purple-700 border-t border-l border-r border-slate-200' : 'bg-transparent text-slate-500 hover:text-slate-800'}`}>
-                    <i className="fa-solid fa-microscope mr-1"></i> Analysis
+                    <i className="fa-solid fa-microscope mr-1"></i> ATS Scan
+                  </button>
+                  <button onClick={() => transitionHelper(() => setActiveRightTab('interview'))} className={`px-4 py-3 text-xs font-black rounded-t-xl transition-all ${activeRightTab === 'interview' ? 'bg-white text-rose-700 border-t border-l border-r border-slate-200' : 'bg-transparent text-slate-500 hover:text-slate-800'}`}>
+                    <i className="fa-solid fa-user-tie mr-1"></i> Interview
                   </button>
                   <button onClick={() => transitionHelper(() => setActiveRightTab('assistant'))} className={`px-4 py-3 text-xs font-black rounded-t-xl transition-all ${activeRightTab === 'assistant' ? 'bg-white text-blue-700 border-t border-l border-r border-slate-200' : 'bg-transparent text-slate-500 hover:text-slate-800'}`}>
                     <i className="fa-solid fa-comment-dots mr-1"></i> Assistant
@@ -705,8 +736,22 @@
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center text-slate-400 h-64">
-                        <i className="fa-solid fa-chart-pie text-4xl mb-3 opacity-40"></i>
-                        <p className="text-sm font-semibold">Click Analyze Fit to begin analysis</p>
+                        <i className="fa-solid fa-microscope text-4xl mb-3 opacity-40"></i>
+                        <p className="text-sm font-semibold">Click ATS Scan to begin analysis</p>
+                      </div>
+                    )}
+                  </div>
+                )}
+                {activeRightTab === 'interview' && (
+                  <div className="flex-1">
+                    {mockResult ? (
+                      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm text-slate-800">
+                        <div className="prose prose-rose max-w-none text-sm" dangerouslySetInnerHTML={{ __html: marked.parse(mockResult) }} />
+                      </div>
+                    ) : (
+                      <div className="flex flex-col items-center justify-center text-slate-400 h-64">
+                        <i className="fa-solid fa-user-tie text-4xl mb-3 opacity-40"></i>
+                        <p className="text-sm font-semibold">Click Interview Prep to generate Mock Interview</p>
                       </div>
                     )}
                   </div>
@@ -745,6 +790,7 @@
       const [hiddenJobs, setHiddenJobs] = useState(new Set());
       
       const [currentView, setCurrentView] = useState('tracker');
+      const [viewMode, setViewMode] = useState('kanban');
       const [activeResumeJob, setActiveResumeJob] = useState(null);
       const [sysError, setSysError] = useState(null); 
 
@@ -971,7 +1017,62 @@
         
         return passesTab;
       });
-
+      const renderJobCard = (job) => (
+        <div key={job.id} className="bg-slate-900/40 backdrop-blur-md border border-purple-500/10 hover:border-purple-500/40 rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-fuchsia-500/10 shadow-lg shadow-black/20 group mb-4">
+          <div>
+            <div className="flex justify-between items-center mb-3">
+              <span className="text-[10px] font-black uppercase bg-purple-500/15 text-purple-300 border border-purple-500/20 px-2 py-0.5 rounded">
+                <i className="fa-solid fa-tag mr-1 text-fuchsia-400"></i> {job.type}
+              </span>
+              <span className="text-[10px] font-mono text-purple-400/80">
+                {job.source || 'Scraped'}
+              </span>
+            </div>
+            <h3 className="text-[15px] font-black text-white leading-snug group-hover:text-fuchsia-300 transition-colors">
+              <a href={job.url} target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-1.5">
+                {job.title}
+                <i className="fa-solid fa-arrow-up-right-from-square text-[10px] text-purple-400 group-hover:text-fuchsia-300 transition-colors"></i>
+              </a>
+            </h3>
+            <p className="text-emerald-400 font-bold text-xs mt-1">{job.organization}</p>
+            <p className="text-[11px] text-purple-300/60 mt-1 flex items-center gap-1"><i className="fa-solid fa-location-dot"></i> {job.location || 'Remote/US'}</p>
+          </div>
+          <div className="mt-4 pt-4 border-t border-purple-500/10 flex flex-col gap-3">
+            <div className="flex justify-between items-center">
+              <div className="flex flex-col gap-1">
+                {job.postDate && (
+                  <span className="text-[10px] text-purple-400/80 font-mono flex items-center gap-1">
+                    <i className="fa-regular fa-calendar"></i> {job.postDate}
+                  </span>
+                )}
+                {job.compatibilityScore && (
+                  <span className="text-[10px] text-emerald-400/80 font-mono flex items-center gap-1">
+                    <i className="fa-solid fa-bolt"></i> Match: {job.compatibilityScore}%
+                  </span>
+                )}
+              </div>
+              <button onClick={() => handleTailorResume(job)} className="bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-white border border-emerald-500/20 px-3 py-1.5 rounded-xl text-[10px] font-bold transition-all flex items-center gap-1.5" title="Open in Resume Studio">
+                <i className="fa-solid fa-wand-magic-sparkles"></i> Studio
+              </button>
+            </div>
+            <div className="flex justify-between gap-1 items-center bg-black/20 p-1.5 rounded-xl border border-purple-500/10">
+              <select 
+                className="bg-transparent text-[11px] text-purple-300 font-bold focus:outline-none flex-grow"
+                value={appliedJobs[job.id] ? 'Applied' : inProgressJobs.has(job.id) ? 'InProgress' : queuedJobs.has(job.id) ? 'Queued' : 'New'}
+                onChange={(e) => updateJobStatus(job.id, e.target.value)}
+              >
+                <option value="New" className="bg-slate-900 text-purple-300">New Match</option>
+                <option value="Queued" className="bg-slate-900 text-purple-300">Queued</option>
+                <option value="InProgress" className="bg-slate-900 text-purple-300">Preparing</option>
+                <option value="Applied" className="bg-slate-900 text-purple-300">Applied</option>
+              </select>
+              <button onClick={() => hideJob(job.id)} className="text-rose-400 hover:text-white bg-rose-500/10 hover:bg-rose-500 px-2 py-1 flex items-center justify-center rounded-lg transition-all" title="Remove Job">
+                <i className="fa-solid fa-trash-can text-[10px]"></i>
+              </button>
+            </div>
+          </div>
+        </div>
+      );
       return (
         <div className="flex-grow flex flex-col">
           
@@ -1112,6 +1213,10 @@
                 </div>
                 
                 <div className="flex items-center gap-3">
+                  <div className="flex bg-purple-950/40 rounded-xl border border-purple-500/20 p-1 mr-2 hidden md:flex">
+                    <button onClick={() => setViewMode('list')} className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${viewMode === 'list' ? 'bg-purple-600 text-white shadow-md' : 'text-purple-400 hover:text-white'}`}><i className="fa-solid fa-list mr-1"></i> List</button>
+                    <button onClick={() => setViewMode('kanban')} className={`px-4 py-2 rounded-lg text-xs font-bold transition-all ${viewMode === 'kanban' ? 'bg-purple-600 text-white shadow-md' : 'text-purple-400 hover:text-white'}`}><i className="fa-solid fa-table-columns mr-1"></i> Kanban</button>
+                  </div>
                   {isRefreshing && (
                     <span className="text-xs font-semibold text-emerald-400 flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 px-3 py-1.5 rounded-xl">
                       <i className="fa-solid fa-circle-notch fa-spin"></i> Refreshing
@@ -1143,73 +1248,37 @@
                   <p className="font-bold text-sm tracking-widest uppercase">Loading Database Schema...</p>
                 </div>
               ) : (
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="w-full h-full">
                   {filteredJobs.length === 0 ? (
                     <div className="col-span-full py-16 text-center text-purple-400 border border-purple-500/10 rounded-3xl bg-slate-900/20">
                       <i className="fa-solid fa-folder-open text-4xl mb-3 opacity-30"></i>
                       <p className="font-semibold text-sm">No jobs matches found in this pipeline tab.</p>
                     </div>
+                  ) : viewMode === 'list' ? (
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                      {filteredJobs.map(job => renderJobCard(job))}
+                    </div>
                   ) : (
-                    filteredJobs.map(job => (
-                      <div key={job.id} className="bg-slate-900/40 backdrop-blur-md border border-purple-500/10 hover:border-purple-500/40 rounded-3xl p-6 flex flex-col justify-between transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl hover:shadow-fuchsia-500/10 shadow-lg shadow-black/20 group">
-                        <div>
-                          {/* CARD METADATA HEADER */}
-                          <div className="flex justify-between items-center mb-3">
-                            <span className="text-[10px] font-black uppercase bg-purple-500/15 text-purple-300 border border-purple-500/20 px-2 py-0.5 rounded">
-                              <i className="fa-solid fa-tag mr-1 text-fuchsia-400"></i> {job.type}
-                            </span>
-                            <span className="text-[10px] font-mono text-purple-400/80">
-                              {job.source || 'Scraped'}
-                            </span>
+                    <div className="flex gap-6 overflow-x-auto pb-6 snap-x h-full items-start">
+                      {[
+                        { title: 'New Matches', icon: 'fa-sparkles', color: 'text-blue-400', border: 'border-blue-500/20', bg: 'bg-blue-500/5', jobs: filteredJobs.filter(j => !queuedJobs.has(j.id) && !inProgressJobs.has(j.id) && !appliedJobs[j.id]) },
+                        { title: 'Queued', icon: 'fa-hourglass-start', color: 'text-amber-400', border: 'border-amber-500/20', bg: 'bg-amber-500/5', jobs: filteredJobs.filter(j => queuedJobs.has(j.id)) },
+                        { title: 'Preparing', icon: 'fa-hammer', color: 'text-fuchsia-400', border: 'border-fuchsia-500/20', bg: 'bg-fuchsia-500/5', jobs: filteredJobs.filter(j => inProgressJobs.has(j.id)) },
+                        { title: 'Applied', icon: 'fa-check-double', color: 'text-emerald-400', border: 'border-emerald-500/20', bg: 'bg-emerald-500/5', jobs: filteredJobs.filter(j => appliedJobs[j.id]) }
+                      ].map(col => (
+                        <div key={col.title} className={`flex-shrink-0 w-[340px] flex flex-col rounded-3xl border ${col.border} ${col.bg} p-4 snap-center`}>
+                          <div className="flex justify-between items-center mb-5 px-2">
+                            <h3 className={`font-black text-sm uppercase tracking-widest flex items-center gap-2 ${col.color}`}>
+                              <i className={`fa-solid ${col.icon}`}></i> {col.title}
+                            </h3>
+                            <span className="text-xs font-bold bg-black/40 px-2 py-0.5 rounded-full text-white">{col.jobs.length}</span>
                           </div>
-
-                          <h3 className="text-lg font-black text-white leading-snug group-hover:text-fuchsia-300 transition-colors">
-                            <a href={job.url} target="_blank" rel="noopener noreferrer" className="hover:underline inline-flex items-center gap-2">
-                              {job.title}
-                              <i className="fa-solid fa-arrow-up-right-from-square text-xs text-purple-400 group-hover:text-fuchsia-300 transition-colors"></i>
-                            </a>
-                          </h3>
-                          <p className="text-emerald-400 font-bold text-sm mt-1">{job.organization}</p>
-                          <p className="text-xs text-purple-300/60 mt-2 flex items-center gap-1"><i className="fa-solid fa-location-dot"></i> {job.location || 'Remote/US'}</p>
-                        </div>
-
-                        {/* CARD ACTIONS */}
-                        <div className="mt-6 pt-4 border-t border-purple-500/10 flex justify-between items-center">
-                          <div className="flex flex-col gap-1">
-                            {job.postDate && (
-                              <span className="text-[10px] text-purple-400/80 font-mono flex items-center gap-1">
-                                <i className="fa-regular fa-calendar"></i> {job.postDate}
-                              </span>
-                            )}
-                            {job.compatibilityScore && (
-                              <span className="text-[10px] text-emerald-400/80 font-mono flex items-center gap-1">
-                                <i className="fa-solid fa-bolt"></i> Match: {job.compatibilityScore}%
-                              </span>
-                            )}
-                          </div>
-                          
-                          <div className="flex gap-2 justify-end items-center">
-                            <button onClick={() => handleTailorResume(job)} className="bg-emerald-500/10 hover:bg-emerald-500 text-emerald-400 hover:text-white border border-emerald-500/20 px-3 py-2 rounded-xl text-xs font-bold transition-all flex items-center gap-1.5" title="Open in Resume Studio">
-                              <i className="fa-solid fa-wand-magic-sparkles"></i> Studio
-                            </button>
-
-                            {!appliedJobs[job.id] ? (
-                              <button onClick={() => updateJobStatus(job.id, 'Applied')} className="text-teal-400 hover:text-white bg-teal-500/10 hover:bg-teal-500 border border-teal-500/20 h-8 w-8 flex items-center justify-center rounded-xl transition-all" title="Mark as Applied">
-                                <i className="fa-solid fa-check"></i>
-                              </button>
-                            ) : (
-                              <span className="text-emerald-400 bg-emerald-500/10 border border-emerald-500/20 h-8 px-2 flex items-center justify-center rounded-xl text-[10px] font-bold" title="Already Applied">
-                                <i className="fa-solid fa-check-double mr-1"></i> Applied
-                              </span>
-                            )}
-
-                            <button onClick={() => hideJob(job.id)} className="text-rose-400 hover:text-white bg-rose-500/10 hover:bg-rose-500 border border-rose-500/20 h-8 w-8 flex items-center justify-center rounded-xl transition-all" title="Remove Job">
-                              <i className="fa-solid fa-trash-can"></i>
-                            </button>
+                          <div className="flex flex-col gap-4 overflow-y-auto max-h-[70vh] pr-2 pb-4 styled-scrollbar">
+                            {col.jobs.map(job => renderJobCard(job))}
                           </div>
                         </div>
-                      </div>
-                    ))
+                      ))}
+                    </div>
                   )}
                 </div>
               )}
