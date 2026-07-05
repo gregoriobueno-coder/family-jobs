@@ -2028,19 +2028,6 @@
     "compatibilityScore": 85
   },
   {
-    "id": "bc9c0c1c90657ed76f788e59fcbddd3b",
-    "title": "Data Analyst",
-    "organization": "nan",
-    "url": "https://www.indeed.com/viewjob?jk=8133fe4f571086cf",
-    "location": "Remote, US",
-    "description": "**Overview**\n\nWe are seeking a dynamic and detail\\-oriented Data Analyst to join our innovative team. In this role, you will harness your expertise in data analysis, visualization, and database management to transform complex data sets into actionable insights. Your efforts will drive strategic decision\\-making, optimize business processes, and support our commitment to excellence in business intelligence. This position offers an exciting opportunity to work with cutting\\-edge tools and methodologies in a fast\\-paced environment dedicated to continuous improvement and data\\-driven success.\n\n**Duties**\n\n* Collect, clean, and analyze large datasets using SQL databases, Python, R, and ETL (Extract, Transform, Load) processes to ensure data accuracy and integrity.\n* Develop interactive dashboards and reports utilizing Tableau, Power BI, Looker, and other reporting tools to visualize key performance indicators and trends.\n* Design and implement scalable data models and database structures with Microsoft SQL Server, Oracle, and other relational database systems.\n* Collaborate within Agile project management frameworks to plan, execute, and deliver analytics solutions aligned with business needs.\n* Conduct comprehensive analysis of business requirements to develop insightful reports that support strategic planning and operational improvements.\n* Perform SDLC (Software Development Lifecycle) analysis to ensure the quality and efficiency of analytics projects from inception through deployment.\n* Utilize technical proficiency in VBA, Bash (Unix shell scripting), Talend, Visio, and Linked Data techniques to enhance data workflows and integration processes.\n\n**Skills**\n\n* Strong expertise in SQL query management, database design, and query optimization for efficient data retrieval.\n* Proficiency with business intelligence tools such as Tableau, Power BI, Looker for dashboard development and data visualization.\n* Experience with ETL tools like Talend for data integration across multiple sources including Oracle and SQL Server databases.\n* Advanced knowledge of analysis skills including Excel data analysis techniques for detailed reporting.\n* Familiarity with software development lifecycle analysis (SDLC) principles applied within analytics projects.\n* Ability to perform business analysis by translating complex data into clear insights that influence decision\\-making.\n* Technical skills in R, Python, VBA, Bash scripting for automation and advanced analytics tasks.\n* Understanding of linked data concepts for integrating diverse datasets across platforms.\n\nJoin us as a Data Analyst if you're passionate about turning raw data into powerful stories that shape the future of our organization! Your analytical expertise will be instrumental in driving innovation through insightful reporting, robust data models, and compelling visualizations\u2014all while working within a collaborative environment that values continuous learning and growth.\n\nPay: $36,400\\.00 \\- $102,800\\.00 per year\n\nBenefits:\n\n* 401(k)\n* 401(k) 2% match\n* 401(k) matching\n* Caregiver leave\n* Dental insurance\n* Family leave\n* Flexible schedule\n* Health insurance\n* Health savings account\n* Life insurance\n* Paid holidays\n* Paid time off\n* Visa sponsorship\n* Work from home\n\nWork Location: Remote",
-    "type": "Greg",
-    "source": "Python Agent",
-    "userStatus": "Queued",
-    "postDate": "2026-07-04",
-    "compatibilityScore": 85
-  },
-  {
     "id": "9cf4e3cf135acc06f6ed17e0c1622a7c",
     "title": "Epic Cogito Business Intelligence Manager",
     "organization": "Xtensys Connected Health solutions",
