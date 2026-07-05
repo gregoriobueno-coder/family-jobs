@@ -1001,6 +1001,17 @@ const [jobs, setJobs] = useState([]);
         finally { setIsLoading(false); setIsRefreshing(false); }
       };
 
+      // Poll every 10 seconds if there are any jobs currently "Preparing"
+      useEffect(() => {
+        if (inProgressJobs.size === 0) return;
+        
+        const intervalId = setInterval(() => {
+          fetchDataFromGoogle();
+        }, 10000);
+        
+        return () => clearInterval(intervalId);
+      }, [inProgressJobs.size]);
+
       const showToast = (message, type = 'info') => { setToastMsg({ message, type }); };
 
       const updateJobStatus = (id, newStatus) => {
@@ -1131,20 +1142,28 @@ const [jobs, setJobs] = useState([]);
               </button>
             </div>
             
-            <div className="flex gap-2">
+            <div className="flex gap-2 flex-wrap justify-end">
+              {inProgressJobs.has(job.id) && (
+                <a href="https://github.com/gregoriobueno-coder/family-jobs/actions" target="_blank" rel="noopener noreferrer" 
+                   className="animate-pulse bg-emerald-500/20 hover:bg-emerald-500/40 text-emerald-300 border border-emerald-500/50 px-3.5 py-1.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-1.5 shadow-[0_0_15px_rgba(16,185,129,0.3)]">
+                  <i className="fa-solid fa-satellite-dish fa-beat-fade"></i> Live Logs
+                </a>
+              )}
               {!appliedJobs[job.id] && (
                 <button 
                   onClick={() => handleAutoApply(job)} 
-                  disabled={applyingJobs.has(job.id)}
+                  disabled={applyingJobs.has(job.id) || inProgressJobs.has(job.id)}
                   className="bg-gradient-to-r from-fuchsia-600 to-purple-600 hover:from-fuchsia-500 hover:to-purple-500 disabled:opacity-50 disabled:grayscale text-white border border-fuchsia-400/30 px-3.5 py-1.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-1.5 shadow-lg shadow-fuchsia-500/20" 
                   title="Run fully autonomous Playwright application">
-                  {applyingJobs.has(job.id) ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-robot drop-shadow-md"></i>}
-                  {applyingJobs.has(job.id) ? "Applying..." : "Auto Apply"}
+                  {(applyingJobs.has(job.id) || inProgressJobs.has(job.id)) ? <i className="fa-solid fa-circle-notch fa-spin"></i> : <i className="fa-solid fa-robot drop-shadow-md"></i>}
+                  {(applyingJobs.has(job.id) || inProgressJobs.has(job.id)) ? "Applying..." : "Auto Apply"}
                 </button>
               )}
-              <button onClick={() => handleTailorResume(job)} className="bg-white/5 hover:bg-emerald-500/20 text-emerald-300 hover:text-emerald-200 border border-emerald-500/20 px-3.5 py-1.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-1.5 backdrop-blur-sm" title="Open in Resume Studio">
-                <i className="fa-solid fa-wand-magic-sparkles"></i> Studio
-              </button>
+              {!inProgressJobs.has(job.id) && (
+                <button onClick={() => handleTailorResume(job)} className="bg-white/5 hover:bg-emerald-500/20 text-emerald-300 hover:text-emerald-200 border border-emerald-500/20 px-3.5 py-1.5 rounded-xl text-[11px] font-black transition-all flex items-center gap-1.5 backdrop-blur-sm" title="Open in Resume Studio">
+                  <i className="fa-solid fa-wand-magic-sparkles"></i> Studio
+                </button>
+              )}
             </div>
           </div>
         </div>
