@@ -52,15 +52,18 @@ def generate_documents(candidate_name, profile, job_description):
     model = genai.GenerativeModel('gemini-1.5-flash')
     
     prompt = f"""
-    You are an expert executive resume writer. 
-    Write a tailored Resume and Cover Letter for {candidate_name} based on their profile and the job description.
+    You are a Senior Technical Recruiter and ATS Expert. Your job is to rewrite a resume to achieve a 100% match score for a specific job, while keeping the candidate's core truth intact.
     
-    CRITICAL INSTRUCTIONS:
-    1. Output ONLY valid HTML. DO NOT output markdown. DO NOT use ```html codeblocks. Just raw HTML.
-    2. Use inline CSS to style the documents cleanly. Use standard fonts like Arial or Helvetica. Make it look like a minimalist, professional Harvard-style PDF document.
-    3. The Resume MUST be wrapped entirely inside a <div id="resume">.
-    4. The Cover Letter MUST be wrapped entirely inside a <div id="cover_letter">.
-    5. Ensure proper margins and line heights.
+    TASK: Write a highly tailored Resume and Cover Letter for {candidate_name}.
+    
+    CRITICAL RECRUITER INSTRUCTIONS:
+    1. AGGRESSIVELY REWRITE bullet points to inject the exact keywords, tools, and methodologies mentioned in the Job Description. DO NOT just copy the old resume.
+    2. QUANTIFY achievements (e.g., "Increased X by Y%", "Managed budget of $Z"). If exact numbers aren't in the profile, use realistic generic business metrics that match their seniority.
+    3. Output ONLY valid HTML. DO NOT output markdown. DO NOT use ```html codeblocks. Just raw HTML.
+    4. ATS-OPTIMIZED DESIGN: Use an ultra-clean, minimalist Harvard-style format. NO tables, NO columns. Use standard fonts (Arial/Helvetica). Use standard semantic tags (<h1>, <h2>, <ul>, <li>).
+    5. The Resume MUST be wrapped entirely inside a <div id="resume">.
+    6. The Cover Letter MUST be wrapped entirely inside a <div id="cover_letter">.
+    7. Ensure the cover letter is highly persuasive, mapping the candidate's unique background directly to the company's specific needs in the JD.
     
     CANDIDATE PROFILE:
     {json.dumps(profile)}

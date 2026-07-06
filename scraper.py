@@ -640,6 +640,10 @@ def main():
         kws = list(candidate_keywords[candidate])
         exs = list(candidate_excludes[candidate])
         
+        # [POISON PILL] Hardcode strict exclusions for Rachel to prevent junk PM jobs
+        if candidate == "Rachel":
+            exs.extend(["construction", "civil", "hvac", "architectural", "superintendent", "structural", "mechanical", "electrical", "plumbing"])
+            
         # Apply local pre-filter criteria
         passed = local_pre_filter([job], kws, exs)
         if passed:
