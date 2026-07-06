@@ -10,7 +10,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "400dbe88326b09404159039736ddb07b",
@@ -23,7 +24,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "cbf44bc891e9e999bea4239a4fd34efc",
@@ -36,7 +38,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "f1632fd574ae1e649e92e0f47aad6bfc",
@@ -49,7 +52,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "df26c56782f986d009b3369364a5a604",
@@ -62,7 +66,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "17d133b919c444f172efa76348d2cb87",
@@ -75,7 +80,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "3a4063b2f93cf6f87d20674bb5f6776d",
@@ -88,7 +94,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "d6d4913fb23598be0923f004182bc74b",
@@ -101,7 +108,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "63ccf24f634b04f76160813aa2991088",
@@ -114,7 +122,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "fa443c87af6870ccdb281bfdfe51d9de",
@@ -127,7 +136,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "ca853f1b297ff6e998d64c08a7256330",
@@ -140,7 +150,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "cb63c820e54d41a618c6bd06a1250e32",
@@ -153,7 +164,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "765da89b3d7fca0186235fa9abec9ee0",
@@ -166,7 +178,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "ccb75c8b4eb458a8ba2a856c64715702",
@@ -179,7 +192,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "e595f1e3e6924bd22c60b125d328f578",
@@ -192,7 +206,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Hybrid"
   },
   {
     "id": "ecefb7bf10fc5c771d4f0a69d4353191",
@@ -205,7 +220,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "1b988f1b7bb4f4735b22f674140fc247",
@@ -218,7 +234,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "e490a9df702b831312a65941cba8c65d",
@@ -231,7 +248,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "7b6d8e7fe7572088fa973516bba9b55b",
@@ -244,7 +262,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "f9b9142ba4df2461cf0b529baa8a1c69",
@@ -257,7 +276,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "35e2646dd6c8f25d2598124b234ada5b",
@@ -270,7 +290,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "cb6a6198e5d5e4a7506078559f02e9cb",
@@ -283,7 +304,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "1b6de9f129880b39e99ca784cc3d3b2b",
@@ -296,7 +318,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "d50a13aa0b905f03c638a07544fe04ac",
@@ -309,7 +332,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "6be52faa26f33d7787676701989ebf65",
@@ -322,7 +346,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "6505bcc22ad71da38bf1fc3f6aacc9b0",
@@ -335,7 +360,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "58010dc9ccb7a05836fd760247e3f264",
@@ -348,7 +374,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "837d6583d6ba018fe2fdf4cc687f8705",
@@ -361,7 +388,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "1c9ae09f89229dd35bd1872b5e78d248",
@@ -374,7 +402,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "afe6c13fce5734651c8678a96b8ef8b8",
@@ -387,7 +416,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "11c664161dbaf0fadf615fb800439de5",
@@ -400,7 +430,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "cf4ca841a8a60cc9b04ffa7d3ebfd44c",
@@ -413,7 +444,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-28",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "64c7767f91b2da8a4ac3a1d9801022e9",
@@ -426,7 +458,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-29",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "14e50443ad5d69ceabee764288998224",
@@ -439,7 +472,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-29",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "c16ed4430841e2b5a57ceca87bd20024",
@@ -452,7 +486,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-29",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "ba2a115b7339b3d50eb33f3df640451f",
@@ -465,7 +500,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-29",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "b6069d9ce57dda33eb81e4f00c0507d0",
@@ -478,7 +514,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-29",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "6a65d4a6b6f12ed948fa76cde494d0ab",
@@ -491,7 +528,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "af12eec3d217516080638a958f690ec7",
@@ -504,7 +542,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "b151f80713c1580e7d9516dcae850e0c",
@@ -517,7 +556,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "04929b8faed00a67008a7deccff131d2",
@@ -530,7 +570,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "c83d0afe6a8fb4f5cc15f8bc94d96dbc",
@@ -543,7 +584,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "ac7d35691d25ebe5646d30d9568703fc",
@@ -556,7 +598,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "fbe03ee9161e3200dd9609318a8658eb",
@@ -569,7 +612,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "3763ef1916e144d0b07ac4075b604c28",
@@ -582,7 +626,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "d0184cc7774351d54e2a355cccb0c952",
@@ -595,7 +640,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "9f4fa215ba1783a0d87d4b8be2f40e1a",
@@ -608,7 +654,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "19a37f87ccb432391528e3146c085c2e",
@@ -621,7 +668,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "280dbf4367b49335c49ac2e7e0b2e669",
@@ -634,7 +682,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "d90bf45e21a5519b9ba51fa5898d4fc2",
@@ -647,7 +696,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "2b960868a28f84a12ab5906a1b78341a",
@@ -660,7 +710,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "ad2ab68386cc74331695ae773d5fe132",
@@ -673,7 +724,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "33b2e744a251a0a82692f64cf48fa557",
@@ -686,7 +738,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "001f58e294bc3a565ad48861357d9bb9",
@@ -699,7 +752,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "bb33b47e8c0532de07077b5cbdfc451f",
@@ -712,7 +766,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "591111fb589ca4e6d14453fc46ef08fd",
@@ -725,7 +780,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "70d609539872836be8812465ff0d6f62",
@@ -738,7 +794,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "3c3e3796f851313984a1a8b3fee62d21",
@@ -751,7 +808,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "0e5328eea12686fb6cbc8f89978d307d",
@@ -764,7 +822,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "d538b864e290aff8cfa68dfc8818c945",
@@ -777,7 +836,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "9710a79f3bdf3a916ad6531bde3bd291",
@@ -790,7 +850,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "c5bc5c939413b85fb821adb7a4cfd7ae",
@@ -803,7 +864,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "b02dfd4fea91ecfaf27e30b3dea3e3d2",
@@ -816,7 +878,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "14d966e86d2fc436ae360386e37f1f24",
@@ -829,7 +892,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "7801344c8f4d57511d645c0ac25f94cb",
@@ -842,7 +906,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "ff6014c6af3ca8f5bed71a353368bc1e",
@@ -855,7 +920,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "073baefd03e3155bf345d26162db23ff",
@@ -868,7 +934,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-06-30",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "44513e2bae71240177f8451d1624f76f",
@@ -881,7 +948,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "d35703d5bee43d7c1ffaef114322c82d",
@@ -894,7 +962,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "1e21671a9853116c82167d54ddad08b5",
@@ -907,7 +976,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "313c8278c7e790f659276026fe4282f3",
@@ -920,7 +990,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "4b130cd3fe164d84dbe0d08a50e97f61",
@@ -933,7 +1004,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "fbb3c1a1c672a134205acbdc693af689",
@@ -946,7 +1018,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "5c0e1124146cb5ab395d703b96872060",
@@ -959,7 +1032,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "876c80d1cb80fc7b7270ff3d98927ae6",
@@ -972,7 +1046,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "29dcefe33eeca1a9ffae7e270460c824",
@@ -985,7 +1060,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "aa54b0e7f70f50090d8fd89d97c1b747",
@@ -998,7 +1074,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "9167eb6cc939f7d7cf5829bf10863d80",
@@ -1011,7 +1088,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "0ec9b0dcda5de8b686538376c0541e9e",
@@ -1024,7 +1102,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "29c76e910a96b1f0d2b052c5e3e33c30",
@@ -1037,7 +1116,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "06e9767d8a516bfdf043f86458629811",
@@ -1050,7 +1130,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "1eac460f0c2f0ca236fab2fd8083551c",
@@ -1063,7 +1144,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "b1fb1b4de21a566fa20e1cea8465028e",
@@ -1076,7 +1158,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "c79284ce86e9749469b777f72a0dd902",
@@ -1089,7 +1172,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "9d67643a19cdbeb555cf0846a9cad73f",
@@ -1102,7 +1186,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "51d1dd70335c0e909ad3e9053a20b455",
@@ -1115,7 +1200,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "0e082535c19beb5e9cded1c712778e21",
@@ -1128,7 +1214,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "784de3cc15e7cdf461fe8e0c0a2b5790",
@@ -1141,7 +1228,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "89f6d7e77c5a4748528c75915dd82e54",
@@ -1154,7 +1242,8 @@
     "source": "Python Agent",
     "userStatus": "Applied",
     "postDate": "2026-07-01",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "410c44e41a73a6d5146e418d34c8349f",
@@ -1167,7 +1256,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "d2421f8b54444fb5f049a943f2e98e45",
@@ -1180,7 +1270,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "5b8fb661570db5f47ec021e12a0ac0c7",
@@ -1193,7 +1284,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "354878a3536c47ef5a9348be073f956a",
@@ -1206,7 +1298,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "c17b66313047382c898851b2bfba9764",
@@ -1219,7 +1312,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "313e81b99eeb9d7d7bef990ce2cd3a3f",
@@ -1232,7 +1326,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "87804fb10fc0051c09783e6e44adfe4c",
@@ -1245,7 +1340,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "499f286139393a911d765770fe3767bb",
@@ -1258,7 +1354,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "a2635bed45de154d53c81a18452dc022",
@@ -1271,7 +1368,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "3889d14235f87ac110cf0b370c3ea97a",
@@ -1284,7 +1382,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "d22639c372735e79388d2cfd7b0ef839",
@@ -1297,7 +1396,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "5b844b3f45c88c7a807561ba5019ef85",
@@ -1310,7 +1410,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "5cd49f5d225b03514d1f3cd69b877955",
@@ -1323,7 +1424,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "34a5486ddeb6789828ed45c749d496ee",
@@ -1336,7 +1438,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "81d638476a0167cc5bc115672025ce5d",
@@ -1349,7 +1452,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "23bb689545c8420d84538e36693903e1",
@@ -1362,7 +1466,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "c984c26dbff7c923ebc9fc5b5da96670",
@@ -1375,7 +1480,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "145211c596a12e6eabcfe91cc577385d",
@@ -1388,7 +1494,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "3524bca48504d6697229e8d8f18a7742",
@@ -1401,7 +1508,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "4adc7d5351829db915c2e46406deb86b",
@@ -1414,7 +1522,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "d5993c057be4f53e137d0a7b044dfe0c",
@@ -1427,7 +1536,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "0c532d7ac8284f56320fbf995a78202a",
@@ -1440,7 +1550,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "bc30467941f5a59f4cb2f21198e001e8",
@@ -1453,7 +1564,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-02",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "48f596c29a7876426b5e4ebaa37a0295",
@@ -1466,7 +1578,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "36fe00154807e00b273f271ca9f9ed7b",
@@ -1479,7 +1592,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "c21981b91881ca132168a9c60ffb738f",
@@ -1492,7 +1606,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "3119778fe401ac44747125d58d3557d4",
@@ -1505,7 +1620,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "f718e94b3fbe55e33a911138241795d2",
@@ -1518,7 +1634,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "bde219da23f8d53a594d8aabd9c44656",
@@ -1531,7 +1648,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "f609a79492f15fe526c2ecac22b799c3",
@@ -1544,7 +1662,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "d21cfe6e8d5e5323d7d353afb174083b",
@@ -1557,7 +1676,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "72f24db82caf29a6afdf8acb3a4df532",
@@ -1570,7 +1690,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "f86499d8f6a83cd0b7a1a14f774171fb",
@@ -1583,7 +1704,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "ffb6393d0fe44e0e9f9e4085d133d83d",
@@ -1596,7 +1718,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "cf89a52baf7c0b72684e1a629e3c5040",
@@ -1609,7 +1732,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "18fd8684fc11e87affb4e8e59241f9d2",
@@ -1622,7 +1746,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "3fe936f6943c51661cb558833bdeaeef",
@@ -1635,7 +1760,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "a251a80f4abf37fa4843942bf461c600",
@@ -1648,7 +1774,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "88f406eb06601bcb1dc14cf6512e8882",
@@ -1661,7 +1788,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "1b08cc31c55d101a43ce3ffbbbf6b569",
@@ -1674,7 +1802,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-03",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "9cf4e3cf135acc06f6ed17e0c1622a7c",
@@ -1687,7 +1816,8 @@
     "source": "Python Agent",
     "userStatus": "InProgress",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "Remote"
   },
   {
     "id": "12b025a96a1287385ea8ebadcb4e3fd1",
@@ -1700,7 +1830,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "de44bedc2bdd4582e7b60e63bb2328e3",
@@ -1713,7 +1844,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "43fa433d0b47e7bbf4e14d19eadc4f0c",
@@ -1726,7 +1858,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "ff12629eab82743b07f6caee3543bf6f",
@@ -1739,7 +1872,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "0c4027614d0d3c284b330052701041e0",
@@ -1752,7 +1886,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "bf1e0aff499655f399d738c9f7fa850a",
@@ -1765,7 +1900,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "c9bae2e9e8edfc9ec25661f0fa374fa7",
@@ -1778,7 +1914,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "f068823cea118342002682ef4215abdf",
@@ -1791,7 +1928,8 @@
     "source": "Python Agent",
     "userStatus": "Queued",
     "postDate": "2026-07-04",
-    "compatibilityScore": 85
+    "compatibilityScore": 85,
+    "workModel": "In-Office"
   },
   {
     "id": "e8fa52e79635b310e43ddf5114a9d7cd",
@@ -1805,7 +1943,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-05",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "Remote"
   },
   {
     "id": "1c3c9c488d2a1e47906bae405b350eac",
@@ -1819,7 +1958,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "2eab8f235ac8ee2b3ef2db1275d053ed",
@@ -1833,7 +1973,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "5d8fcef35a23d846a6365cb902aa8538",
@@ -1847,7 +1988,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "d6b9900b54491f06c43f94399b49fec9",
@@ -1861,7 +2003,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "7f4e1730c4ba5ed49983f68f59fdf3a3",
@@ -1875,7 +2018,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-28",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "d3ffda5834dbfef37dce656efaa809ca",
@@ -1889,7 +2033,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "Hybrid"
   },
   {
     "id": "1bb739578cdf7cff55b337e4c5243312",
@@ -1903,7 +2048,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "f81965a2c7ee5e53c05e98da8ed58f8a",
@@ -1917,7 +2063,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "a2050b8e1544432924cdad0c0ac40f63",
@@ -1931,7 +2078,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "c8786f723826be2a33bdf111971764d5",
@@ -1945,7 +2093,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "aa682d465abbf51faa4036a8a9387be5",
@@ -1959,7 +2108,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "4e8e9c6a2491c7694dc56ab2c58516e2",
@@ -1973,7 +2123,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "b6bff9f0b7196070671f3d31e0d8ba86",
@@ -1987,7 +2138,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "Remote"
   },
   {
     "id": "ca316ca54ff69d83ca3eef027043f024",
@@ -2001,7 +2153,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "Remote"
   },
   {
     "id": "27a2d35d24977359a4940c37b2c106bc",
@@ -2015,7 +2168,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "619318d897b06c76c2f2c8d90d244ff6",
@@ -2029,7 +2183,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "Remote"
   },
   {
     "id": "760d8d03a9866d1dfedcdb7b9dd47cec",
@@ -2043,7 +2198,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-29",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "90daca37db197b4a45d8184f0140b833",
@@ -2057,7 +2213,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "5c728916e1e807ca94cab54140e66e17",
@@ -2071,7 +2228,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "7fa8c60ee8191e0a36dce4e0eca73624",
@@ -2085,7 +2243,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "04854a749d4a96c154cd3d2ad4fd7dc1",
@@ -2099,7 +2258,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "5949f727e373f6004c18410bdb0ce5d6",
@@ -2113,7 +2273,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "e5048d3ade97f81827f821eeef9b7574",
@@ -2127,7 +2288,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "4a368f8b6c6e13f5d961946a85525683",
@@ -2141,7 +2303,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "e13382e45712cbb5c9ab1ba32c1784f6",
@@ -2155,7 +2318,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "d930163ccfddbe966dc4a106603d25b3",
@@ -2169,7 +2333,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "f0bddf9b21a13fc1587500eba6f4b123",
@@ -2183,7 +2348,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "b8ed20320b18a5322500b8a5d7854c7e",
@@ -2197,7 +2363,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "dddfc4174d6c6172bcb38ed369f23149",
@@ -2211,7 +2378,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "508f1620b309df61e56e43b67bd8fede",
@@ -2225,7 +2393,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "0c648a3c685351f4da8708eda07abb2d",
@@ -2239,7 +2408,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "7e964ef75bcea7699807aa312df2548e",
@@ -2253,7 +2423,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "f837d3e8b1f09f994a88f042acaffadf",
@@ -2267,7 +2438,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-29",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "80f0711083160221749e0802f571409e",
@@ -2281,7 +2453,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-29",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "efd846265d505de854e3f1fffbe10230",
@@ -2295,7 +2468,8 @@
     "userStatus": "Queued",
     "postDate": "nan",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "4e8662ba114f53958e308d216394c0f7",
@@ -2309,7 +2483,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "077b560c00fdc1c63348f8dd9588a8b2",
@@ -2323,7 +2498,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "99f81b7b2f3d99bef6400d2e9788ef94",
@@ -2337,7 +2513,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "bd85763ec7388b400b514c1c6d7b0d9b",
@@ -2351,7 +2528,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "48dd3834892267307de128c5c3b8be37",
@@ -2365,7 +2543,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-28",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "f46a756ecf34ba973bdb0a25f508eaa7",
@@ -2379,7 +2558,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-28",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "938a6ec9fa21f689f43b757782b19559",
@@ -2393,7 +2573,8 @@
     "userStatus": "Queued",
     "postDate": "nan",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "214d39477d3c5e587a06045ccc9279f4",
@@ -2407,7 +2588,8 @@
     "userStatus": "Queued",
     "postDate": "nan",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "9f6040dd8f44ada9290407b46fbec5fe",
@@ -2421,7 +2603,8 @@
     "userStatus": "Queued",
     "postDate": "nan",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "3c74b57ff26e43cc6c277e511972de8d",
@@ -2435,7 +2618,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-04",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "73bc38f0c109f94c1e541dc8df1125da",
@@ -2449,7 +2633,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-04",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "030fc1619b1d4b8dd63625449fc921f9",
@@ -2463,7 +2648,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-04",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "37bf815bced003e9be5c1816d0c76c14",
@@ -2477,7 +2663,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-04",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "81f0a02d78f3ca121c7086041bb408c6",
@@ -2491,7 +2678,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "7819c6e7f49b1b9f259407ac368d9545",
@@ -2505,7 +2693,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "5ce5c1f2ea1574eefa1d55aaf8444051",
@@ -2519,7 +2708,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "b7114c15e5385a689d719d48e178be4e",
@@ -2533,7 +2723,8 @@
     "userStatus": "Queued",
     "postDate": "nan",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "cbfd0264d265236c951dd026f5f79bfb",
@@ -2547,7 +2738,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-04",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "882c83b867f97566ab48b594e7795e14",
@@ -2561,7 +2753,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-03",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "bc4f3b6b70b28af7fa466d7530006f48",
@@ -2575,7 +2768,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "d9f633aa06371650dd1b8e03d8637994",
@@ -2589,7 +2783,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-02",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "ab34fcc935b52c74cae58cd765ab1458",
@@ -2603,7 +2798,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "114e021256ce413a1399de51e407be50",
@@ -2617,7 +2813,8 @@
     "userStatus": "Queued",
     "postDate": "2026-07-01",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "513d21f4e19c3fc9afaf1ab15d33b09a",
@@ -2631,7 +2828,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "f2872460be73089cdb7825ff64508845",
@@ -2645,7 +2843,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "a47b377a2d9e3e860cc714c3989bf937",
@@ -2659,7 +2858,8 @@
     "userStatus": "Queued",
     "postDate": "2026-06-30",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   },
   {
     "id": "70164a5fc7a0fef021ed956cbc4a2947",
@@ -2673,6 +2873,7 @@
     "userStatus": "Queued",
     "postDate": "2026-06-28",
     "compatibilityScore": 85,
-    "salary": "Not Listed"
+    "salary": "Not Listed",
+    "workModel": "In-Office"
   }
 ]

@@ -1104,11 +1104,18 @@ const [jobs, setJobs] = useState([]);
                 <span className="text-[10px] text-purple-300/50 font-mono">{job.source || 'Scraped'}</span>
               </div>
               
-              {job.salary && job.salary !== 'Not Listed' && (
-                <div className="mt-2 inline-flex self-start items-center gap-1.5 bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-lg text-[11px] font-bold shadow-sm shadow-emerald-900/20">
-                  <i className="fa-solid fa-money-bill-wave"></i> {job.salary}
-                </div>
-              )}
+              <div className="flex flex-wrap items-center gap-2 mt-2">
+                {job.salary && job.salary !== 'Not Listed' && (
+                  <div className="inline-flex items-center gap-1.5 bg-emerald-950/40 border border-emerald-500/30 text-emerald-400 px-2.5 py-1 rounded-lg text-[11px] font-bold shadow-sm shadow-emerald-900/20">
+                    <i className="fa-solid fa-money-bill-wave"></i> {job.salary}
+                  </div>
+                )}
+                {job.workModel && job.workModel !== 'Unknown' && (
+                  <div className={`inline-flex items-center gap-1.5 border px-2.5 py-1 rounded-lg text-[11px] font-bold shadow-sm ${job.workModel === 'Remote' ? 'bg-sky-950/40 border-sky-500/30 text-sky-400 shadow-sky-900/20' : job.workModel === 'Hybrid' ? 'bg-amber-950/40 border-amber-500/30 text-amber-400 shadow-amber-900/20' : 'bg-purple-950/40 border-purple-500/30 text-purple-400 shadow-purple-900/20'}`}>
+                    <i className={`fa-solid ${job.workModel === 'Remote' ? 'fa-house-signal' : job.workModel === 'Hybrid' ? 'fa-building-user' : 'fa-building'}`}></i> {job.workModel}
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Receipt Thumbnail */}
