@@ -297,28 +297,28 @@
       };
 
       const executeAiCall = async (systemPrompt, extraContext = '') => {
-        const targetUrl = window.location.protocol === 'file:' ? 'http://localhost:8000/api' : '/api';
+        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi81oW_LpX5dY22i8U2p0dZtFwSgI1q03_e51v2O/exec";
         const payload = {
           action: "generateResume",
           userQuery: `BASE RESUME:\n${baseResume}\n${extraContext}\n\nTARGET JOB DESCRIPTION:\n${jobDescription}`,
           systemPrompt: systemPrompt
         };
 
-        setAiStatus({ step: 'Connecting to AI server...', progress: 15, detail: `POST ${targetUrl}` });
+        setAiStatus({ step: 'Connecting to AI server...', progress: 15, detail: `POST Apps Script` });
 
         let response;
         try {
-          response = await customFetch(GOOGLE_SHEET_API_URL, {
+          response = await customFetch(APPS_SCRIPT_URL, {
             method: 'POST',
             headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
             body: `data=${encodeURIComponent(JSON.stringify(payload))}`
           });
         } catch (networkErr) {
           console.error('[Studio] Network error:', networkErr);
-          throw new Error(`Network error reaching ${targetUrl}: ${networkErr.message}`);
+          throw new Error(`Network error: ${networkErr.message}`);
         }
 
-        setAiStatus({ step: 'Reading server response...', progress: 40, detail: `HTTP ${response.status} from ${targetUrl}` });
+        setAiStatus({ step: 'Reading server response...', progress: 40, detail: `HTTP ${response.status} from Apps Script` });
 
         let responseText;
         try {
@@ -375,7 +375,8 @@
           2. QUANTIFY achievements (e.g., "Increased X by Y%", "Managed budget of $Z"). Ensure every bullet has a strong action verb and measurable result.
           3. DO NOT HALLUCINATE completely fake jobs, but creatively reframe the candidate's existing experience to perfectly align with the Target JD.
           4. Format as Markdown. Use standard Markdown headers and lists.
-          5. NO HTML, NO CSS, NO TABLES. Pure clean Harvard-style Markdown text.`;
+          5. NO HTML, NO CSS, NO TABLES. Pure clean Harvard-style Markdown text.
+          6. AT THE VERY END of the resume, add a section called "### Missing ATS Keywords" and list any critical skills/tools required by the JD that the candidate genuinely lacks, so they can study them.`;
           
           const finalMarkdown = await executeAiCall(systemPrompt);
           if (finalMarkdown) {
