@@ -373,21 +373,27 @@
           4. Focus heavily on quantified and qualified results, not just duties, to express not impress. Every bullet point should detail the task, action, and measurable outcome.
           5. Section Headers & Order:
              - Tech/CS Roles: H1 (Name), Contact Info, ## EDUCATION, ## TECHNICAL SKILLS, ## EXPERIENCE.
-             - Non-Tech Roles: H1 (Name), Contact Info, ## EXPERIENCE, ## EDUCATION, ## SKILLS & INTERESTS.
-          6. Experience Entry Layout:
-             **Organization Name**, City, State
-             *Position Title*, Month Year – Month Year (or Present)
-             - Bullet points...
-          7. Output Format: Return ONLY the raw, clean markdown resume. Do NOT wrap the output in \`\`\`markdown or \`\`\` code blocks. Do not add any introductory or concluding conversational text.`;
+        setActiveRightTab('resume');
+        try {
+          const systemPrompt = `You are a Senior Technical Recruiter and ATS Expert strictly following the Harvard Mignone Center for Career Success guidelines. Your job is to rewrite a resume to achieve a 100% match score for a specific job, while keeping the candidate's core truth intact.
+          
+          TASK: Tailor the candidate's Base Resume to the Target Job Description.
+          
+          CRITICAL RECRUITER INSTRUCTIONS:
+          1. AGGRESSIVELY REWRITE bullet points to inject the exact keywords, tools, and methodologies mentioned in the Target Job Description. DO NOT just copy the old resume or make minimal tweaks. Restructure bullets to put the most relevant ATS keywords first.
+          2. QUANTIFY achievements (e.g., "Increased X by Y%", "Managed budget of $Z"). Ensure every bullet has a strong action verb and measurable result.
+          3. DO NOT HALLUCINATE completely fake jobs, but creatively reframe the candidate's existing experience to perfectly align with the Target JD.
+          4. Format as Markdown. Use standard Markdown headers and lists.
+          5. NO HTML, NO CSS, NO TABLES. Pure clean Harvard-style Markdown text.`;
+          
           const finalMarkdown = await executeAiCall(systemPrompt);
           if (finalMarkdown) {
              setTailoredResume(finalMarkdown);
-             setActiveRightTab('resume');
-             showToast("Resume tailored to Harvard MCS standards!", "success");
+             showToast("Resume tailored successfully!", "success");
           } else throw new Error("Invalid AI response.");
         } catch (error) {
-          setSysError(`Resume Generation Failed: ${error.message}`);
-          showToast("Generation failed.", "error");
+          setSysError(`Tailoring Failed: ${error.message}`);
+          showToast("Failed to generate resume.", "error");
         } finally { setIsGenerating(false); setTimeout(() => setAiStatus(null), 3000); }
       };
 
@@ -396,24 +402,20 @@
           return showToast("Paste a Job Description first!", "error");
         }
         setIsDraftingLetter(true); setSysError(null); setAiStatus(null);
+        setActiveRightTab('coverLetter');
         try {
           const systemPrompt = `You are a career advisor strictly following the Harvard Mignone Center for Career Success (MCS) cover letter guidelines. Write a highly tailored, one-page cover letter using the Base Resume and Target JD.
-          CRITICAL HARVARD MCS RULES:
-          1. Structure: Start with Date, Contact Name, Title, Company Name, and Company Address at the top.
-          2. Salutation: Address a specific person if possible (e.g. "Dear Contact Name:") ending with a COLON (":"), NOT a comma.
-          3. Paragraph 1 (Opening): Hook the reader, state the exact role and how you heard about it. End with a summary statement (thesis) presenting three clear reasons why you are a good fit.
-          4. Paragraph 2 & 3 (Middle): Show why you are interested in this specific employer and type of work. Illustrate with one or two key examples (mini-narratives with quantified results/metrics from the resume) showing how your skills relate to the job. Do not repeat the entire resume.
-          5. Paragraph 4 (Closing): Reiterate enthusiasm, thank the reader for consideration, and state that you look forward to the opportunity to discuss further.
-          6. Tone & Rules: Avoid flowery language. Avoid the "I" trap (do not start consecutive sentences with "I"; vary sentence structure). Use professional action verbs. Close with "Sincerely," and candidate name. Return ONLY the markdown letter.`;
+          
+          Format as standard Markdown. Do NOT use HTML or CSS.
+          Use standard business letter format (Contact info, Date, Salutation, Body, Sign-off).`;
           const text = await executeAiCall(systemPrompt);
           if (text) {
              setCoverLetter(text);
-             setActiveRightTab('coverLetter');
              showToast("Cover Letter drafted!", "success");
           } else throw new Error("Invalid AI response.");
         } catch (error) {
-          setSysError(`Cover Letter Failed: ${error.message}`);
-          showToast("Failed to draft letter.", "error");
+          setSysError(`Letter Drafting Failed: ${error.message}`);
+          showToast("Failed to generate cover letter.", "error");
         } finally { setIsDraftingLetter(false); setTimeout(() => setAiStatus(null), 3000); }
       };
 
@@ -422,6 +424,7 @@
           return showToast("Paste a Job Description first!", "error");
         }
         setIsAnalyzing(true); setSysError(null); setAiStatus(null);
+        setActiveRightTab('analyzer');
         try {
           const systemPrompt = `You are a strict ATS (Applicant Tracking System) simulator. Analyze the Base Resume against the Target Job Description. Provide:
 1. ATS Match Score: A strict 0-100% score representing keyword and hard-skill match.
@@ -430,7 +433,6 @@
           const text = await executeAiCall(systemPrompt);
           if (text) {
              setAnalysisResult(text);
-             setActiveRightTab('analyzer');
              showToast("ATS Scan complete!", "success");
           } else throw new Error("Invalid AI response.");
         } catch (error) {
@@ -444,16 +446,17 @@
           return showToast("Paste a Job Description first!", "error");
         }
         setIsMocking(true); setSysError(null); setAiStatus(null);
+        setActiveRightTab('interview');
         try {
           const systemPrompt = `You are an expert technical interviewer and behavioral hiring manager. Based ONLY on the provided Job Description and the candidate's Base Resume, generate a Mock Interview Prep sheet:
 1. Generate 3 highly specific technical/domain questions they will likely be asked.
 2. Generate 2 behavioral questions tailored to the company/culture implied by the JD.
-3. For EACH question, provide a suggested 'STAR Method' answer strategy utilizing the specific experiences listed in the candidate's Base Resume.`;
+3. For each question, draft a brief bulleted "Ideal Answer Strategy" leveraging the candidate's actual resume experience.
+Format as Markdown.`;
           const text = await executeAiCall(systemPrompt);
           if (text) {
              setMockResult(text);
-             setActiveRightTab('interview');
-             showToast("Mock Interview Prep generated!", "success");
+             showToast("Interview Prep generated!", "success");
           } else throw new Error("Invalid AI response.");
         } catch (error) {
           setSysError(`Mock Interview Failed: ${error.message}`);
@@ -702,13 +705,16 @@
               
               <div className="p-6 overflow-y-auto flex-1 bg-slate-50 flex flex-col">
                 {activeRightTab === 'resume' && (
-                  <div className="flex-1 flex justify-center bg-slate-200/40 p-2 rounded-2xl overflow-y-auto">
+                  <div className="flex-1">
                     {tailoredResume ? (
-                      <div ref={resumeOutputRef} className="resume-document w-full" dangerouslySetInnerHTML={{ __html: marked.parse(tailoredResume) }} />
+                      <div className="bg-white p-8 rounded-2xl border border-slate-200 shadow-sm text-slate-800">
+                        <div ref={resumeOutputRef} className="prose max-w-none text-sm leading-relaxed" dangerouslySetInnerHTML={{ __html: marked.parse(tailoredResume) }} />
+                        <button onClick={() => copyToClipboard(tailoredResume)} className="mt-6 text-xs font-black text-emerald-600 hover:text-emerald-800 flex items-center gap-1.5"><i className="fa-regular fa-copy"></i> Copy Resume Content</button>
+                      </div>
                     ) : (
-                      <div className="flex flex-col items-center justify-center text-slate-400 m-auto">
-                        <i className="fa-solid fa-file-import text-4xl mb-3 opacity-40"></i>
-                        <p className="text-sm font-semibold">Click Tailor Resume to generate document</p>
+                      <div className="flex flex-col items-center justify-center text-slate-400 h-64">
+                        <i className={`fa-solid fa-file-import text-4xl mb-3 opacity-40 ${isGenerating ? 'fa-beat-fade text-emerald-400' : ''}`}></i>
+                        <p className="text-sm font-semibold">{isGenerating ? 'Tailoring Resume...' : 'Click Tailor Resume to generate document'}</p>
                       </div>
                     )}
                   </div>
@@ -722,8 +728,8 @@
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center text-slate-400 h-64">
-                        <i className="fa-solid fa-envelope text-4xl mb-3 opacity-40"></i>
-                        <p className="text-sm font-semibold">Click Cover Letter to generate document</p>
+                        <i className={`fa-solid fa-envelope text-4xl mb-3 opacity-40 ${isDraftingLetter ? 'fa-beat-fade text-teal-400' : ''}`}></i>
+                        <p className="text-sm font-semibold">{isDraftingLetter ? 'Drafting Cover Letter...' : 'Click Cover Letter to generate document'}</p>
                       </div>
                     )}
                   </div>
@@ -736,8 +742,8 @@
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center text-slate-400 h-64">
-                        <i className="fa-solid fa-microscope text-4xl mb-3 opacity-40"></i>
-                        <p className="text-sm font-semibold">Click ATS Scan to begin analysis</p>
+                        <i className={`fa-solid fa-microscope text-4xl mb-3 opacity-40 ${isAnalyzing ? 'fa-beat-fade text-purple-400' : ''}`}></i>
+                        <p className="text-sm font-semibold">{isAnalyzing ? 'Scanning Resume...' : 'Click ATS Scan to begin analysis'}</p>
                       </div>
                     )}
                   </div>
@@ -750,8 +756,8 @@
                       </div>
                     ) : (
                       <div className="flex flex-col items-center justify-center text-slate-400 h-64">
-                        <i className="fa-solid fa-user-tie text-4xl mb-3 opacity-40"></i>
-                        <p className="text-sm font-semibold">Click Interview Prep to generate Mock Interview</p>
+                        <i className={`fa-solid fa-user-tie text-4xl mb-3 opacity-40 ${isMocking ? 'fa-beat-fade text-rose-400' : ''}`}></i>
+                        <p className="text-sm font-semibold">{isMocking ? 'Generating Prep Sheet...' : 'Click Interview Prep to generate questions'}</p>
                       </div>
                     )}
                   </div>
