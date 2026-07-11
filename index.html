@@ -364,15 +364,6 @@
           return showToast("Paste a Job Description first!", "error");
         }
         setIsGenerating(true); setSysError(null); setAiStatus(null);
-        try {
-          const systemPrompt = `You are an expert Career Coach strictly following the Harvard Mignone Center for Career Success (MCS) resume guidelines. Tailor the candidate's Base Resume to the Target Job Description.
-          CRITICAL HARVARD MCS RULES:
-          1. NO personal pronouns ("I", "my", "we", "our"), no narrative style, no abbreviations, no slang, no pictures, or EEO demographics.
-          2. DO NOT include any "Professional Summary", "Objective", or "Target Roles" section. These are strictly prohibited by Harvard MCS guidelines.
-          3. Every single experience bullet point MUST begin with a strong, metrics-driven ACTION VERB (e.g., Spearheaded, Orchestrated, Collaborated, Formulated, Engineered, Streamlined, Analyzed, Forecasted).
-          4. Focus heavily on quantified and qualified results, not just duties, to express not impress. Every bullet point should detail the task, action, and measurable outcome.
-          5. Section Headers & Order:
-             - Tech/CS Roles: H1 (Name), Contact Info, ## EDUCATION, ## TECHNICAL SKILLS, ## EXPERIENCE.
         setActiveRightTab('resume');
         try {
           const systemPrompt = `You are a Senior Technical Recruiter and ATS Expert strictly following the Harvard Mignone Center for Career Success guidelines. Your job is to rewrite a resume to achieve a 100% match score for a specific job, while keeping the candidate's core truth intact.
