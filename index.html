@@ -297,28 +297,28 @@
       };
 
       const executeAiCall = async (systemPrompt, extraContext = '') => {
-        const APPS_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbyi81oW_LpX5dY22i8U2p0dZtFwSgI1q03_e51v2O/exec";
+        const targetUrl = window.location.protocol === 'file:' ? 'http://localhost:8000/api' : '/api';
         const payload = {
           action: "generateResume",
           userQuery: `BASE RESUME:\n${baseResume}\n${extraContext}\n\nTARGET JOB DESCRIPTION:\n${jobDescription}`,
           systemPrompt: systemPrompt
         };
 
-        setAiStatus({ step: 'Connecting to AI server...', progress: 15, detail: `POST Apps Script` });
+        setAiStatus({ step: 'Connecting to AI server...', progress: 15, detail: `POST ${targetUrl}` });
 
         let response;
         try {
-          response = await customFetch(APPS_SCRIPT_URL, {
+          response = await fetch(targetUrl, {
             method: 'POST',
-            headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-            body: `data=${encodeURIComponent(JSON.stringify(payload))}`
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
           });
         } catch (networkErr) {
           console.error('[Studio] Network error:', networkErr);
-          throw new Error(`Network error: ${networkErr.message}`);
+          throw new Error(`Network error reaching ${targetUrl}: ${networkErr.message}`);
         }
 
-        setAiStatus({ step: 'Reading server response...', progress: 40, detail: `HTTP ${response.status} from Apps Script` });
+        setAiStatus({ step: 'Reading server response...', progress: 40, detail: `HTTP ${response.status} from ${targetUrl}` });
 
         let responseText;
         try {
